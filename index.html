@@ -98,11 +98,12 @@
       --cyan:          #06b6d4;
       --emerald:       #10b981;
 
-      --bg:            #07071100;
-      --bg-solid:      #070711;
-      --surface:       rgba(255,255,255,0.03);
-      --surface-hover: rgba(255,255,255,0.06);
-      --border:        rgba(255,255,255,0.08);
+      --bg:            #0b112000;
+      --bg-solid:      #0b1120;
+      --bg-2:          #0d1627;
+      --surface:       rgba(255,255,255,0.04);
+      --surface-hover: rgba(255,255,255,0.07);
+      --border:        rgba(99,102,241,0.12);
       --border-hover:  rgba(99,102,241,0.45);
 
       --text:          #e2e8f0;
@@ -207,27 +208,84 @@
     }
 
     /* ================================================================
-       BACKGROUND ORBS
+       GRID BACKGROUND
     ================================================================ */
-    .orbs {
+    .bg-grid {
       position: fixed; inset: 0;
-      pointer-events: none; z-index: 0; overflow: hidden;
+      pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(99,102,241,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,102,241,.06) 1px, transparent 1px);
+      background-size: 48px 48px;
     }
-    .orb {
-      position: absolute; border-radius: 50%;
-      filter: blur(90px); opacity: .14;
-      animation: orbFloat 22s ease-in-out infinite;
+    .bg-grid::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(99,102,241,.12) 0%, transparent 70%);
     }
-    .orb-1 { width: 680px; height: 680px; background: var(--violet); top: -250px; left: -250px; animation-duration: 28s; }
-    .orb-2 { width: 520px; height: 520px; background: var(--rose);   top: 35%;  right: -160px; animation-delay: -9s;  animation-duration: 22s; }
-    .orb-3 { width: 440px; height: 440px; background: var(--cyan);   bottom: -80px; left: 32%; animation-delay: -16s; animation-duration: 25s; }
 
-    @keyframes orbFloat {
-      0%,100% { transform: translate(0,0) scale(1); }
-      25%      { transform: translate(28px,-38px) scale(1.04); }
-      50%      { transform: translate(-18px,32px) scale(.96); }
-      75%      { transform: translate(38px,18px) scale(1.02); }
+    /* ================================================================
+       HERO — DEUX COLONNES
+    ================================================================ */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding-top: var(--nav-h); position: relative; overflow: hidden;
     }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-hello {
+      font-size: 1.5rem; font-weight: 700; color: var(--text-muted);
+      margin-bottom: .25rem;
+    }
+    .hero-iam {
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      font-weight: 900; line-height: 1.1; letter-spacing: -.04em;
+      color: var(--white); margin-bottom: .75rem;
+    }
+    .hero-typing-wrap {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--text-muted); margin-bottom: 2rem; min-height: 2em;
+    }
+    .hero-typing-prefix { color: var(--text-muted); }
+    .hero-typed { color: var(--violet-light); font-weight: 600; }
+    .hero-cursor {
+      display: inline-block; width: 2px; height: 1.1em;
+      background: var(--violet); margin-left: 2px;
+      vertical-align: middle;
+      animation: blink .75s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .hero-socials {
+      display: flex; gap: .625rem; margin-bottom: 2rem; flex-wrap: wrap;
+    }
+    .hero-social-link {
+      width: 38px; height: 38px; border-radius: var(--r-sm);
+      border: 1px solid var(--border); background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .95rem; color: var(--text-muted);
+      transition: all var(--ease);
+    }
+    .hero-social-link:hover {
+      border-color: var(--violet); color: var(--violet);
+      background: rgba(99,102,241,.1); transform: translateY(-3px);
+    }
+
+    /* SVG illustration */
+    .hero-illustration {
+      display: flex; align-items: center; justify-content: center;
+      animation: floatIllu 5s ease-in-out infinite;
+    }
+    @keyframes floatIllu {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-14px); }
+    }
+    .hero-illustration svg { width: 100%; max-width: 480px; height: auto; }
 
     /* ================================================================
        NAVIGATION
@@ -238,7 +296,7 @@
       transition: background var(--ease), box-shadow var(--ease), height var(--ease);
     }
     #navbar.scrolled {
-      background: rgba(7,7,17,.88);
+      background: rgba(11,17,32,.92);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       box-shadow: 0 1px 0 var(--border), var(--shadow-sm);
       height: 60px;
@@ -787,15 +845,17 @@
       .footer-grid  { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
-      .nav-links    { display: none; }
-      .nav-hamburger{ display: flex; }
-      .section-pad  { padding: 4rem 0; }
-      .hero-cta     { flex-direction: column; align-items: flex-start; }
-      .stats-row    { grid-template-columns: repeat(2,1fr); }
-      .gh-card      { flex-direction: column; align-items: flex-start; padding: 2rem; }
-      .form-row     { grid-template-columns: 1fr; }
-      .footer-grid  { grid-template-columns: 1fr; gap: 2rem; }
-      .footer-bottom{ flex-direction: column; align-items: flex-start; }
+      .nav-links      { display: none; }
+      .nav-hamburger  { display: flex; }
+      .section-pad    { padding: 4rem 0; }
+      .hero-grid      { grid-template-columns: 1fr; }
+      .hero-illustration { display: none; }
+      .hero-cta       { flex-direction: column; align-items: flex-start; }
+      .stats-row      { grid-template-columns: repeat(2,1fr); }
+      .gh-card        { flex-direction: column; align-items: flex-start; padding: 2rem; }
+      .form-row       { grid-template-columns: 1fr; }
+      .footer-grid    { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom  { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 480px) {
       :root { --nav-h: 60px; }
@@ -860,12 +920,8 @@
     <div class="ld-text" id="ld-text">Initialisation...</div>
   </div>
 
-  <!-- BACKGROUND ORBS -->
-  <div class="orbs" aria-hidden="true">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-  </div>
+  <!-- BACKGROUND GRID -->
+  <div class="bg-grid" aria-hidden="true"></div>
 
   <!-- NAVBAR -->
   <header>
@@ -923,54 +979,164 @@
     ============================================================ -->
     <section id="hero" aria-label="Introduction">
       <div class="container">
-        <div class="hero-content">
+        <div class="hero-grid">
 
-          <div class="hero-badge">
-            <span class="hero-badge-dot" aria-hidden="true"></span>
-            <span data-i18n="hero.badge">Freelance actif · Disponible pour missions</span>
+          <!-- Colonne gauche -->
+          <div class="hero-left">
+            <p class="hero-hello" style="animation:fadeUp .6s .1s both">
+              Hello <span aria-hidden="true">👋</span>
+            </p>
+            <h1 class="hero-iam" style="animation:fadeUp .6s .2s both">
+              I am <span class="grad-text">Credo Ahiafor</span>
+            </h1>
+
+            <p class="hero-typing-wrap" style="animation:fadeUp .6s .3s both" aria-live="polite">
+              <span class="hero-typing-prefix">I </span><span class="hero-typed" id="typed-text"></span><span class="hero-cursor" aria-hidden="true"></span>
+            </p>
+
+            <!-- Icônes sociales -->
+            <div class="hero-socials" style="animation:fadeUp .6s .4s both" aria-label="Réseaux sociaux">
+              <a href="https://github.com/GRIIINDER" class="hero-social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fa-brands fa-github" aria-hidden="true"></i>
+              </a>
+              <a href="https://linkedin.com/in/credoahiafor" class="hero-social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+              </a>
+              <a href="mailto:ahiafor.credo@gmail.com" class="hero-social-link" aria-label="Email">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              </a>
+              <a href="tel:+22892236379" class="hero-social-link" aria-label="Téléphone">
+                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+              </a>
+              <div class="hero-social-link" aria-label="Lomé, Togo">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              </div>
+            </div>
+
+            <!-- CTAs -->
+            <div class="hero-cta" style="animation:fadeUp .6s .5s both">
+              <!-- PLACEHOLDER : remplacer VOTRE_ID_CV par l'ID réel du fichier Google Drive -->
+              <a
+                href="https://drive.google.com/file/d/VOTRE_ID_CV"
+                class="btn btn-secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Télécharger mon CV"
+              >
+                <i class="fa-solid fa-download" aria-hidden="true"></i>
+                Resume
+              </a>
+              <a href="#contact" class="btn btn-primary" aria-label="Me contacter">
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                Let's Talk
+              </a>
+            </div>
           </div>
 
-          <h1 class="hero-h1">
-            <span data-i18n="hero.line1">Développeur</span><br />
-            <span class="grad-text" data-i18n="hero.line2">&amp; Ingénieur</span><br />
-            <span data-i18n="hero.line3">Réseaux</span>
-          </h1>
+          <!-- Colonne droite : illustration SVG -->
+          <div class="hero-illustration" aria-hidden="true" style="animation:fadeUp .8s .3s both">
+            <svg viewBox="0 0 480 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Grille de fond -->
+              <defs>
+                <pattern id="grid" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+                  <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(99,102,241,0.15)" stroke-width=".5"/>
+                </pattern>
+                <linearGradient id="gv" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#6366f1"/>
+                  <stop offset="100%" stop-color="#ec4899"/>
+                </linearGradient>
+                <linearGradient id="gc" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#06b6d4"/>
+                  <stop offset="100%" stop-color="#6366f1"/>
+                </linearGradient>
+              </defs>
+              <rect width="480" height="420" fill="url(#grid)" opacity=".6"/>
 
-          <p class="hero-sub" data-i18n="hero.sub">
-            Je conçois des solutions web modernes et des infrastructures réseaux robustes — du site WordPress professionnel à l'application React, en passant par la sécurité des systèmes.
-          </p>
+              <!-- Écran principal -->
+              <rect x="80" y="60" width="300" height="200" rx="12" fill="rgba(13,22,39,0.95)" stroke="rgba(99,102,241,0.4)" stroke-width="1.5"/>
+              <!-- Barre de titre écran -->
+              <rect x="80" y="60" width="300" height="32" rx="12" fill="rgba(99,102,241,0.15)"/>
+              <circle cx="102" cy="76" r="5" fill="#f87171" opacity=".8"/>
+              <circle cx="118" cy="76" r="5" fill="#fbbf24" opacity=".8"/>
+              <circle cx="134" cy="76" r="5" fill="#34d399" opacity=".8"/>
+              <!-- Lignes de code -->
+              <rect x="104" y="110" width="80" height="6" rx="3" fill="url(#gv)" opacity=".9"/>
+              <rect x="104" y="126" width="140" height="6" rx="3" fill="rgba(165,180,252,.5)"/>
+              <rect x="104" y="142" width="60" height="6" rx="3" fill="rgba(103,232,249,.7)"/>
+              <rect x="104" y="158" width="110" height="6" rx="3" fill="rgba(165,180,252,.4)"/>
+              <rect x="104" y="174" width="90" height="6" rx="3" fill="url(#gc)" opacity=".8"/>
+              <rect x="104" y="190" width="130" height="6" rx="3" fill="rgba(165,180,252,.35)"/>
+              <rect x="104" y="206" width="70" height="6" rx="3" fill="rgba(249,168,212,.6)"/>
+              <rect x="104" y="222" width="100" height="6" rx="3" fill="rgba(165,180,252,.3)"/>
+              <!-- Curseur clignotant -->
+              <rect x="104" y="238" width="2" height="14" rx="1" fill="#6366f1" opacity=".9">
+                <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+              </rect>
 
-          <div class="hero-loc" aria-label="Localisation : Lomé, Togo">
-            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-            <span data-i18n="hero.loc">Lomé, Togo</span>
-          </div>
+              <!-- Fenêtre terminal (droite) -->
+              <rect x="300" y="150" width="140" height="100" rx="8" fill="rgba(13,22,39,0.95)" stroke="rgba(6,182,212,0.35)" stroke-width="1"/>
+              <rect x="300" y="150" width="140" height="22" rx="8" fill="rgba(6,182,212,0.1)"/>
+              <rect x="312" y="182" width="60" height="4" rx="2" fill="rgba(52,211,153,.7)"/>
+              <rect x="312" y="194" width="90" height="4" rx="2" fill="rgba(165,180,252,.4)"/>
+              <rect x="312" y="206" width="50" height="4" rx="2" fill="rgba(249,168,212,.5)"/>
+              <rect x="312" y="218" width="75" height="4" rx="2" fill="rgba(103,232,249,.5)"/>
+              <rect x="312" y="230" width="2" height="10" rx="1" fill="#34d399" opacity=".9">
+                <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/>
+              </rect>
 
-          <div class="hero-cta">
-            <a href="#projects" class="btn btn-primary" aria-label="Voir mes projets">
-              <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
-              <span data-i18n="hero.cta1">Mes projets</span>
-            </a>
-            <a
-              href="https://github.com/GRIIINDER"
-              class="btn btn-secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Voir mon profil GitHub (ouvre dans un nouvel onglet)"
-            >
-              <i class="fa-brands fa-github" aria-hidden="true"></i>
-              <span data-i18n="hero.cta2">GitHub</span>
-            </a>
-            <!-- PLACEHOLDER : remplacer VOTRE_ID_CV par l'ID réel du fichier Google Drive -->
-            <a
-              href="https://drive.google.com/file/d/VOTRE_ID_CV"
-              class="btn btn-ghost"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Télécharger mon CV (ouvre dans un nouvel onglet)"
-            >
-              <i class="fa-solid fa-download" aria-hidden="true"></i>
-              <span data-i18n="hero.cta3">CV</span>
-            </a>
+              <!-- Bulle shield (cybersécurité) -->
+              <g transform="translate(52,90)">
+                <circle cx="0" cy="0" r="28" fill="rgba(13,22,39,.9)" stroke="rgba(99,102,241,.5)" stroke-width="1.5"/>
+                <path d="M0-14 L12 -7 L12 4 Q12 12 0 16 Q-12 12 -12 4 L-12 -7Z" fill="url(#gv)" opacity=".9"/>
+              </g>
+
+              <!-- Bulle réseau (wifi) -->
+              <g transform="translate(430,120)">
+                <circle cx="0" cy="0" r="28" fill="rgba(13,22,39,.9)" stroke="rgba(6,182,212,.5)" stroke-width="1.5"/>
+                <path d="M-12-4 Q0-16 12-4" stroke="rgba(103,232,249,.9)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M-8 2 Q0-6 8 2" stroke="rgba(103,232,249,.9)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <circle cx="0" cy="8" r="2.5" fill="rgba(103,232,249,.9)"/>
+              </g>
+
+              <!-- Bulle WordPress -->
+              <g transform="translate(54,290)">
+                <circle cx="0" cy="0" r="26" fill="rgba(13,22,39,.9)" stroke="rgba(249,168,212,.4)" stroke-width="1.5"/>
+                <text x="0" y="5" text-anchor="middle" font-size="14" fill="rgba(249,168,212,.9)" font-weight="bold">WP</text>
+              </g>
+
+              <!-- Bulle React -->
+              <g transform="translate(428,300)">
+                <circle cx="0" cy="0" r="26" fill="rgba(13,22,39,.9)" stroke="rgba(103,232,249,.4)" stroke-width="1.5"/>
+                <circle cx="0" cy="0" r="4" fill="rgba(103,232,249,.9)"/>
+                <ellipse cx="0" cy="0" rx="14" ry="5" stroke="rgba(103,232,249,.7)" stroke-width="1.5" fill="none" transform="rotate(0)"/>
+                <ellipse cx="0" cy="0" rx="14" ry="5" stroke="rgba(103,232,249,.7)" stroke-width="1.5" fill="none" transform="rotate(60)"/>
+                <ellipse cx="0" cy="0" rx="14" ry="5" stroke="rgba(103,232,249,.7)" stroke-width="1.5" fill="none" transform="rotate(120)"/>
+              </g>
+
+              <!-- Lignes de connexion pointillées -->
+              <line x1="80" y1="160" x2="52" y2="90" stroke="rgba(99,102,241,.2)" stroke-width="1" stroke-dasharray="4 3"/>
+              <line x1="380" y1="160" x2="430" y2="120" stroke="rgba(6,182,212,.2)" stroke-width="1" stroke-dasharray="4 3"/>
+              <line x1="130" y1="260" x2="54" y2="290" stroke="rgba(249,168,212,.2)" stroke-width="1" stroke-dasharray="4 3"/>
+              <line x1="380" y1="240" x2="428" y2="300" stroke="rgba(103,232,249,.2)" stroke-width="1" stroke-dasharray="4 3"/>
+
+              <!-- Pied de l'écran / bureau -->
+              <rect x="210" y="260" width="40" height="24" rx="2" fill="rgba(99,102,241,0.2)" stroke="rgba(99,102,241,.3)" stroke-width="1"/>
+              <rect x="150" y="284" width="160" height="8" rx="4" fill="rgba(99,102,241,.15)" stroke="rgba(99,102,241,.25)" stroke-width="1"/>
+
+              <!-- Particules flottantes -->
+              <circle cx="200" cy="350" r="3" fill="rgba(99,102,241,.6)">
+                <animate attributeName="cy" values="350;340;350" dur="3s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="290" cy="370" r="2" fill="rgba(6,182,212,.5)">
+                <animate attributeName="cy" values="370;358;370" dur="4s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="160" cy="380" r="2.5" fill="rgba(236,72,153,.4)">
+                <animate attributeName="cy" values="380;370;380" dur="3.5s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="340" cy="355" r="2" fill="rgba(165,180,252,.5)">
+                <animate attributeName="cy" values="355;345;355" dur="2.8s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
           </div>
 
         </div>
@@ -1749,6 +1915,45 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && mobileNav.classList.contains('open')) close();
     });
+  })();
+
+  /* ================================================================
+     TYPING ANIMATION
+  ================================================================ */
+  (function () {
+    const el = document.getElementById('typed-text');
+    if (!el) return;
+    const words = [
+      'développe des sites web',
+      'configure des réseaux',
+      'sécurise des systèmes',
+      'crée des apps React',
+      'déploie sur le cloud',
+    ];
+    let wi = 0, ci = 0, deleting = false;
+    const SPEED_TYPE = 70, SPEED_DEL = 35, PAUSE = 1800;
+
+    function tick() {
+      const word = words[wi];
+      if (!deleting) {
+        el.textContent = word.slice(0, ci + 1);
+        ci++;
+        if (ci === word.length) {
+          deleting = true;
+          setTimeout(tick, PAUSE);
+          return;
+        }
+      } else {
+        el.textContent = word.slice(0, ci - 1);
+        ci--;
+        if (ci === 0) {
+          deleting = false;
+          wi = (wi + 1) % words.length;
+        }
+      }
+      setTimeout(tick, deleting ? SPEED_DEL : SPEED_TYPE);
+    }
+    setTimeout(tick, 800);
   })();
 
   /* ================================================================
