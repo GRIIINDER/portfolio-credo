@@ -1823,22 +1823,27 @@
     const progress = document.getElementById('ld-progress');
     let pct = 0;
 
+    const finish = () => {
+      pctEl.textContent = '100%';
+      progress.setAttribute('aria-valuenow', 100);
+      // 1s pause → WELCOME
+      setTimeout(() => {
+        pctEl.textContent = 'WELCOME';
+        // 3s sur WELCOME → fade out
+        setTimeout(() => screen.classList.add('out'), 3000);
+      }, 1000);
+    };
+
     const iv = setInterval(() => {
-      pct += (Math.random() * 3 + 1) * (1 - pct / 130);
-      if (pct >= 100) pct = 100;
+      pct += Math.random() * 3 + 1.2;
+      if (pct >= 100) { pct = 100; clearInterval(iv); finish(); return; }
 
       pctEl.textContent = Math.round(pct) + '%';
       progress.setAttribute('aria-valuenow', Math.round(pct));
+    }, 110);
 
-      if (pct >= 100) {
-        clearInterval(iv);
-        pctEl.textContent = 'WELCOME';
-        setTimeout(() => screen.classList.add('out'), 3500);
-      }
-    }, 100);
-
-    // Safety cap: hide after 7s no matter what
-    setTimeout(() => { clearInterval(iv); screen.classList.add('out'); }, 7000);
+    // Safety cap: hide after 12s no matter what
+    setTimeout(() => { clearInterval(iv); screen.classList.add('out'); }, 12000);
   })();
 
   /* ================================================================
