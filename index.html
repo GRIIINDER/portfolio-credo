@@ -410,10 +410,57 @@
     .vsc-si-r { margin-left:auto; display:flex; }
 
     /* ── Responsive ── */
+    #mob-nav {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      height: 56px;
+      align-items: stretch;
+    }
+    .mob-ni {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 3px;
+      background: none; border: none; color: var(--fg3);
+      font-size: 9px; font-family: var(--font-ui); letter-spacing: .03em;
+      transition: color .15s; padding: 0;
+    }
+    .mob-ni i { font-size: 17px; }
+    .mob-ni.on { color: var(--accent); }
+
+    @media(hover:none){
+      #vsc-cursor { display: none; }
+      *, *::before, *::after { cursor: auto !important; }
+    }
+
     @media(max-width:800px){
-      :root{--side-w:0px;--act-w:0px}
-      #vsc-sidebar,#vsc-actbar{display:none}
-      #vsc-panes{padding:16px 20px}
+      :root { --side-w: 0px; --act-w: 0px; }
+      #vsc-sidebar, #vsc-actbar, #vsc-menu { display: none; }
+      #vsc {
+        height: calc(100vh - 56px);
+        grid-template-rows: var(--title-h) 1fr var(--status-h);
+      }
+      .vsc-winctrls { display: none; }
+      .vsc-title-txt {
+        font-size: 11px; max-width: 65%;
+        overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      }
+      #vsc-bread { display: none; }
+      #vsc-editor { grid-template-rows: var(--tab-h) 1fr; }
+      .vsc-tab { min-width: 90px; }
+      #vsc-panes { padding: 20px 16px; }
+      .hero-photo { width: 90px; height: 90px; }
+      .hero-row { gap: 20px; }
+      #mob-nav { display: flex; }
+    }
+
+    @media(max-width:480px){
+      #vsc-panes { padding: 16px 12px; }
+      .vsc-tab { min-width: 72px; }
+      .hero-name { font-size: clamp(1.6rem, 7vw, 2.5rem); }
+      .proj-grid { grid-template-columns: 1fr; }
+      .stat { min-width: 70px; padding: 12px 14px; }
+      .about-stats { gap: 10px; }
     }
     ::-webkit-scrollbar{width:6px;height:6px}
     ::-webkit-scrollbar-track{background:transparent}
@@ -878,6 +925,28 @@
 
 </div><!-- /vsc -->
 
+<!-- Mobile bottom navigation -->
+<nav id="mob-nav" aria-label="Navigation mobile">
+  <button class="mob-ni on" onclick="openPane('home')"        data-pane="home">
+    <i class="fa-solid fa-house"></i><span>Home</span>
+  </button>
+  <button class="mob-ni"    onclick="openPane('about')"       data-pane="about">
+    <i class="fa-solid fa-user"></i><span>About</span>
+  </button>
+  <button class="mob-ni"    onclick="openPane('projets')"     data-pane="projets">
+    <i class="fa-solid fa-folder-open"></i><span>Projets</span>
+  </button>
+  <button class="mob-ni"    onclick="openPane('competences')" data-pane="competences">
+    <i class="fa-solid fa-code"></i><span>Skills</span>
+  </button>
+  <button class="mob-ni"    onclick="openPane('parcours')"    data-pane="parcours">
+    <i class="fa-solid fa-timeline"></i><span>Parcours</span>
+  </button>
+  <button class="mob-ni"    onclick="openPane('contact')"     data-pane="contact">
+    <i class="fa-solid fa-envelope"></i><span>Contact</span>
+  </button>
+</nav>
+
 <script>
 /* ── Cursor ── */
 (function(){
@@ -941,6 +1010,9 @@ function openPane(id){
   });
   document.querySelectorAll('.pane').forEach(function(el){
     el.classList.toggle('on', el.id === 'pane-' + id);
+  });
+  document.querySelectorAll('.mob-ni').forEach(function(el){
+    el.classList.toggle('on', el.dataset.pane === id);
   });
 
   if(openTabs.indexOf(id) < 0) openTabs.push(id);
