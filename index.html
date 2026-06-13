@@ -282,25 +282,32 @@
     .p-hdr { color:var(--green); font-size:12px; font-style:italic; margin-bottom:28px; }
 
     /* ── HOME pane ── */
-    .hero-row { display:flex; align-items:flex-start; gap:48px; flex-wrap:wrap; margin-top:8px; }
-    .hero-left { flex:1; min-width:260px; }
-    .hero-photo { width:160px; height:160px; border-radius:8px; object-fit:cover; border:2px solid var(--border); flex-shrink:0; }
-    .hero-greet { color:var(--green); font-size:13px; margin-bottom:10px; }
-    .hero-name  { font-size:clamp(2rem,4.5vw,3.2rem); font-weight:700; color:var(--fg); font-family:var(--font-ui); line-height:1.1; margin-bottom:12px; }
-    .hero-name em { color:var(--accent); font-style:normal; }
-    .hero-type  { font-size:14px; color:var(--fg2); min-height:1.6em; margin-bottom:28px; font-family:var(--font-mono); }
+    .hero-name-big { margin:8px 0 20px; line-height:1.05; font-family:var(--font-ui); }
+    .hnb-line1 { display:block; font-size:clamp(2.8rem,9vw,7rem); font-weight:800; color:var(--fg); letter-spacing:-.02em; }
+    .hnb-line2 { display:block; font-size:clamp(2.8rem,9vw,7rem); font-weight:800; color:var(--accent); letter-spacing:-.02em; }
+    .hero-badges { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+    .hb-pill { display:inline-flex; align-items:center; gap:7px; background:var(--bg2); border:1px solid var(--border); border-radius:999px; padding:5px 14px; font-size:12px; color:var(--fg2); font-family:var(--font-ui); }
+    .hb-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+    .hero-type  { font-size:14px; color:var(--fg2); min-height:1.6em; margin-bottom:24px; font-family:var(--font-mono); }
     .type-cur   { display:inline-block; width:2px; height:1em; background:var(--fg); margin-left:2px; vertical-align:middle; animation:ld-blink .8s step-end infinite; }
-    .hero-bio   { color:var(--fg2); line-height:1.75; margin-bottom:28px; font-family:var(--font-ui); font-size:13.5px; }
+    .hero-bio   { color:var(--fg2); line-height:1.75; margin-bottom:24px; font-family:var(--font-ui); font-size:13.5px; max-width:680px; }
     .hero-bio strong { color:var(--teal); font-weight:500; }
-    .hero-links { display:flex; gap:12px; flex-wrap:wrap; }
-    .hero-link  {
-      display:flex; align-items:center; gap:8px;
-      color:var(--fg2); font-size:12.5px; font-family:var(--font-ui);
-      text-decoration:none; padding:7px 14px;
-      border:1px solid var(--border); border-radius:4px;
-      transition:all .15s;
-    }
-    .hero-link:hover { border-color:var(--accent); color:var(--accent); background:rgba(0,122,204,.08); }
+    .hero-ctas  { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:32px; }
+    .hcta { display:inline-flex; align-items:center; gap:8px; border-radius:999px; padding:10px 24px; font-size:13px; font-family:var(--font-ui); font-weight:600; border:none; transition:all .15s; }
+    .hcta-primary   { background:var(--accent); color:#fff; }
+    .hcta-primary:hover   { background:var(--accent2); }
+    .hcta-secondary { background:var(--bg2); color:var(--fg); border:1px solid var(--border); }
+    .hcta-secondary:hover { border-color:var(--accent); color:var(--accent); }
+    .hcta-ghost     { background:transparent; color:var(--fg2); border:1px solid var(--border); }
+    .hcta-ghost:hover     { border-color:var(--accent); color:var(--accent); }
+    .hero-stats { display:flex; flex-wrap:wrap; background:var(--bg2); border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-bottom:28px; }
+    .hstat { flex:1; min-width:80px; padding:18px 14px; text-align:center; border-right:1px solid var(--border); }
+    .hstat:last-child { border-right:none; }
+    .hstat-val { display:block; font-size:2rem; font-weight:700; color:var(--accent); font-family:var(--font-mono); }
+    .hstat-lbl { display:block; font-size:10px; color:var(--fg3); font-family:var(--font-ui); text-transform:uppercase; letter-spacing:.08em; margin-top:4px; }
+    .hero-socials { display:flex; flex-wrap:wrap; gap:8px; }
+    .hsc-pill { display:inline-flex; align-items:center; gap:8px; background:var(--bg2); border:1px solid var(--border); border-radius:999px; padding:7px 16px; font-size:12.5px; color:var(--fg2); font-family:var(--font-ui); text-decoration:none; transition:all .15s; }
+    .hsc-pill:hover { border-color:var(--accent); color:var(--accent); background:rgba(0,122,204,.08); }
 
     /* ── ABOUT pane ── */
     .about-row { display:flex; gap:36px; flex-wrap:wrap; margin-bottom:36px; align-items:flex-start; }
@@ -504,7 +511,7 @@
       <div class="vsc-tl y"></div>
       <div class="vsc-tl g"></div>
     </div>
-    <div class="vsc-title-txt">portfolio — Credo Ahiafor — Visual Studio Code</div>
+    <div class="vsc-title-txt">credo-ahiafor : portfolio</div>
     <div class="vsc-winctrls">
       <div class="vsc-wc">&#x2014;</div>
       <div class="vsc-wc">&#x25A1;</div>
@@ -540,7 +547,7 @@
 
     <!-- Sidebar -->
     <div id="vsc-sidebar">
-      <div class="vsc-sb-hdr">Explorateur</div>
+      <div class="vsc-sb-hdr">Portfolio</div>
       <div class="vsc-fl">
         <div class="vsc-f on"  onclick="openPane('home')"        data-pane="home">
           <span class="vsc-fi fi-tsx">TSX</span><span>home.tsx</span>
@@ -574,7 +581,9 @@
 
       <!-- Breadcrumb -->
       <div id="vsc-bread">
-        <span>portfolio</span>
+        <span>credo-ahiafor</span>
+        <span class="sep">›</span>
+        <span>src</span>
         <span class="sep">›</span>
         <span class="cur" id="bread-cur">home.tsx</span>
       </div>
@@ -584,35 +593,74 @@
 
         <!-- ─ home.tsx ─ -->
         <div class="pane on" id="pane-home">
-          <div class="p-hdr">// home.tsx — Bienvenue dans mon portfolio</div>
-          <div class="hero-row">
-            <div class="hero-left">
-              <div class="hero-greet">// Hello World 👋</div>
-              <h1 class="hero-name">I am <em>Credo Ahiafor</em></h1>
-              <div class="hero-type">
-                <span id="typing-text"></span><span class="type-cur"></span>
-              </div>
-              <p class="hero-bio">
-                Ingénieur passionné par les <strong>réseaux</strong>,
-                la <strong>cybersécurité</strong> et le <strong>développement web</strong>.
-                Basé à Lomé, Togo — disponible pour des missions freelance.
-              </p>
-              <div class="hero-links">
-                <a href="https://github.com/GRIIINDER" target="_blank" rel="noopener" class="hero-link">
-                  <i class="fa-brands fa-github"></i> GitHub
-                </a>
-                <a href="https://www.linkedin.com/in/credoahiafor" target="_blank" rel="noopener" class="hero-link">
-                  <i class="fa-brands fa-linkedin"></i> LinkedIn
-                </a>
-                <a href="mailto:ahiafor.credo@gmail.com" class="hero-link">
-                  <i class="fa-solid fa-envelope"></i> Email
-                </a>
-                <a href="tel:+22892236379" class="hero-link">
-                  <i class="fa-solid fa-phone"></i> +228 92 23 63 79
-                </a>
-              </div>
+          <div class="p-hdr">// hello world !! Bienvenue dans mon portfolio</div>
+
+          <h1 class="hero-name-big">
+            <span class="hnb-line1">Credo</span>
+            <span class="hnb-line2">Ahiafor.</span>
+          </h1>
+
+          <div class="hero-badges">
+            <span class="hb-pill"><span class="hb-dot" style="background:var(--teal)"></span>Ingénieur Réseaux &amp; Sécurité</span>
+            <span class="hb-pill"><span class="hb-dot" style="background:var(--accent)"></span>Développeur Web</span>
+            <span class="hb-pill"><span class="hb-dot" style="background:var(--purple)"></span>Expert Cybersécurité</span>
+            <span class="hb-pill"><span class="hb-dot" style="background:var(--green)"></span>Lomé, Togo</span>
+          </div>
+
+          <div class="hero-type">
+            <span id="typing-text"></span><span class="type-cur"></span>
+          </div>
+
+          <p class="hero-bio">
+            Ingénieur passionné par les <strong>réseaux</strong>, la <strong>cybersécurité</strong>
+            et le <strong>développement web</strong>. Je construis des systèmes
+            <strong>robustes, sécurisés et scalables</strong> — disponible pour des missions freelance depuis Lomé.
+          </p>
+
+          <div class="hero-ctas">
+            <button class="hcta hcta-primary" onclick="openPane('projets')">
+              <i class="fa-solid fa-folder-open"></i> Projets
+            </button>
+            <button class="hcta hcta-secondary" onclick="openPane('about')">
+              <i class="fa-solid fa-user"></i> À Propos
+            </button>
+            <button class="hcta hcta-ghost" onclick="openPane('contact')">
+              <i class="fa-solid fa-envelope"></i> Contact
+            </button>
+          </div>
+
+          <div class="hero-stats">
+            <div class="hstat">
+              <span class="hstat-val">5+</span>
+              <span class="hstat-lbl">Projets</span>
             </div>
-            <img src="assets/images/credoahiafor.webp" alt="Credo Ahiafor" class="hero-photo" loading="lazy">
+            <div class="hstat">
+              <span class="hstat-val">2</span>
+              <span class="hstat-lbl">Licences</span>
+            </div>
+            <div class="hstat">
+              <span class="hstat-val">M2</span>
+              <span class="hstat-lbl">Diplômé 2026</span>
+            </div>
+            <div class="hstat">
+              <span class="hstat-val">∞</span>
+              <span class="hstat-lbl">Curiosité</span>
+            </div>
+          </div>
+
+          <div class="hero-socials">
+            <a href="https://github.com/GRIIINDER" target="_blank" rel="noopener" class="hsc-pill">
+              <i class="fa-brands fa-github"></i> GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/credoahiafor" target="_blank" rel="noopener" class="hsc-pill">
+              <i class="fa-brands fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="mailto:ahiafor.credo@gmail.com" class="hsc-pill">
+              <i class="fa-solid fa-envelope"></i> Email
+            </a>
+            <a href="tel:+22892236379" class="hsc-pill">
+              <i class="fa-solid fa-phone"></i> +228 92 23 63 79
+            </a>
           </div>
         </div>
 
