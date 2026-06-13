@@ -1832,12 +1832,13 @@
 
       if (pct >= 100) {
         clearInterval(iv);
-        setTimeout(() => screen.classList.add('out'), 300);
+        pctEl.textContent = 'WELCOME';
+        setTimeout(() => screen.classList.add('out'), 900);
       }
     }, 55);
 
-    // Safety cap: hide after 3.5s no matter what
-    setTimeout(() => { clearInterval(iv); screen.classList.add('out'); }, 3500);
+    // Safety cap: hide after 4s no matter what
+    setTimeout(() => { clearInterval(iv); screen.classList.add('out'); }, 4000);
   })();
 
   /* ================================================================
