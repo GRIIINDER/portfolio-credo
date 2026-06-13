@@ -1824,7 +1824,7 @@
     let pct = 0;
 
     const iv = setInterval(() => {
-      pct += Math.random() * 14 + 5;
+      pct += (Math.random() * 3 + 1) * (1 - pct / 130);
       if (pct >= 100) pct = 100;
 
       pctEl.textContent = Math.round(pct) + '%';
@@ -1835,10 +1835,10 @@
         pctEl.textContent = 'WELCOME';
         setTimeout(() => screen.classList.add('out'), 900);
       }
-    }, 55);
+    }, 100);
 
-    // Safety cap: hide after 4s no matter what
-    setTimeout(() => { clearInterval(iv); screen.classList.add('out'); }, 4000);
+    // Safety cap: hide after 7s no matter what
+    setTimeout(() => { clearInterval(iv); screen.classList.add('out'); }, 7000);
   })();
 
   /* ================================================================
