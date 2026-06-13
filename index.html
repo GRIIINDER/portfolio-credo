@@ -179,32 +179,63 @@
     #loading {
       position: fixed; inset: 0; z-index: 9999;
       background: var(--bg-solid);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 1.75rem;
-      transition: opacity .5s var(--ease), visibility .5s;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      transition: opacity .6s var(--ease), visibility .6s;
     }
     #loading.out { opacity: 0; visibility: hidden; pointer-events: none; }
 
-    .ld-logo {
-      font-size: 2.25rem; font-weight: 900; letter-spacing: -.04em;
-      background: var(--grad-hero);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .ld-marquee {
+      position: absolute; inset: 0;
+      display: flex; align-items: center;
+      overflow: hidden; pointer-events: none;
     }
-    .ld-track {
-      width: 220px; height: 3px;
-      background: rgba(255,255,255,.07);
-      border-radius: var(--r-full); overflow: hidden;
+    .ld-marquee-inner {
+      display: flex; white-space: nowrap;
+      font-size: clamp(5rem, 12vw, 11rem);
+      font-weight: 900; letter-spacing: -.03em; text-transform: uppercase;
+      color: rgba(255,255,255,.055);
+      animation: ld-scroll 12s linear infinite;
+      user-select: none;
     }
-    .ld-fill {
-      height: 100%; width: 0%;
-      background: var(--grad-primary);
+    @keyframes ld-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .ld-pill {
+      position: relative;
+      display: flex; align-items: center; gap: 1.2rem;
+      background: #0d1220;
+      border: 1px solid rgba(99,102,241,.25);
       border-radius: var(--r-full);
-      transition: width .05s linear;
+      padding: .85rem 1.5rem .85rem 1.75rem;
+      min-width: 270px;
+      box-shadow: -6px 0 40px rgba(99,102,241,.35), 0 0 60px rgba(99,102,241,.1);
+      overflow: hidden;
     }
-    .ld-text {
-      font-size: .75rem; color: var(--text-dim);
-      letter-spacing: .1em; text-transform: uppercase;
+    .ld-pill::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0; width: 72px;
+      background: linear-gradient(90deg, rgba(99,102,241,.8) 0%, transparent 100%);
+      border-radius: var(--r-full) 0 0 var(--r-full);
+    }
+    .ld-label {
+      color: #fff; font-size: .8rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase; z-index: 1;
+    }
+    .ld-pct {
+      color: #fff; font-size: .8rem; font-weight: 700;
+      letter-spacing: .05em; margin-left: auto; min-width: 3.5ch; z-index: 1;
+    }
+    .ld-cursor {
+      width: 14px; height: 18px;
+      background: #fff; border-radius: 3px; z-index: 1; flex-shrink: 0;
+      animation: ld-blink .8s step-end infinite;
+    }
+    @keyframes ld-blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
     }
 
     /* ================================================================
@@ -896,28 +927,18 @@
   <a class="skip-link" href="#main">Aller au contenu principal</a>
 
   <!-- LOADING SCREEN -->
-  <div
-    id="loading"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Chargement du portfolio"
-    aria-live="polite"
-  >
-    <div class="ld-logo">Credo.</div>
-    <div>
-      <div
-        class="ld-track"
-        role="progressbar"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        aria-valuenow="0"
-        aria-label="Progression du chargement"
-        id="ld-progress"
-      >
-        <div class="ld-fill" id="ld-bar"></div>
+  <div id="loading" role="dialog" aria-modal="true" aria-label="Chargement du portfolio" aria-live="polite">
+    <div class="ld-marquee" aria-hidden="true">
+      <div class="ld-marquee-inner">
+        <span>DÉVELOPPEUR WEB&nbsp;•&nbsp;INGÉNIEUR RÉSEAU&nbsp;•&nbsp;CYBERSÉCURITÉ&nbsp;•&nbsp;CLOUD&nbsp;•&nbsp;</span>
+        <span>DÉVELOPPEUR WEB&nbsp;•&nbsp;INGÉNIEUR RÉSEAU&nbsp;•&nbsp;CYBERSÉCURITÉ&nbsp;•&nbsp;CLOUD&nbsp;•&nbsp;</span>
       </div>
     </div>
-    <div class="ld-text" id="ld-text">Initialisation...</div>
+    <div class="ld-pill" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progression du chargement" id="ld-progress">
+      <span class="ld-label">LOADING</span>
+      <span class="ld-pct" id="ld-text">0%</span>
+      <div class="ld-cursor" id="ld-bar"></div>
+    </div>
   </div>
 
   <!-- BACKGROUND GRID -->
@@ -1798,28 +1819,20 @@
   ================================================================ */
   (function () {
     const screen   = document.getElementById('loading');
-    const bar      = document.getElementById('ld-bar');
-    const textEl   = document.getElementById('ld-text');
+    const pctEl    = document.getElementById('ld-text');
     const progress = document.getElementById('ld-progress');
-    const msgs     = ['Initialisation...', 'Chargement des assets...', 'Presque prêt...', 'Bienvenue !'];
-    let pct = 0, msgIdx = 0;
+    let pct = 0;
 
     const iv = setInterval(() => {
-      pct += Math.random() * 16 + 6;
+      pct += Math.random() * 14 + 5;
       if (pct >= 100) pct = 100;
 
-      bar.style.width = pct + '%';
+      pctEl.textContent = Math.round(pct) + '%';
       progress.setAttribute('aria-valuenow', Math.round(pct));
-
-      const threshold = (msgIdx + 1) * 25;
-      if (pct >= threshold && msgIdx < msgs.length - 1) {
-        msgIdx++;
-        textEl.textContent = msgs[msgIdx];
-      }
 
       if (pct >= 100) {
         clearInterval(iv);
-        setTimeout(() => screen.classList.add('out'), 250);
+        setTimeout(() => screen.classList.add('out'), 300);
       }
     }, 55);
 
