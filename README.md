@@ -1,6 +1,6 @@
-# Portfolio — Credo Ahiafor
+# portfolio-credo — Credo Ahiafor
 
-Personal portfolio website.
+Portfolio professionnel de Credo Ahiafor.
 
 ## Structure
 
