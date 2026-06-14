@@ -1782,40 +1782,49 @@ function closePalette(){
 }
 function filterPalette(){
   var q = document.getElementById('cmd-inp').value.trim().toLowerCase();
-  var isCop = q === 'copilot';
-  var cmds = PAL_CMDS.filter(function(c){ return !q || c.label.toLowerCase().includes(q) || isCop; });
-  var files = PAL_FILES.filter(function(f){ return !q || f.name.toLowerCase().includes(q) || f.id.includes(q); });
   var html = '';
-  if(cmds.length){
-    html += '<div class="cmd-section">Commandes</div>';
-    cmds.forEach(function(c,i){
-      html += '<div class="cmd-item" data-type="cmd" data-i="'+i+'">' +
-        '<span class="cmd-item-ico" style="color:#a78bfa;font-size:13px">✦</span>' +
-        '<span class="cmd-item-name" style="color:#a78bfa">'+c.label+'</span>' +
-        (c.key ? '<span class="cmd-item-path">'+c.key+'</span>' : '') +
-        '</div>';
-    });
-  }
-  if(files.length){
-    html += '<div class="cmd-section">Fichiers</div>';
-    files.forEach(function(f,i){
-      var ico = (f.id === 'cv') ? PDF_SVG : (FILE_SVG[f.id] || '');
-      html += '<div class="cmd-item" data-type="file" data-i="'+i+'">' +
-        '<span class="cmd-item-ico">'+ico+'</span>' +
-        '<span class="cmd-item-name">'+f.name+'</span>' +
-        '<span class="cmd-item-path">'+f.path+'</span>' +
-        '</div>';
-    });
-  }
+  var hasCmd = false, hasFile = false;
+
+  /* Commandes — on garde l'index réel dans PAL_CMDS */
+  PAL_CMDS.forEach(function(c, i){
+    if(q && !c.label.toLowerCase().includes(q) && !('copilot'.includes(q))) return;
+    if(!hasCmd){ html += '<div class="cmd-section">Commandes</div>'; hasCmd = true; }
+    html += '<div class="cmd-item" data-type="cmd" data-i="'+i+'">' +
+      '<span class="cmd-item-ico" style="color:#a78bfa;font-size:13px">✦</span>' +
+      '<span class="cmd-item-name" style="color:#a78bfa">'+c.label+'</span>' +
+      (c.key ? '<span class="cmd-item-path">'+c.key+'</span>' : '') +
+      '</div>';
+  });
+
+  /* Fichiers — data-i = index réel dans PAL_FILES (jamais dans le sous-ensemble filtré) */
+  PAL_FILES.forEach(function(f, i){
+    if(q && !f.name.toLowerCase().includes(q) && !f.id.includes(q)) return;
+    if(!hasFile){ html += '<div class="cmd-section">Fichiers</div>'; hasFile = true; }
+    var ico = (f.id === 'cv') ? PDF_SVG : (FILE_SVG[f.id] || '');
+    html += '<div class="cmd-item" data-type="file" data-i="'+i+'">' +
+      '<span class="cmd-item-ico">'+ico+'</span>' +
+      '<span class="cmd-item-name">'+f.name+'</span>' +
+      '<span class="cmd-item-path">'+f.path+'</span>' +
+      '</div>';
+  });
+
   if(!html) html = '<div style="padding:16px 14px;color:var(--fg3);font-size:13px">Aucun résultat</div>';
   var res = document.getElementById('cmd-results');
   res.innerHTML = html;
   palIdx = -1;
+
   res.querySelectorAll('.cmd-item').forEach(function(el){
     el.addEventListener('click', function(){
       var type = el.dataset.type, idx = +el.dataset.i;
-      if(type === 'cmd'){ PAL_CMDS[idx].action(); closePalette(); }
-      else { var f = PAL_FILES[idx]; closePalette(); if(f.href) window.open(f.href,'_blank'); else openPane(f.id); }
+      if(type === 'cmd'){
+        PAL_CMDS[idx].action();
+        closePalette();
+      } else {
+        var f = PAL_FILES[idx];
+        closePalette();
+        if(f.href) window.open(f.href, '_blank');
+        else openPane(f.id);
+      }
     });
   });
 }
