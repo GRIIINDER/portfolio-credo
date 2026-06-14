@@ -630,7 +630,7 @@
     </div>
   </div>
   <div class="ld-pill" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progression du chargement" id="ld-progress">
-    <span class="ld-label">LOADING</span>
+    <span class="ld-label">CHARGEMENT</span>
     <span class="ld-pct" id="ld-text">0%</span>
     <div class="ld-cursor"></div>
   </div>
@@ -656,13 +656,13 @@
 
   <!-- Menu Bar -->
   <div id="vsc-menu">
-    <div class="vsc-mi">File</div>
-    <div class="vsc-mi">Edit</div>
-    <div class="vsc-mi">View</div>
-    <div class="vsc-mi">Go</div>
-    <div class="vsc-mi">Run</div>
+    <div class="vsc-mi">Fichier</div>
+    <div class="vsc-mi">Édition</div>
+    <div class="vsc-mi">Affichage</div>
+    <div class="vsc-mi">Aller</div>
+    <div class="vsc-mi">Exécuter</div>
     <div class="vsc-mi">Terminal</div>
-    <div class="vsc-mi">Help</div>
+    <div class="vsc-mi">Aide</div>
   </div>
 
   <!-- Main -->
@@ -670,9 +670,9 @@
 
     <!-- Activity Bar -->
     <div id="vsc-actbar">
-      <div class="vsc-ai on" title="Explorer"><i class="fa-solid fa-folder-open"></i></div>
+      <div class="vsc-ai on" title="Explorateur"><i class="fa-solid fa-folder-open"></i></div>
       <div class="vsc-ai" title="Recherche"><i class="fa-solid fa-magnifying-glass"></i></div>
-      <div class="vsc-ai" title="Source Control"><i class="fa-solid fa-code-branch"></i></div>
+      <div class="vsc-ai" title="Contrôle de source"><i class="fa-solid fa-code-branch"></i></div>
       <div class="vsc-ai" title="Extensions"><i class="fa-solid fa-puzzle-piece"></i></div>
       <div class="vsc-ai-bot">
         <div class="vsc-ai" title="Compte"><i class="fa-solid fa-circle-user"></i></div>
@@ -819,7 +819,7 @@
         <div class="pane" id="pane-about">
           <div class="p-hdr">&lt;!-- about.html — Credo Ahiafor --&gt;</div>
 
-          <h2 class="ab-title">About Me</h2>
+          <h2 class="ab-title">À Propos</h2>
           <div class="ab-subtitle">// qui je suis &nbsp;·&nbsp; ce que je fais &nbsp;·&nbsp; où je construis</div>
 
           <div class="ab-bio-card">
@@ -832,7 +832,7 @@
           </div>
 
           <div class="ab-section">
-            <div class="ab-sec-hdr">Current Focus</div>
+            <div class="ab-sec-hdr">Focus Actuel</div>
             <div class="ab-focus-grid">
               <div class="ab-focus-item"><span class="ab-focus-icon">🌐</span><span>Développement web freelance — Cabinet BEGO, Afinah Closet, GUEZE</span></div>
               <div class="ab-focus-item"><span class="ab-focus-icon">🔒</span><span>Cybersécurité &amp; infrastructure réseau Cisco</span></div>
@@ -844,7 +844,7 @@
           </div>
 
           <div class="ab-section">
-            <div class="ab-sec-hdr">Education</div>
+            <div class="ab-sec-hdr">Formation</div>
 
             <div class="ab-edu-card">
               <div class="ab-edu-top">
@@ -887,10 +887,10 @@
 
         <!-- ─ projets.js ─ -->
         <div class="pane" id="pane-projets">
-          <div class="p-hdr">// projets.js : things I've built &amp; shipped</div>
+          <div class="p-hdr">// projets.js : ce que j'ai construit &amp; livré</div>
 
-          <h2 class="pj-title">Projects</h2>
-          <div class="pj-subtitle">const projects = [ ...shipped, ...building ]</div>
+          <h2 class="pj-title">Projets</h2>
+          <div class="pj-subtitle">const projets = [ ...livrés, ...en_cours ]</div>
 
           <div class="pj-grid">
 
@@ -1027,10 +1027,10 @@
 
         <!-- ─ experience.ts ─ -->
         <div class="pane" id="pane-parcours">
-          <div class="p-hdr">// experience.ts - professional journey</div>
+          <div class="p-hdr">// experience.ts — parcours professionnel</div>
 
-          <h2 class="ex-title">Experience</h2>
-          <div class="ex-subtitle">interface Career extends Timeline {}</div>
+          <h2 class="ex-title">Expérience</h2>
+          <div class="ex-subtitle">interface Carrière extends Chronologie {}</div>
 
           <div class="ex-section-hdr">Expérience Professionnelle</div>
           <div class="ex-list">
@@ -1119,15 +1119,15 @@
 
         <!-- ─ contact.css ─ -->
         <div class="pane" id="pane-contact">
-          <div class="p-hdr">/* contact.css — let's build something */</div>
+          <div class="p-hdr">/* contact.css — construisons quelque chose */</div>
 
           <h2 class="ct-title">Contact</h2>
-          <div class="ct-subtitle">// open to work, collabs &amp; good conversations</div>
+          <div class="ct-subtitle">// ouvert au travail, collabs &amp; bons échanges</div>
 
           <div class="ct-grid">
 
             <div>
-              <div class="ct-section-hdr">Find Me On</div>
+              <div class="ct-section-hdr">Me Retrouver Sur</div>
               <div class="ct-links">
 
                 <a href="mailto:ahiafor.credo@gmail.com" class="ct-link">
@@ -1179,25 +1179,25 @@
             </div>
 
             <div>
-              <div class="ct-section-hdr">Send A Message</div>
+              <div class="ct-section-hdr">Envoyer un Message</div>
               <form class="ct-form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <div>
-                  <label class="ct-label" for="cf-name">// YOUR_NAME *</label>
+                  <label class="ct-label" for="cf-name">// VOTRE_NOM *</label>
                   <input type="text" id="cf-name" name="name" required class="ct-input" placeholder="string">
                 </div>
                 <div>
-                  <label class="ct-label" for="cf-email">// YOUR_EMAIL *</label>
+                  <label class="ct-label" for="cf-email">// VOTRE_EMAIL *</label>
                   <input type="email" id="cf-email" name="email" required class="ct-input" placeholder="string">
                 </div>
                 <div>
-                  <label class="ct-label" for="cf-sub">// SUBJECT</label>
+                  <label class="ct-label" for="cf-sub">// SUJET</label>
                   <input type="text" id="cf-sub" name="subject" class="ct-input" placeholder="string">
                 </div>
                 <div>
                   <label class="ct-label" for="cf-msg">// MESSAGE *</label>
-                  <textarea id="cf-msg" name="message" required class="ct-textarea" placeholder="'''your message'''"></textarea>
+                  <textarea id="cf-msg" name="message" required class="ct-textarea" placeholder="'''votre message'''"></textarea>
                 </div>
-                <button type="submit" class="ct-btn">→ send_message()</button>
+                <button type="submit" class="ct-btn">→ envoyer_message()</button>
                 <div class="ct-powered">// Powered by Formspree — arrive directement dans ma boîte</div>
                 <div class="cf-ok" id="cf-ok">// Message envoyé avec succès ✓</div>
               </form>
@@ -1211,7 +1211,7 @@
           <div class="p-hdr"># README.md</div>
 
           <h1 class="rm-name">Credo Ahiafor</h1>
-          <div class="rm-role">Network &amp; Security Engineer · Développeur Web · Lomé, Togo 🇹🇬</div>
+          <div class="rm-role">Ingénieur Réseaux &amp; Sécurité · Développeur Web · Lomé, Togo 🇹🇬</div>
 
           <div class="rm-pills">
             <span class="rm-pill" style="background:rgba(0,122,204,.15);color:var(--accent);border-color:rgba(0,122,204,.4)">🔵 Cisco</span>
@@ -1221,13 +1221,13 @@
             <span class="rm-pill" style="background:rgba(197,134,192,.15);color:var(--purple);border-color:rgba(197,134,192,.4)">🐧 Linux</span>
           </div>
 
-          <h2 class="rm-section">🛡️ About</h2>
+          <h2 class="rm-section">🛡️ À Propos</h2>
           <p class="rm-p">Passionné par la cybersécurité, les architectures réseaux et le développement web, j'accompagne entreprises et entrepreneurs dans leurs projets numériques depuis 5 ans. La rigueur et l'authenticité sont au cœur de ma façon de travailler.</p>
           <ul class="rm-dots">
             <li>🔒 Conception d'architectures <strong>réseau sécurisées</strong> (Cisco, VLAN, VPN)</li>
             <li>🌐 Développement web full-stack : WordPress, React, Shopify</li>
             <li>⚡ Automatisation &amp; scripting Python pour l'administration réseau</li>
-            <li>✨ Always learning, always building</li>
+            <li>✨ Toujours apprenant, toujours en construction</li>
           </ul>
 
           <h2 class="rm-section">Stack</h2>
@@ -1270,12 +1270,12 @@
             </div>
           </div>
 
-          <h2 class="rm-section">Connect</h2>
+          <h2 class="rm-section">Contact</h2>
           <ul class="rm-conn-list">
             <li><span>Email:    </span> <a href="mailto:ahiafor.credo@gmail.com">ahiafor.credo@gmail.com</a></li>
             <li><span>GitHub:   </span> <a href="https://github.com/GRIIINDER" target="_blank" rel="noopener">GRIIINDER</a></li>
             <li><span>LinkedIn: </span> <a href="https://www.linkedin.com/in/credoahiafor" target="_blank" rel="noopener">credoahiafor</a></li>
-            <li><span>Phone:    </span> <a href="tel:+22892236379">+228 92 23 63 79</a></li>
+            <li><span>Tél. :    </span> <a href="tel:+22892236379">+228 92 23 63 79</a></li>
           </ul>
 
           <div class="rm-copy-box">
@@ -1318,16 +1318,16 @@
 <!-- Mobile bottom navigation -->
 <nav id="mob-nav" aria-label="Navigation mobile">
   <button class="mob-ni on" onclick="openPane('home')"        data-pane="home">
-    <i class="fa-solid fa-house"></i><span>Home</span>
+    <i class="fa-solid fa-house"></i><span>Accueil</span>
   </button>
   <button class="mob-ni"    onclick="openPane('about')"       data-pane="about">
-    <i class="fa-solid fa-user"></i><span>About</span>
+    <i class="fa-solid fa-user"></i><span>À Propos</span>
   </button>
   <button class="mob-ni"    onclick="openPane('projets')"     data-pane="projets">
     <i class="fa-solid fa-folder-open"></i><span>Projets</span>
   </button>
   <button class="mob-ni"    onclick="openPane('competences')" data-pane="competences">
-    <i class="fa-solid fa-code"></i><span>Skills</span>
+    <i class="fa-solid fa-code"></i><span>Compétences</span>
   </button>
   <button class="mob-ni"    onclick="openPane('parcours')"    data-pane="parcours">
     <i class="fa-solid fa-timeline"></i><span>Parcours</span>
@@ -1361,7 +1361,7 @@
     pctEl.textContent = '100%';
     progress.setAttribute('aria-valuenow', 100);
     setTimeout(function(){
-      pctEl.textContent = 'WELCOME';
+      pctEl.textContent = 'BIENVENUE';
       setTimeout(function(){ screen.classList.add('out'); }, 3000);
     }, 1000);
   }
