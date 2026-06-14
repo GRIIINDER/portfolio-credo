@@ -357,20 +357,21 @@
     }
     .sk-badge:hover { border-color:var(--accent); color:var(--fg); }
 
-    /* ── TIMELINE pane ── */
-    .tl { position:relative; padding-left:28px; }
-    .tl::before { content:''; position:absolute; left:8px; top:6px; bottom:6px; width:1px; background:var(--border); }
-    .tl-item { position:relative; padding-bottom:30px; }
-    .tl-dot {
-      position:absolute; left:-24px; top:5px;
-      width:10px; height:10px; border-radius:50%; background:var(--accent);
-      border:2px solid var(--bg); z-index:1;
-    }
-    .tl-date  { font-size:11px; color:var(--fg3); font-family:var(--font-mono); margin-bottom:4px; }
-    .tl-title { font-weight:600; color:var(--fg); font-size:14px; font-family:var(--font-ui); margin-bottom:4px; }
-    .tl-org   { font-size:12px; color:var(--accent); font-family:var(--font-ui); margin-bottom:6px; }
-    .tl-desc  { font-size:12.5px; color:var(--fg2); line-height:1.65; font-family:var(--font-ui); }
-    .tl-mention { display:inline-block; margin-top:6px; font-size:11px; font-weight:700; color:var(--teal); background:rgba(78,201,176,.1); padding:2px 8px; border-radius:3px; font-family:var(--font-mono); }
+    /* ── PARCOURS/EXPERIENCE pane ── */
+    .ex-title      { font-size:clamp(2rem,6vw,3.5rem); font-weight:800; color:var(--fg); font-family:var(--font-ui); margin:8px 0 8px; letter-spacing:-.02em; }
+    .ex-subtitle   { color:var(--fg3); font-size:13px; font-family:var(--font-mono); margin-bottom:32px; }
+    .ex-section-hdr{ font-size:12px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--teal); font-family:var(--font-ui); margin:28px 0 4px; }
+    .ex-list       { display:flex; flex-direction:column; }
+    .ex-item       { padding:24px 0; border-bottom:1px solid var(--border); }
+    .ex-item:last-child { border-bottom:none; }
+    .ex-date-row   { display:flex; align-items:center; gap:10px; margin-bottom:10px; font-size:13px; color:var(--fg3); font-family:var(--font-mono); }
+    .ex-rdot       { width:14px; height:14px; border-radius:50%; flex-shrink:0; border:2px solid var(--accent); background:var(--bg2); position:relative; }
+    .ex-rdot::after{ content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:5px; height:5px; border-radius:50%; background:var(--accent); }
+    .ex-role       { font-size:1.2rem; font-weight:700; color:var(--fg); font-family:var(--font-ui); margin-bottom:5px; }
+    .ex-org        { font-size:13px; color:var(--teal); font-family:var(--font-ui); margin-bottom:10px; }
+    .ex-desc       { font-size:13px; color:var(--fg2); font-family:var(--font-mono); line-height:1.65; margin-bottom:12px; max-width:700px; }
+    .ex-tags       { display:flex; flex-wrap:wrap; gap:6px; }
+    .ex-tag        { font-size:11px; padding:3px 10px; border:1px solid var(--border); border-radius:4px; color:var(--fg2); font-family:var(--font-mono); background:var(--bg3); }
 
     /* ── CONTACT pane ── */
     .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; }
@@ -889,66 +890,91 @@
 
         <!-- ─ parcours.ts ─ -->
         <div class="pane" id="pane-parcours">
-          <div class="p-hdr">// parcours.ts — Expérience &amp; Formation</div>
-          <div class="tl">
+          <div class="p-hdr">// parcours.ts - professional journey</div>
 
-            <div class="tl-item">
-              <div class="tl-dot"></div>
-              <div class="tl-date">Sept. 2025 — Présent</div>
-              <div class="tl-title">Développeur Web Freelance</div>
-              <div class="tl-org"><i class="fa-solid fa-laptop-code fa-xs"></i>&nbsp; Indépendant · Lomé, Togo</div>
-              <div class="tl-desc">Création et maintenance de sites web professionnels. Projets WordPress RGPD, Shopify e-commerce mode modeste, application React de tontine digitale.</div>
-              <div class="tl-mention">Cabinet BEGO · Afinah Closet · GUEZE</div>
+          <h2 class="ex-title">Experience</h2>
+          <div class="ex-subtitle">interface Career extends Timeline {}</div>
+
+          <div class="ex-section-hdr">Expérience Professionnelle</div>
+          <div class="ex-list">
+
+            <div class="ex-item">
+              <div class="ex-date-row"><span class="ex-rdot"></span>Sept. 2025 — Présent</div>
+              <div class="ex-role">Développeur Web Freelance</div>
+              <div class="ex-org">@ Indépendant · Lomé, Togo</div>
+              <div class="ex-desc">Création et maintenance de sites web professionnels. Projets WordPress RGPD, Shopify e-commerce mode modeste, application React de tontine digitale.</div>
+              <div class="ex-tags">
+                <span class="ex-tag">WordPress</span><span class="ex-tag">Shopify</span>
+                <span class="ex-tag">React</span><span class="ex-tag">Next.js</span><span class="ex-tag">RGPD</span>
+              </div>
             </div>
 
-            <div class="tl-item">
-              <div class="tl-dot"></div>
-              <div class="tl-date">2024</div>
-              <div class="tl-title">Jury — OuraGrove Hackathon</div>
-              <div class="tl-org"><i class="fa-solid fa-trophy fa-xs"></i>&nbsp; OuraGrove · Lomé, Togo</div>
-              <div class="tl-desc">Membre du jury d'un hackathon tech. Évaluation des projets participants sur les critères d'innovation, de faisabilité technique et d'impact business.</div>
+            <div class="ex-item">
+              <div class="ex-date-row"><span class="ex-rdot"></span>2024</div>
+              <div class="ex-role">Jury — OuraGrove Hackathon</div>
+              <div class="ex-org">@ OuraGrove · Lomé, Togo</div>
+              <div class="ex-desc">Membre du jury d'un hackathon tech. Évaluation des projets sur les critères d'innovation, de faisabilité technique et d'impact business.</div>
+              <div class="ex-tags">
+                <span class="ex-tag">Tech</span><span class="ex-tag">Innovation</span><span class="ex-tag">Évaluation</span>
+              </div>
             </div>
 
-            <div class="tl-item">
-              <div class="tl-dot" style="background:var(--teal)"></div>
-              <div class="tl-date">2023 — 2026</div>
-              <div class="tl-title">Master 2 — Systèmes, Réseaux &amp; Sécurité</div>
-              <div class="tl-org"><i class="fa-solid fa-graduation-cap fa-xs"></i>&nbsp; ESGIS Togo · Lomé</div>
-              <div class="tl-desc">Formation avancée en cybersécurité, architectures réseaux enterprise, virtualisation et cloud. Diplômé.</div>
+            <div class="ex-item">
+              <div class="ex-date-row"><span class="ex-rdot"></span>Fév. — Juin 2022</div>
+              <div class="ex-role">Stagiaire Technicien Réseau</div>
+              <div class="ex-org">@ CFAO Infrastructure · Lomé, Togo</div>
+              <div class="ex-desc">Configuration et mise en service d'équipements réseau et de postes clients. Maintenance préventive du parc informatique, résolution d'incidents. Installation d'imprimantes réseau.</div>
+              <div class="ex-tags">
+                <span class="ex-tag">Cisco</span><span class="ex-tag">Windows Server</span>
+                <span class="ex-tag">VLAN</span><span class="ex-tag">Maintenance</span>
+              </div>
             </div>
 
-            <div class="tl-item">
-              <div class="tl-dot"></div>
-              <div class="tl-date">Fév. — Juin 2022</div>
-              <div class="tl-title">Stagiaire Technicien Réseau</div>
-              <div class="tl-org"><i class="fa-solid fa-building fa-xs"></i>&nbsp; CFAO Infrastructure · Lomé, Togo</div>
-              <div class="tl-desc">Configuration et mise en service d'équipements réseau et de postes clients. Maintenance préventive du parc informatique, résolution d'incidents. Installation d'imprimantes réseau et déploiement d'équipements d'impression.</div>
+          </div>
+
+          <div class="ex-section-hdr">Formation</div>
+          <div class="ex-list">
+
+            <div class="ex-item">
+              <div class="ex-date-row"><span class="ex-rdot"></span>2023 — 2026</div>
+              <div class="ex-role">Master 2 — Systèmes, Réseaux &amp; Sécurité</div>
+              <div class="ex-org">@ ESGIS Togo · Lomé</div>
+              <div class="ex-desc">Formation avancée en cybersécurité, architectures réseaux enterprise, virtualisation et cloud. Diplômé.</div>
+              <div class="ex-tags">
+                <span class="ex-tag">Cybersécurité</span><span class="ex-tag">Réseaux</span>
+                <span class="ex-tag">Cloud</span><span class="ex-tag">Virtualisation</span>
+              </div>
             </div>
 
-            <div class="tl-item">
-              <div class="tl-dot" style="background:var(--teal)"></div>
-              <div class="tl-date">2020 — 2023</div>
-              <div class="tl-title">Licence — Réseaux &amp; Télécommunications</div>
-              <div class="tl-org"><i class="fa-solid fa-graduation-cap fa-xs"></i>&nbsp; UCAO · Lomé</div>
-              <div class="tl-desc">Formation en architecture réseaux, protocoles de communication, télécommunications et sécurité des systèmes d'information.</div>
-              <div class="tl-mention">Mention PASSABLE</div>
+            <div class="ex-item">
+              <div class="ex-date-row"><span class="ex-rdot"></span>2020 — 2022</div>
+              <div class="ex-role">Licence — Réseaux &amp; Télécommunications</div>
+              <div class="ex-org">@ UCAO · Lomé — Mention PASSABLE</div>
+              <div class="ex-desc">Architecture réseaux, protocoles de communication, télécommunications et sécurité des systèmes d'information.</div>
+              <div class="ex-tags">
+                <span class="ex-tag">Réseaux</span><span class="ex-tag">Protocoles</span><span class="ex-tag">Télécom</span>
+              </div>
             </div>
 
-            <div class="tl-item">
-              <div class="tl-dot" style="background:var(--teal)"></div>
-              <div class="tl-date">2017 — 2020</div>
-              <div class="tl-title">Licence — Développement d'Applications</div>
-              <div class="tl-org"><i class="fa-solid fa-graduation-cap fa-xs"></i>&nbsp; UCAO-ISTIN · Lomé</div>
-              <div class="tl-desc">Fondamentaux du génie logiciel, algorithmique, bases de données, développement orienté objet et conception UML.</div>
-              <div class="tl-mention">Mention PASSABLE</div>
+            <div class="ex-item">
+              <div class="ex-date-row"><span class="ex-rdot"></span>2022 — 2024</div>
+              <div class="ex-role">Licence — Développement d'Applications</div>
+              <div class="ex-org">@ UCAO-ISTIN · Lomé — Mention PASSABLE</div>
+              <div class="ex-desc">Génie logiciel, algorithmique, bases de données, développement orienté objet et conception UML.</div>
+              <div class="ex-tags">
+                <span class="ex-tag">POO</span><span class="ex-tag">Java</span>
+                <span class="ex-tag">UML</span><span class="ex-tag">SQL</span>
+              </div>
             </div>
 
-            <div class="tl-item">
-              <div class="tl-dot" style="background:var(--yellow)"></div>
-              <div class="tl-date">2017</div>
-              <div class="tl-title">Baccalauréat Série D</div>
-              <div class="tl-org"><i class="fa-solid fa-school fa-xs"></i>&nbsp; Collège Protestant · Kpalimé, Togo</div>
-              <div class="tl-desc">Baccalauréat scientifique, série D — Sciences de la vie et de la terre + Mathématiques.</div>
+            <div class="ex-item">
+              <div class="ex-date-row"><span class="ex-rdot"></span>2019 — 2020</div>
+              <div class="ex-role">Baccalauréat — Série D</div>
+              <div class="ex-org">@ Collège Protestant · Kpalimé, Togo</div>
+              <div class="ex-desc">Baccalauréat scientifique, série D — Sciences de la vie et de la terre et Mathématiques.</div>
+              <div class="ex-tags">
+                <span class="ex-tag">Mathématiques</span><span class="ex-tag">SVT</span><span class="ex-tag">Sciences</span>
+              </div>
             </div>
 
           </div>
