@@ -310,18 +310,22 @@
     .hsc-pill:hover { border-color:var(--accent); color:var(--accent); background:rgba(0,122,204,.08); }
 
     /* ── ABOUT pane ── */
-    .about-row { display:flex; gap:36px; flex-wrap:wrap; margin-bottom:36px; align-items:flex-start; }
-    .about-photo { width:130px; height:130px; border-radius:6px; object-fit:cover; border:1px solid var(--border); flex-shrink:0; }
-    .about-bio-block { flex:1; min-width:240px; }
-    .about-bio-block p { color:var(--fg2); line-height:1.78; margin-bottom:14px; font-family:var(--font-ui); font-size:13.5px; }
-    .about-bio-block strong { color:var(--teal); font-weight:500; }
-    .about-stats { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:32px; }
-    .stat { background:var(--bg2); border:1px solid var(--border); border-radius:6px; padding:16px 20px; text-align:center; min-width:90px; }
-    .stat-val { font-size:1.5rem; font-weight:700; color:var(--accent); font-family:var(--font-mono); }
-    .stat-lbl { font-size:11px; color:var(--fg2); font-family:var(--font-ui); margin-top:4px; }
-    .highlights { display:flex; flex-direction:column; gap:12px; }
-    .hl { display:flex; align-items:center; gap:12px; color:var(--fg); font-size:13px; font-family:var(--font-ui); }
-    .hl i { color:var(--accent); width:16px; text-align:center; }
+    .ab-title { font-size:clamp(2rem,6vw,3.5rem); font-weight:800; color:var(--fg); font-family:var(--font-ui); margin:8px 0 8px; letter-spacing:-.02em; }
+    .ab-subtitle { color:var(--fg3); font-size:13px; font-family:var(--font-mono); margin-bottom:28px; }
+    .ab-bio-card { background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:24px 28px; margin-bottom:32px; line-height:1.8; color:var(--fg2); font-family:var(--font-ui); font-size:13.5px; }
+    .ab-bio-card strong { color:var(--teal); font-weight:500; }
+    .ab-section { margin-bottom:36px; }
+    .ab-sec-hdr { font-size:12px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--teal); font-family:var(--font-ui); margin-bottom:16px; }
+    .ab-focus-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:20px; }
+    .ab-focus-item { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:var(--fg2); font-family:var(--font-ui); line-height:1.55; }
+    .ab-focus-icon { font-size:15px; flex-shrink:0; line-height:1.4; }
+    .ab-edu-card { background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:20px 24px; margin-bottom:12px; }
+    .ab-edu-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:8px; }
+    .ab-edu-school { font-size:15px; font-weight:700; color:var(--fg); font-family:var(--font-ui); }
+    .ab-edu-years { font-size:12px; color:var(--fg3); font-family:var(--font-mono); white-space:nowrap; }
+    .ab-edu-sub { font-size:12px; color:var(--fg3); font-family:var(--font-ui); margin-bottom:6px; }
+    .ab-edu-degree { font-size:13px; color:var(--teal); font-family:var(--font-ui); font-weight:500; }
+    .ab-edu-note { font-size:12px; color:var(--fg3); font-family:var(--font-mono); margin-top:4px; }
 
     /* ── PROJECTS pane ── */
     .proj-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px; margin-top:4px; }
@@ -462,12 +466,16 @@
       #mob-nav { display: flex; }
     }
 
+    @media(max-width:600px){
+      .ab-focus-grid { grid-template-columns: 1fr; }
+      .ab-bio-card { padding: 18px 16px; }
+      .ab-edu-card { padding: 16px 14px; }
+    }
+
     @media(max-width:480px){
       #vsc-panes { padding: 16px 12px; }
       .vsc-tab { min-width: 72px; }
       .proj-grid { grid-template-columns: 1fr; }
-      .stat { min-width: 70px; padding: 12px 14px; }
-      .about-stats { gap: 10px; }
       .hstat { min-width: 70px; padding: 14px 10px; }
       .hstat-val { font-size: 1.5rem; }
       .hero-ctas { gap: 8px; }
@@ -670,28 +678,71 @@
 
         <!-- ─ about.html ─ -->
         <div class="pane" id="pane-about">
-          <div class="p-hdr">&lt;!-- about.html — À propos de moi --&gt;</div>
+          <div class="p-hdr">&lt;!-- about.html — Credo Ahiafor --&gt;</div>
 
-          <div class="about-row">
-            <img src="assets/images/credoahiafor.webp" alt="Credo Ahiafor" class="about-photo" loading="lazy">
-            <div class="about-bio-block">
-              <p>Développeur web freelance et ingénieur réseaux basé à Lomé, je combine expertise technique et sens du business pour livrer des solutions qui marchent vraiment — pas juste sur papier.</p>
-              <p>Mon spectre va du site corporate WordPress au Shopify e-commerce, en passant par des applications React full-stack et des infrastructures réseau Cisco. Je navigue aussi bien côté front que côté câbles.</p>
+          <h2 class="ab-title">About Me</h2>
+          <div class="ab-subtitle">// qui je suis &nbsp;·&nbsp; ce que je fais &nbsp;·&nbsp; où je construis</div>
+
+          <div class="ab-bio-card">
+            <p>Bonjour ! Je suis <strong>Credo Ahiafor</strong>, ingénieur en <strong>réseaux &amp; sécurité</strong>
+            et <strong>développeur web freelance</strong> basé à <strong>Lomé, Togo</strong>. Je construis des
+            systèmes web robustes et des infrastructures réseau sécurisées — du câble au code.
+            Actuellement en <strong>Master 2 Systèmes, Réseaux &amp; Sécurité</strong> à l'ESGIS Togo, je
+            combine expertise technique et sens pratique pour livrer des solutions qui marchent
+            vraiment — pas juste sur papier.</p>
+          </div>
+
+          <div class="ab-section">
+            <div class="ab-sec-hdr">Current Focus</div>
+            <div class="ab-focus-grid">
+              <div class="ab-focus-item"><span class="ab-focus-icon">🌐</span><span>Développement web freelance — Cabinet BEGO, Afinah Closet, GUEZE</span></div>
+              <div class="ab-focus-item"><span class="ab-focus-icon">🔒</span><span>Cybersécurité &amp; infrastructure réseau Cisco</span></div>
+              <div class="ab-focus-item"><span class="ab-focus-icon">⚛️</span><span>Applications React full-stack &amp; WordPress RGPD</span></div>
+              <div class="ab-focus-item"><span class="ab-focus-icon">☁️</span><span>Cloud Azure &amp; virtualisation serveurs</span></div>
+              <div class="ab-focus-item"><span class="ab-focus-icon">🛒</span><span>E-commerce Shopify &amp; WooCommerce</span></div>
+              <div class="ab-focus-item"><span class="ab-focus-icon">📚</span><span>Toujours apprenant, toujours en construction</span></div>
             </div>
           </div>
 
-          <div class="about-stats">
-            <div class="stat"><div class="stat-val">5+</div><div class="stat-lbl">Ans d'expérience</div></div>
-            <div class="stat"><div class="stat-val">4+</div><div class="stat-lbl">Projets réalisés</div></div>
-            <div class="stat"><div class="stat-val">2</div><div class="stat-lbl">Clients actifs</div></div>
-            <div class="stat"><div class="stat-val">M2</div><div class="stat-lbl">Diplômé 2026</div></div>
-          </div>
+          <div class="ab-section">
+            <div class="ab-sec-hdr">Education</div>
 
-          <div class="highlights">
-            <div class="hl"><i class="fa-solid fa-check"></i><span>Freelance actif depuis sept. 2025 — Cabinet BEGO &amp; Afinah Closet</span></div>
-            <div class="hl"><i class="fa-solid fa-check"></i><span>Master 2 Systèmes, Réseaux &amp; Sécurité — ESGIS Togo, diplômé 2026</span></div>
-            <div class="hl"><i class="fa-solid fa-check"></i><span>Stage infrastructure réseau chez CFAO — configuration Cisco, VLAN, datacenter</span></div>
-            <div class="hl"><i class="fa-solid fa-check"></i><span>Passionné de cybersécurité, cloud Azure et intelligence artificielle</span></div>
+            <div class="ab-edu-card">
+              <div class="ab-edu-top">
+                <span class="ab-edu-school">🎓 ESGIS Togo</span>
+                <span class="ab-edu-years">2024 — 2026</span>
+              </div>
+              <div class="ab-edu-sub">École Supérieure de Génie Informatique et des Sciences</div>
+              <div class="ab-edu-degree">Master 2 — Systèmes, Réseaux &amp; Sécurité</div>
+            </div>
+
+            <div class="ab-edu-card">
+              <div class="ab-edu-top">
+                <span class="ab-edu-school">🎓 UCAO-ISTIN · Lomé</span>
+                <span class="ab-edu-years">2022 — 2024</span>
+              </div>
+              <div class="ab-edu-sub">Université Catholique de l'Afrique de l'Ouest</div>
+              <div class="ab-edu-degree">Licence — Développement d'Applications</div>
+              <div class="ab-edu-note">Mention : PASSABLE</div>
+            </div>
+
+            <div class="ab-edu-card">
+              <div class="ab-edu-top">
+                <span class="ab-edu-school">🎓 UCAO · Lomé</span>
+                <span class="ab-edu-years">2020 — 2022</span>
+              </div>
+              <div class="ab-edu-sub">Université Catholique de l'Afrique de l'Ouest</div>
+              <div class="ab-edu-degree">Licence — Réseaux &amp; Télécommunications</div>
+              <div class="ab-edu-note">Mention : PASSABLE</div>
+            </div>
+
+            <div class="ab-edu-card">
+              <div class="ab-edu-top">
+                <span class="ab-edu-school">🏫 Collège Protestant · Kpalimé</span>
+                <span class="ab-edu-years">2019 — 2020</span>
+              </div>
+              <div class="ab-edu-degree">Baccalauréat — Série D</div>
+            </div>
           </div>
         </div>
 
