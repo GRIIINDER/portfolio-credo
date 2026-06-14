@@ -187,7 +187,12 @@
     .fg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 9px; }
     .fg-item { background: #242424; border: 1px solid #2e2e2e; border-radius: 7px; padding: 8px 11px; font-size: 13px; color: #666; line-height: 1.4; }
 
-    .pj { background: #242424; border: 1px solid #2e2e2e; border-radius: 9px; padding: 14px 16px; margin-bottom: 9px; transition: border-color .1s; }
+    .pj { background: #242424; border: 1px solid #2e2e2e; border-radius: 9px; overflow: hidden; margin-bottom: 9px; transition: border-color .1s; }
+    .pj-body { padding: 12px 14px 14px; }
+    .pj-img { width: 100%; height: 170px; overflow: hidden; background: #2a2a2a; display: block; position: relative; }
+    .pj-img img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform .4s ease; filter: brightness(.92); }
+    .pj:hover .pj-img img { transform: scale(1.03); filter: brightness(1); }
+    .pj:hover { border-color: #3a3a3a; }
     .pj:hover { border-color: #2e2e2e; }
     .pj-top { display: flex; justify-content: space-between; margin-bottom: 6px; }
     .pj-icon { font-size: 20px; }
@@ -559,9 +564,42 @@
               <div class="mc-name">Portfolio</div>
               <div class="mc-text">
                 <p>Voici les projets que j'ai construits et livrés.</p>
-                <div class="pj"><div class="pj-top"><span class="pj-icon">🏥</span><div class="pj-links"><a href="https://cabinetbego.com" target="_blank" rel="noopener" class="pj-link"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i> Voir le site</a></div></div><div class="pj-cats">WordPress · Vitrine · Professionnel</div><div class="pj-name">Cabinet BEGO</div><div class="pj-desc">Site vitrine pour un cabinet d'études et de gestion des organisations. Design soigné, SEO optimisé, formulaire de contact, hébergement sécurisé conforme RGPD.</div><div class="pj-stack"><span class="pj-tag">WordPress</span><span class="pj-tag">WooCommerce</span><span class="pj-tag">SEO</span><span class="pj-tag">RGPD</span></div></div>
-                <div class="pj"><div class="pj-top"><span class="pj-icon">👗</span><div class="pj-links"><a href="https://afinahcloset.com" target="_blank" rel="noopener" class="pj-link"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i> Voir le site</a></div></div><div class="pj-cats">Shopify · E-commerce · Mode Africaine</div><div class="pj-name">Afinah Closet</div><div class="pj-desc">Boutique e-commerce de mode africaine modeste. Catalogue produits, gestion des commandes, paiement sécurisé et livraison internationale.</div><div class="pj-stack"><span class="pj-tag">Shopify</span><span class="pj-tag">Liquid</span><span class="pj-tag">CSS</span><span class="pj-tag">E-commerce</span></div></div>
-                <div class="pj"><div class="pj-top"><span class="pj-icon">🐷</span><div class="pj-links"><a href="https://github.com/GRIIINDER/tontine-app" target="_blank" rel="noopener" class="pj-link"><i class="fa-brands fa-github"></i> GitHub</a><a href="https://gueze.vercel.app" target="_blank" rel="noopener" class="pj-link"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i> Live</a></div></div><div class="pj-cats">Full Stack · SaaS · Fintech</div><div class="pj-name">GUEZE</div><div class="pj-desc">Application SaaS de gestion de tontines. OAuth Google, notifications temps réel, tableau de bord et gestion des cycles de paiement.</div><div class="pj-stack"><span class="pj-tag">React</span><span class="pj-tag">Next.js</span><span class="pj-tag">Supabase</span><span class="pj-tag">PostgreSQL</span><span class="pj-tag">TypeScript</span></div></div>
+                <div class="pj">
+                  <a class="pj-img" href="https://cabinetbego.com" target="_blank" rel="noopener">
+                    <img src="https://image.thum.io/get/width/620/crop/360/https://cabinetbego.com" alt="Cabinet BEGO" loading="lazy">
+                  </a>
+                  <div class="pj-body">
+                    <div class="pj-top"><span class="pj-icon">🏥</span><div class="pj-links"><a href="https://cabinetbego.com" target="_blank" rel="noopener" class="pj-link"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i> Voir le site</a></div></div>
+                    <div class="pj-cats">WordPress · Vitrine · Professionnel</div>
+                    <div class="pj-name">Cabinet BEGO</div>
+                    <div class="pj-desc">Site vitrine pour un cabinet d'études et de gestion des organisations. Design soigné, SEO optimisé, formulaire de contact, hébergement sécurisé conforme RGPD.</div>
+                    <div class="pj-stack"><span class="pj-tag">WordPress</span><span class="pj-tag">WooCommerce</span><span class="pj-tag">SEO</span><span class="pj-tag">RGPD</span></div>
+                  </div>
+                </div>
+                <div class="pj">
+                  <a class="pj-img" href="https://afinahcloset.com" target="_blank" rel="noopener">
+                    <img src="https://image.thum.io/get/width/620/crop/360/https://afinahcloset.com" alt="Afinah Closet" loading="lazy">
+                  </a>
+                  <div class="pj-body">
+                    <div class="pj-top"><span class="pj-icon">👗</span><div class="pj-links"><a href="https://afinahcloset.com" target="_blank" rel="noopener" class="pj-link"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i> Voir le site</a></div></div>
+                    <div class="pj-cats">Shopify · E-commerce · Mode Africaine</div>
+                    <div class="pj-name">Afinah Closet</div>
+                    <div class="pj-desc">Boutique e-commerce de mode africaine modeste. Catalogue produits, gestion des commandes, paiement sécurisé et livraison internationale.</div>
+                    <div class="pj-stack"><span class="pj-tag">Shopify</span><span class="pj-tag">Liquid</span><span class="pj-tag">CSS</span><span class="pj-tag">E-commerce</span></div>
+                  </div>
+                </div>
+                <div class="pj">
+                  <a class="pj-img" href="https://gueze.vercel.app" target="_blank" rel="noopener">
+                    <img src="https://image.thum.io/get/width/620/crop/360/https://gueze.vercel.app" alt="GUEZE" loading="lazy">
+                  </a>
+                  <div class="pj-body">
+                    <div class="pj-top"><span class="pj-icon">🐷</span><div class="pj-links"><a href="https://github.com/GRIIINDER/tontine-app" target="_blank" rel="noopener" class="pj-link"><i class="fa-brands fa-github"></i> GitHub</a><a href="https://gueze.vercel.app" target="_blank" rel="noopener" class="pj-link"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i> Live</a></div></div>
+                    <div class="pj-cats">Full Stack · SaaS · Fintech</div>
+                    <div class="pj-name">GUEZE</div>
+                    <div class="pj-desc">Application SaaS de gestion de tontines. OAuth Google, notifications temps réel, tableau de bord et gestion des cycles de paiement.</div>
+                    <div class="pj-stack"><span class="pj-tag">React</span><span class="pj-tag">Next.js</span><span class="pj-tag">Supabase</span><span class="pj-tag">PostgreSQL</span><span class="pj-tag">TypeScript</span></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
