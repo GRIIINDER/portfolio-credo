@@ -16,14 +16,8 @@
     a { text-decoration: none; color: inherit; }
 
     /* ── Cursor ── */
-    #csr { position: fixed; z-index: 99999; pointer-events: none; width: 18px; height: 18px; border: 1.5px solid rgba(255,255,255,.7); top: 0; left: 0; will-change: transform; }
-    #csr .v { position: absolute; left: 50%; transform: translateX(-50%); width: 1.5px; background: rgba(255,255,255,.7); height: 8px; }
-    #csr .v.t { bottom: 100%; margin-bottom: 2px; }
-    #csr .v.b { top: 100%; margin-top: 2px; }
-    #csr .h { position: absolute; top: 50%; transform: translateY(-50%); height: 1.5px; background: rgba(255,255,255,.7); width: 8px; }
-    #csr .h.l { right: 100%; margin-right: 2px; }
-    #csr .h.r { left: 100%; margin-left: 2px; }
-    #csr .d { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 3px; height: 3px; background: rgba(255,255,255,.85); border-radius: 50%; }
+    #csr-dot { position: fixed; z-index: 99999; pointer-events: none; width: 5px; height: 5px; background: rgba(255,255,255,.95); border-radius: 50%; top: 0; left: 0; will-change: transform; opacity: 0; }
+    #csr-ring { position: fixed; z-index: 99998; pointer-events: none; width: 22px; height: 22px; border: 1.5px solid rgba(255,255,255,.45); border-radius: 50%; top: 0; left: 0; will-change: transform; opacity: 0; }
 
     /* ── Loader ── */
     #loading { position: fixed; inset: 0; z-index: 9998; background: #0f0f0f; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: opacity .6s, visibility .6s; }
@@ -311,11 +305,8 @@
 <body>
 
 <!-- Cursor -->
-<div id="csr">
-  <div class="v t"></div><div class="v b"></div>
-  <div class="h l"></div><div class="h r"></div>
-  <div class="d"></div>
-</div>
+<div id="csr-dot"></div>
+<div id="csr-ring"></div>
 
 <!-- Loader -->
 <div id="loading">
@@ -760,13 +751,36 @@
 <script>
 /* ── Cursor ── */
 (function(){
-  var c = document.getElementById('csr');
-  c.style.opacity = '0';
+  var dot  = document.getElementById('csr-dot');
+  var ring = document.getElementById('csr-ring');
+  var mx = -200, my = -200, rx = -200, ry = -200;
+  var ringSize = 22, targetSize = 22;
+  var shown = false;
+
   document.addEventListener('mousemove', function(e){
-    c.style.transform = 'translate('+(e.clientX-9)+'px,'+(e.clientY-9)+'px)';
-    c.style.opacity = '1';
+    mx = e.clientX; my = e.clientY;
+    dot.style.transform = 'translate('+(mx-2.5)+'px,'+(my-2.5)+'px)';
+    if(!shown){ shown=true; dot.style.opacity='1'; ring.style.opacity='1'; }
   });
-  document.addEventListener('mouseleave', function(){ c.style.opacity = '0'; });
+  document.addEventListener('mouseleave', function(){
+    shown=false; dot.style.opacity='0'; ring.style.opacity='0';
+  });
+
+  document.addEventListener('mouseover', function(e){
+    targetSize = e.target.closest('a,button,[role="button"]') ? 34 : 22;
+  });
+
+  function lerp(a,b,t){ return a+(b-a)*t; }
+  (function loop(){
+    rx = lerp(rx, mx, 0.13);
+    ry = lerp(ry, my, 0.13);
+    ringSize = lerp(ringSize, targetSize, 0.16);
+    var h = ringSize/2;
+    ring.style.transform = 'translate('+(rx-h)+'px,'+(ry-h)+'px)';
+    ring.style.width  = ringSize+'px';
+    ring.style.height = ringSize+'px';
+    requestAnimationFrame(loop);
+  })();
 })();
 
 /* ── Loader ── */
