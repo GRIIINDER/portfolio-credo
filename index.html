@@ -1581,6 +1581,58 @@ document.addEventListener('keydown',function(e){
   }
 });
 </script>
+<script>
+/* overwrite askCop with real AI version */
+var copHistory = [];
+var copBusy = false;
+
+function copAddMsg(html, isUser){
+  var body = document.getElementById('cop-msgs');
+  var wrap = document.createElement('div');
+  wrap.className = 'cop-msg ' + (isUser ? 'cop-user' : 'cop-bot');
+  var bub = document.createElement('div');
+  bub.className = 'cop-bubble';
+  bub.innerHTML = html;
+  wrap.appendChild(bub);
+  body.appendChild(wrap);
+  body.scrollTop = body.scrollHeight;
+  return bub;
+}
+
+async function askCop(q){
+  if(copBusy) return;
+  copBusy = true;
+  document.getElementById('cop-input').value = '';
+  document.getElementById('cop-chips').style.display = 'none';
+  copAddMsg(q, true);
+  var bub = copAddMsg('<span class="cop-typing"><span></span><span></span><span></span></span>', false);
+  try {
+    var res = await fetch('/api/copilot', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: q, history: copHistory })
+    });
+    var data = await res.json();
+    var reply = data.reply || "Désolé, je n'ai pas pu répondre.";
+    bub.innerHTML = reply.replace(/\n/g, '<br>');
+    copHistory.push({ role: 'user', content: q });
+    copHistory.push({ role: 'assistant', content: reply });
+    if(copHistory.length > 12) copHistory = copHistory.slice(-12);
+  } catch(err){
+    bub.innerHTML = '⚠️ Connexion impossible. Réessaie dans un instant.';
+  }
+  document.getElementById('cop-msgs').scrollTop = 9999;
+  copBusy = false;
+}
+
+function sendCop(){
+  var inp = document.getElementById('cop-input');
+  var q = inp.value.trim();
+  if(!q || copBusy) return;
+  inp.value = '';
+  askCop(q);
+}
+</script>
 
 <!-- ── Copilot Panel ── -->
 <div id="cop-panel">
