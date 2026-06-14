@@ -5,1621 +5,920 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Credo Ahiafor — Portfolio</title>
   <meta name="description" content="Ingénieur Réseaux &amp; Sécurité · Développeur Web · Lomé, Togo">
-  <meta property="og:title" content="Credo Ahiafor — Portfolio">
-  <meta property="og:description" content="Ingénieur Réseaux &amp; Sécurité · Développeur Web · Lomé, Togo">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
+    html, body { height: 100%; overflow: hidden; font-family: 'Inter', -apple-system, sans-serif; font-size: 13px; background: #0f0f0f; color: #e0e0e0; }
+    button { border: none; background: none; font-family: inherit; font-size: inherit; }
+    a { text-decoration: none; color: inherit; }
 
-    :root {
-      --bg:     #1a1a1a;
-      --sb:     #141414;
-      --panel:  #1e1e1e;
-      --border: #2a2a2a;
-      --hover:  rgba(255,255,255,.06);
-      --active: rgba(255,255,255,.10);
-      --fg:     #e8e8e8;
-      --fg2:    #9a9a9a;
-      --fg3:    #555;
-      --amber:  #D97706;
-      --amber2: #F59E0B;
-      --red:    #DC2626;
-      --purple: #9333EA;
-      --input:  #242424;
-      --user-bubble: #2a2a2a;
-      --font:   'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --mono:   'JetBrains Mono', Consolas, monospace;
-    }
-
-    html, body {
-      height: 100%; overflow: hidden;
-      font-family: var(--font);
-      font-size: 14px;
-      background: var(--bg);
-      color: var(--fg);
-    }
-
-    /* ── Custom Cursor ── */
-    #cl-cursor {
-      position: fixed; z-index: 99999; pointer-events: none;
-      width: 18px; height: 18px;
-      border: 1.5px solid rgba(255,255,255,.75);
-      top: 0; left: 0;
-      will-change: transform;
-    }
-    #cl-cursor .cur-v {
-      position: absolute; left: 50%; transform: translateX(-50%);
-      width: 1.5px; background: rgba(255,255,255,.75); height: 8px;
-    }
-    #cl-cursor .cur-v.top { bottom: 100%; margin-bottom: 2px; }
-    #cl-cursor .cur-v.bot { top: 100%; margin-top: 2px; }
-    #cl-cursor .cur-h {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      height: 1.5px; background: rgba(255,255,255,.75); width: 8px;
-    }
-    #cl-cursor .cur-h.lft { right: 100%; margin-right: 2px; }
-    #cl-cursor .cur-h.rgt { left: 100%; margin-left: 2px; }
-    #cl-cursor .cur-dot {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      width: 3px; height: 3px;
-      background: rgba(255,255,255,.9); border-radius: 50%;
-    }
+    /* ── Cursor ── */
+    #csr { position: fixed; z-index: 99999; pointer-events: none; width: 18px; height: 18px; border: 1.5px solid rgba(255,255,255,.7); top: 0; left: 0; will-change: transform; }
+    #csr .v { position: absolute; left: 50%; transform: translateX(-50%); width: 1.5px; background: rgba(255,255,255,.7); height: 8px; }
+    #csr .v.t { bottom: 100%; margin-bottom: 2px; }
+    #csr .v.b { top: 100%; margin-top: 2px; }
+    #csr .h { position: absolute; top: 50%; transform: translateY(-50%); height: 1.5px; background: rgba(255,255,255,.7); width: 8px; }
+    #csr .h.l { right: 100%; margin-right: 2px; }
+    #csr .h.r { left: 100%; margin-left: 2px; }
+    #csr .d { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 3px; height: 3px; background: rgba(255,255,255,.85); border-radius: 50%; }
 
     /* ── Loader ── */
-    #loading {
-      position: fixed; inset: 0; z-index: 9998;
-      background: var(--bg);
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
-      transition: opacity .6s ease, visibility .6s;
-    }
+    #loading { position: fixed; inset: 0; z-index: 9998; background: #0f0f0f; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: opacity .6s, visibility .6s; }
     #loading.out { opacity: 0; visibility: hidden; pointer-events: none; }
-    .ld-marquee {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; overflow: hidden; pointer-events: none;
-    }
-    .ld-marquee-inner {
-      display: flex; white-space: nowrap;
-      font-size: clamp(5rem, 12vw, 11rem);
-      font-weight: 900; letter-spacing: -.03em; text-transform: uppercase;
-      color: rgba(255,255,255,.03);
-      animation: ld-scroll 14s linear infinite;
-      user-select: none; font-family: var(--font);
-    }
-    @keyframes ld-scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-    .ld-pill {
-      position: relative; display: flex; align-items: center; gap: 1.2rem;
-      background: #0d0d0d; border: 1px solid rgba(217,119,6,.3);
-      border-radius: 999px; padding: .85rem 1.5rem .85rem 1.75rem;
-      min-width: 270px;
-      box-shadow: -6px 0 40px rgba(217,119,6,.3), 0 0 60px rgba(217,119,6,.08);
-      overflow: hidden;
-    }
-    .ld-pill::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 72px;
-      background: linear-gradient(90deg,rgba(217,119,6,.8) 0%,transparent 100%);
-      border-radius: 999px 0 0 999px;
-    }
-    .ld-label { color:#fff; font-size:.75rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; z-index:1; }
-    .ld-pct   { color:#fff; font-size:.75rem; font-weight:700; letter-spacing:.05em; margin-left:auto; min-width:4.5ch; z-index:1; text-align:right; }
-    .ld-cursor{ width:14px; height:18px; background:#D97706; border-radius:2px; z-index:1; flex-shrink:0; animation:ld-blink .8s step-end infinite; }
-    @keyframes ld-blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-    /* ── App layout ── */
-    #cl-app {
-      display: flex; height: 100vh; width: 100vw; overflow: hidden;
-    }
-
-    /* ── Sidebar ── */
-    #cl-sidebar {
-      width: 260px; flex-shrink: 0;
-      background: var(--sb);
-      border-right: 1px solid var(--border);
-      display: flex; flex-direction: column;
-      overflow: hidden;
-    }
-
-    .cl-sb-top {
-      display: flex; align-items: center; gap: 10px;
-      padding: 14px 14px 10px;
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
-    }
-
-    /* Claude gradient asterisk logo */
-    .cl-logo {
-      width: 32px; height: 32px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .cl-logo svg { width: 28px; height: 28px; }
-
-    .cl-brand { font-size: 15px; font-weight: 600; color: var(--fg); letter-spacing: -.01em; }
-    .cl-brand span { color: var(--amber); }
-
-    .cl-new-btn {
-      margin: 10px 10px 6px;
-      display: flex; align-items: center; gap: 8px;
-      padding: 8px 12px;
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--fg2); font-size: 13px; font-family: var(--font);
-      transition: background .15s, color .15s, border-color .15s;
-      flex-shrink: 0;
-    }
-    .cl-new-btn:hover { background: var(--hover); color: var(--fg); border-color: #3a3a3a; }
-    .cl-new-btn i { font-size: 12px; color: var(--amber); }
-
-    .cl-nav-section-label {
-      padding: 10px 14px 4px;
-      font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
-      color: var(--fg3); user-select: none; flex-shrink: 0;
-    }
-
-    .cl-nav { flex: 1; overflow-y: auto; padding: 0 6px 10px; }
-    .cl-nav::-webkit-scrollbar { width: 4px; }
-    .cl-nav::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
-
-    .cl-nav-item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 8px 10px;
-      border-radius: 8px;
-      color: var(--fg2); font-size: 13px;
-      transition: background .12s, color .12s;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      flex-shrink: 0;
-    }
-    .cl-nav-item:hover { background: var(--hover); color: var(--fg); }
-    .cl-nav-item.active { background: var(--active); color: var(--fg); }
-    .cl-nav-item i { width: 16px; text-align: center; flex-shrink: 0; font-size: 13px; color: inherit; opacity: .75; }
-    .cl-nav-item.active i { opacity: 1; color: var(--amber); }
-
-    .cl-sb-bottom {
-      border-top: 1px solid var(--border);
-      padding: 12px 12px;
-      display: flex; align-items: center; gap: 10px;
-      flex-shrink: 0;
-    }
-    .cl-avatar {
-      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
-      background: linear-gradient(135deg, #D97706 0%, #DC2626 50%, #9333EA 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 700; color: #fff;
-    }
-    .cl-user-info { flex: 1; min-width: 0; }
-    .cl-user-name { font-size: 13px; font-weight: 600; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .cl-user-role { font-size: 11px; color: var(--fg3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-    /* ── Main area ── */
-    #cl-main {
-      flex: 1; display: flex; flex-direction: column; overflow: hidden;
-      background: var(--bg);
-    }
-
-    /* Top bar */
-    #cl-topbar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 20px;
-      height: 50px;
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
-    }
-    .cl-model-pill {
-      display: flex; align-items: center; gap: 6px;
-      background: var(--hover); border: 1px solid var(--border);
-      border-radius: 20px; padding: 4px 12px 4px 8px;
-      font-size: 12px; color: var(--fg2);
-    }
-    .cl-model-pill i { font-size: 10px; color: var(--amber); }
-    .cl-topbar-actions { display: flex; gap: 4px; }
-    .cl-tb-btn {
-      width: 30px; height: 30px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 6px; color: var(--fg3); font-size: 13px;
-      transition: background .12s, color .12s;
-    }
-    .cl-tb-btn:hover { background: var(--hover); color: var(--fg); }
-
-    /* Panes */
-    .cl-pane {
-      display: none; flex: 1; flex-direction: column;
-      overflow: hidden;
-    }
-    .cl-pane.active { display: flex; }
-
-    /* Chat messages area */
-    .cl-chat {
-      flex: 1; overflow-y: auto; overflow-x: hidden;
-      padding: 32px 0 16px;
-      scroll-behavior: smooth;
-    }
-    .cl-chat::-webkit-scrollbar { width: 6px; }
-    .cl-chat::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-
-    .cl-msg-wrap {
-      max-width: 720px; margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* User message */
-    .cl-user-msg {
-      display: flex; justify-content: flex-end;
-      margin-bottom: 24px;
-    }
-    .cl-user-bubble {
-      background: var(--user-bubble);
-      border: 1px solid #333;
-      border-radius: 18px 18px 4px 18px;
-      padding: 10px 16px;
-      max-width: 80%;
-      font-size: 14px; color: var(--fg); line-height: 1.5;
-    }
-
-    /* Claude message */
-    .cl-claude-msg {
-      display: flex; gap: 12px;
-      margin-bottom: 32px;
-    }
-    .cl-claude-av {
-      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
-      margin-top: 2px;
-      background: linear-gradient(135deg, #D97706 0%, #DC2626 50%, #9333EA 100%);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .cl-claude-av svg { width: 16px; height: 16px; }
-    .cl-claude-body { flex: 1; min-width: 0; }
-    .cl-claude-name {
-      font-size: 13px; font-weight: 600; color: var(--fg);
-      margin-bottom: 8px;
-    }
-    .cl-claude-text {
-      font-size: 14px; color: var(--fg); line-height: 1.65;
-    }
-    .cl-claude-text p { margin-bottom: 12px; }
-    .cl-claude-text p:last-child { margin-bottom: 0; }
-    .cl-claude-text strong { color: #fff; font-weight: 600; }
-    .cl-claude-text a { color: var(--amber2); text-decoration: none; }
-    .cl-claude-text a:hover { text-decoration: underline; }
-
-    /* ── Home pane ── */
-    #cl-home {
-      align-items: center; justify-content: center;
-    }
-    .cl-home-inner {
-      display: flex; flex-direction: column; align-items: center;
-      max-width: 680px; width: 100%; padding: 0 24px;
-      text-align: center;
-    }
-    .cl-home-av {
-      width: 72px; height: 72px; border-radius: 50%;
-      background: linear-gradient(135deg, #D97706 0%, #DC2626 50%, #9333EA 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 26px; font-weight: 700; color: #fff;
-      margin-bottom: 20px;
-      box-shadow: 0 0 40px rgba(217,119,6,.25);
-    }
-    .cl-home-title {
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
-      font-weight: 700; line-height: 1.2;
-      margin-bottom: 10px;
-      background: linear-gradient(135deg, #fff 0%, #D97706 40%, #DC2626 70%, #9333EA 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .cl-home-sub {
-      font-size: 15px; color: var(--fg2); margin-bottom: 6px;
-    }
-    .cl-typing-wrap {
-      font-size: 14px; color: var(--amber);
-      height: 22px; margin-bottom: 28px;
-      display: flex; align-items: center; gap: 3px;
-    }
-    .cl-type-cur {
-      display: inline-block; width: 2px; height: 16px;
-      background: var(--amber); animation: blink .9s step-end infinite;
-    }
+    .ld-mq { position: absolute; inset: 0; display: flex; align-items: center; overflow: hidden; pointer-events: none; }
+    .ld-mq-i { display: flex; white-space: nowrap; font-size: clamp(5rem,12vw,11rem); font-weight: 900; letter-spacing: -.03em; text-transform: uppercase; color: rgba(255,255,255,.025); animation: mqs 14s linear infinite; }
+    @keyframes mqs { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .ld-pill { position: relative; display: flex; align-items: center; gap: 1.2rem; background: #080808; border: 1px solid rgba(224,100,50,.3); border-radius: 999px; padding: .85rem 1.5rem .85rem 1.75rem; min-width: 270px; box-shadow: -6px 0 40px rgba(224,100,50,.22), 0 0 60px rgba(224,100,50,.06); overflow: hidden; }
+    .ld-pill::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 72px; background: linear-gradient(90deg,rgba(224,100,50,.7) 0%,transparent 100%); border-radius: 999px 0 0 999px; }
+    .ld-lbl, .ld-pct { z-index: 1; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; }
+    .ld-pct { margin-left: auto; min-width: 4.5ch; text-align: right; letter-spacing: .05em; }
+    .ld-cur { width: 14px; height: 18px; background: #e06432; border-radius: 2px; z-index: 1; flex-shrink: 0; animation: blink .8s step-end infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-    .cl-suggestions {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 10px; width: 100%; margin-bottom: 28px;
-    }
-    .cl-sug-card {
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 12px; padding: 14px 16px;
-      text-align: left; transition: background .15s, border-color .15s;
-      color: var(--fg2);
-    }
-    .cl-sug-card:hover { background: var(--hover); border-color: #3a3a3a; color: var(--fg); }
-    .cl-sug-card i { color: var(--amber); margin-right: 8px; font-size: 13px; }
-    .cl-sug-title { font-size: 13px; font-weight: 500; color: var(--fg); margin-bottom: 3px; }
-    .cl-sug-desc  { font-size: 12px; color: var(--fg3); }
+    /* ── App ── */
+    #app { display: flex; height: 100vh; width: 100vw; overflow: hidden; }
 
-    /* ── Input area ── */
-    .cl-input-wrap {
-      padding: 12px 24px 20px;
-      flex-shrink: 0;
-    }
-    .cl-input-box {
-      max-width: 720px; margin: 0 auto;
-      background: var(--input);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      display: flex; align-items: flex-end; gap: 8px;
-      padding: 12px 12px 12px 16px;
-      transition: border-color .15s;
-    }
-    .cl-input-box:focus-within { border-color: #444; }
-    .cl-input-field {
-      flex: 1; background: transparent; border: none; outline: none;
-      color: var(--fg); font-size: 14px; font-family: var(--font);
-      resize: none; min-height: 24px; max-height: 120px;
-      line-height: 1.5;
-    }
-    .cl-input-field::placeholder { color: var(--fg3); }
-    .cl-send-btn {
-      width: 32px; height: 32px; flex-shrink: 0;
-      background: var(--amber);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; color: #fff;
-      transition: background .15s, opacity .15s;
-      opacity: .5;
-    }
-    .cl-send-btn:hover { background: var(--amber2); opacity: 1; }
-    .cl-input-hint {
-      text-align: center; font-size: 11px; color: var(--fg3);
-      margin-top: 8px; max-width: 720px; margin-left: auto; margin-right: auto;
-    }
+    /* ── Sidebar ── */
+    #sb { width: 292px; flex-shrink: 0; background: #0f0f0f; border-right: 1px solid #1e1e1e; display: flex; flex-direction: column; overflow: hidden; }
 
-    /* ── Cards & content styles ── */
-    .cl-card {
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 12px; padding: 16px 20px;
-      margin-bottom: 12px;
-    }
-    .cl-card-title { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 4px; }
-    .cl-card-sub   { font-size: 12px; color: var(--fg3); margin-bottom: 8px; }
-    .cl-card-body  { font-size: 13px; color: var(--fg2); line-height: 1.55; }
+    .sb-tabs { display: flex; gap: 3px; padding: 10px 10px 8px; flex-shrink: 0; }
+    .sb-tab { flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px; padding: 6px 4px; border-radius: 8px; font-size: 12.5px; color: #5a5a5a; transition: background .12s, color .12s; }
+    .sb-tab i { font-size: 12px; }
+    .sb-tab:hover { background: rgba(255,255,255,.05); color: #999; }
+    .sb-tab.on { background: rgba(255,255,255,.08); color: #d0d0d0; }
 
-    /* Education cards */
-    .cl-edu-card {
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 10px; padding: 14px 16px; margin-bottom: 10px;
-    }
-    .cl-edu-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 2px; }
-    .cl-edu-school { font-size: 13px; font-weight: 600; color: var(--fg); }
-    .cl-edu-years  { font-size: 12px; color: var(--fg3); flex-shrink: 0; }
-    .cl-edu-inst   { font-size: 12px; color: var(--fg3); margin-bottom: 3px; }
-    .cl-edu-degree { font-size: 13px; color: var(--amber2); font-weight: 500; }
-    .cl-edu-note   { font-size: 11px; color: var(--fg3); margin-top: 2px; }
+    .sb-new { display: flex; align-items: center; gap: 8px; margin: 3px 8px 2px; padding: 8px 12px; border-radius: 8px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); color: #d0d0d0; font-size: 13px; transition: background .12s; }
+    .sb-new:hover { background: rgba(255,255,255,.08); }
+    .sb-new i { font-size: 12px; color: #666; }
 
-    /* Focus grid */
-    .cl-focus-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 8px; margin-top: 10px;
-    }
-    .cl-focus-item {
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 8px; padding: 10px 12px;
-      font-size: 13px; color: var(--fg2); line-height: 1.4;
-    }
+    .sb-item { display: flex; align-items: center; gap: 9px; padding: 7px 16px; color: #606060; font-size: 13px; transition: background .1s, color .1s; }
+    .sb-item:hover { background: rgba(255,255,255,.04); color: #999; }
+    .sb-item i { font-size: 12px; width: 14px; text-align: center; }
 
-    /* Project cards */
-    .cl-pj-card {
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 12px; padding: 18px 20px; margin-bottom: 12px;
-      transition: border-color .15s;
-    }
-    .cl-pj-card:hover { border-color: #3a3a3a; }
-    .cl-pj-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-    .cl-pj-icon { font-size: 22px; }
-    .cl-pj-links { display: flex; gap: 6px; }
-    .cl-pj-link {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 12px; color: var(--fg3); border: 1px solid var(--border);
-      border-radius: 6px; padding: 4px 10px;
-      transition: color .12s, border-color .12s;
-      text-decoration: none;
-    }
-    .cl-pj-link:hover { color: var(--fg); border-color: #444; }
-    .cl-pj-cats { font-size: 11px; color: var(--fg3); letter-spacing: .05em; text-transform: uppercase; margin-bottom: 6px; }
-    .cl-pj-name { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-    .cl-pj-desc { font-size: 13px; color: var(--fg2); line-height: 1.5; margin-bottom: 10px; }
-    .cl-pj-stack { display: flex; flex-wrap: wrap; gap: 6px; }
-    .cl-pj-tag {
-      font-size: 11px; background: rgba(255,255,255,.06); border: 1px solid var(--border);
-      border-radius: 4px; padding: 2px 8px; color: var(--fg3);
-    }
+    .sb-scroll { flex: 1; overflow-y: auto; padding-bottom: 8px; }
+    .sb-scroll::-webkit-scrollbar { width: 3px; }
+    .sb-scroll::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
 
-    /* Skills */
-    .cl-sk-section { margin-bottom: 18px; }
-    .cl-sk-hdr { font-size: 12px; color: var(--amber2); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 8px; }
-    .cl-sk-grid { display: flex; flex-wrap: wrap; gap: 6px; }
-    .cl-sk-badge {
-      background: rgba(255,255,255,.06); border: 1px solid var(--border);
-      border-radius: 6px; padding: 5px 11px;
-      font-size: 12px; color: var(--fg2);
-      transition: background .12s, color .12s;
-    }
-    .cl-sk-badge:hover { background: rgba(255,255,255,.1); color: var(--fg); }
+    .sb-sep { height: 1px; background: #1e1e1e; margin: 5px 0; }
 
-    /* Timeline */
-    .cl-tl-item { display: flex; gap: 14px; margin-bottom: 20px; }
-    .cl-tl-left { display: flex; flex-direction: column; align-items: center; gap: 0; flex-shrink: 0; width: 12px; padding-top: 4px; }
-    .cl-tl-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
-    .cl-tl-line { flex: 1; width: 1px; background: var(--border); margin-top: 4px; }
-    .cl-tl-body { flex: 1; padding-bottom: 4px; }
-    .cl-tl-date { font-size: 11px; color: var(--fg3); margin-bottom: 3px; }
-    .cl-tl-role { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 2px; }
-    .cl-tl-org  { font-size: 12px; color: var(--amber2); margin-bottom: 5px; }
-    .cl-tl-desc { font-size: 13px; color: var(--fg2); line-height: 1.5; margin-bottom: 7px; }
-    .cl-tl-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-    .cl-tl-tag  {
-      font-size: 11px; background: rgba(217,119,6,.1); border: 1px solid rgba(217,119,6,.25);
-      border-radius: 4px; padding: 2px 7px; color: var(--amber);
-    }
+    .sb-sec-label { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px 3px; font-size: 11px; font-weight: 500; color: #424242; }
+    .sb-sec-label .sort { font-size: 11px; color: #3a3a3a; }
 
-    /* Section divider inside Claude response */
-    .cl-sec-hdr {
-      font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--fg3); margin: 18px 0 10px;
-    }
+    .sb-sess { display: flex; align-items: center; gap: 9px; padding: 6px 16px; color: #555; font-size: 13px; transition: background .1s, color .1s; overflow: hidden; white-space: nowrap; }
+    .sb-sess:hover { background: rgba(255,255,255,.04); color: #999; }
+    .sb-sess.on { color: #d0d0d0; }
+    .sb-sess::before { content: ''; width: 7px; height: 7px; border: 1.5px solid #363636; border-radius: 50%; flex-shrink: 0; }
+    .sb-sess.on::before { border-color: #666; }
+    .sb-sess span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-    /* Contact links */
-    .cl-ct-link {
-      display: flex; align-items: center; gap: 12px;
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 10px; padding: 12px 16px; margin-bottom: 8px;
-      transition: border-color .12s; text-decoration: none;
-    }
-    .cl-ct-link:hover { border-color: #3a3a3a; }
-    .cl-ct-icon {
-      width: 36px; height: 36px; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; flex-shrink: 0;
-    }
-    .cl-ct-info { flex: 1; }
-    .cl-ct-platform { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 2px; }
-    .cl-ct-val { font-size: 13px; color: var(--fg2); }
-    .cl-ct-arrow { color: var(--fg3); font-size: 14px; }
+    .sb-bottom { border-top: 1px solid #1e1e1e; padding: 10px 12px; display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+    .sb-av { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg,#e06432 0%,#9333ea 100%); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .sb-uname { font-size: 13px; color: #d0d0d0; font-weight: 500; }
+    .sb-badge { display: inline-block; font-size: 10px; color: #4a4a4a; border: 1px solid #333; border-radius: 3px; padding: 0px 4px; margin-left: 5px; vertical-align: middle; }
+    .sb-chev { margin-left: auto; color: #3a3a3a; font-size: 11px; }
 
-    /* Contact form */
-    .cl-form { display: grid; gap: 12px; }
-    .cl-form-row { display: grid; gap: 10px; }
-    .cl-label { font-size: 11px; color: var(--fg3); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 4px; display: block; }
-    .cl-finput, .cl-ftextarea {
-      width: 100%; background: var(--input); border: 1px solid var(--border);
-      border-radius: 8px; padding: 10px 14px;
-      color: var(--fg); font-size: 13px; font-family: var(--font);
-      outline: none; transition: border-color .15s;
-    }
-    .cl-finput:focus, .cl-ftextarea:focus { border-color: var(--amber); }
-    .cl-finput::placeholder, .cl-ftextarea::placeholder { color: var(--fg3); }
-    .cl-ftextarea { resize: vertical; min-height: 90px; }
-    .cl-fsubmit {
-      background: var(--amber); color: #fff;
-      border-radius: 8px; padding: 10px 20px;
-      font-size: 13px; font-weight: 600; font-family: var(--font);
-      transition: background .15s;
-      display: inline-flex; align-items: center; gap: 7px;
-    }
-    .cl-fsubmit:hover { background: var(--amber2); }
-    .cf-ok {
-      display: none; margin-top: 8px;
-      font-size: 13px; color: #34d399;
-      background: rgba(52,211,153,.08); border: 1px solid rgba(52,211,153,.2);
-      border-radius: 8px; padding: 10px 14px;
-    }
+    /* ── Main ── */
+    #main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #0f0f0f; position: relative; }
 
-    /* README */
-    .cl-rm-name { font-size: 1.6rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .cl-rm-role { font-size: 14px; color: var(--fg2); margin-bottom: 14px; }
-    .cl-rm-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
-    .cl-rm-pill {
-      font-size: 12px; border-radius: 20px; padding: 3px 12px;
-      border: 1px solid currentColor; opacity: .8;
-    }
-    .cl-rm-h2 { font-size: 15px; font-weight: 700; color: var(--fg); margin: 18px 0 8px; }
-    .cl-rm-p  { font-size: 13px; color: var(--fg2); line-height: 1.6; margin-bottom: 10px; }
-    .cl-rm-dots { list-style: none; padding: 0; display: grid; gap: 5px; margin-bottom: 10px; }
-    .cl-rm-dots li { font-size: 13px; color: var(--fg2); line-height: 1.5; padding-left: 2px; }
-    .cl-rm-stack-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
-    .cl-rm-stack-lbl { font-size: 12px; color: var(--fg3); min-width: 70px; padding-top: 3px; font-family: var(--mono); }
-    .cl-rm-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-    .cl-rm-tag { font-size: 11px; background: rgba(255,255,255,.05); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; color: var(--fg2); }
-    .cl-rm-conn li { font-size: 13px; color: var(--fg2); margin-bottom: 4px; list-style: none; font-family: var(--mono); }
-    .cl-rm-conn a { color: var(--amber2); text-decoration: none; }
-    .cl-rm-copy {
-      background: rgba(255,255,255,.03); border: 1px solid var(--border);
-      border-radius: 10px; padding: 14px 18px; margin: 16px 0;
-      font-size: 12px; color: var(--fg3); line-height: 1.6;
-    }
-    .cl-rm-copy h3 { font-size: 13px; color: var(--fg2); margin-bottom: 6px; }
-    .cl-rm-copy p { margin-bottom: 6px; }
-    .cl-rm-cv {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(217,119,6,.12); border: 1px solid rgba(217,119,6,.3);
-      border-radius: 8px; padding: 10px 18px;
-      font-size: 13px; color: var(--amber2); text-decoration: none;
-      transition: background .15s;
-    }
-    .cl-rm-cv:hover { background: rgba(217,119,6,.2); }
-    .cl-rm-footer {
-      margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
-      font-size: 12px; color: var(--fg3);
-    }
+    .pane { display: none; flex: 1; flex-direction: column; overflow: hidden; }
+    .pane.on { display: flex; }
+
+    /* ── HOME pane ── */
+    #p-home { flex-direction: column; }
+    .home-scroll { flex: 1; overflow-y: auto; padding: 48px 0 24px; }
+    .home-scroll::-webkit-scrollbar { width: 6px; }
+    .home-scroll::-webkit-scrollbar-thumb { background: #1e1e1e; border-radius: 3px; }
+    .home-inner { max-width: 620px; margin: 0 auto; padding: 0 32px; }
+
+    .home-star { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .home-star svg { width: 32px; height: 32px; }
+    .home-greeting { font-size: 27px; font-weight: 600; color: #e8e8e8; letter-spacing: -.02em; line-height: 1.2; }
+
+    /* Stats card */
+    .sc { background: #171717; border: 1px solid #222; border-radius: 11px; overflow: hidden; margin-top: 20px; }
+    .sc-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid #222; }
+    .sc-tabs { display: flex; gap: 2px; }
+    .sc-tab { padding: 5px 11px; border-radius: 6px; font-size: 13px; color: #606060; transition: background .1s, color .1s; }
+    .sc-tab:hover { background: rgba(255,255,255,.05); color: #999; }
+    .sc-tab.on { background: rgba(255,255,255,.08); color: #d0d0d0; }
+    .sc-filters { display: flex; gap: 2px; }
+    .sc-f { padding: 4px 9px; border-radius: 6px; font-size: 12px; color: #4a4a4a; transition: background .1s, color .1s; }
+    .sc-f:hover { color: #888; }
+    .sc-f.on { background: rgba(255,255,255,.07); color: #c0c0c0; }
+
+    /* Stat grid */
+    .sg { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid #222; }
+    .sg-cell { padding: 13px 14px; border-right: 1px solid #1e1e1e; }
+    .sg-cell:nth-child(4n) { border-right: none; }
+    .sg-lbl { font-size: 11.5px; color: #5a5a5a; margin-bottom: 3px; }
+    .sg-val { font-size: 18px; font-weight: 700; color: #e0e0e0; letter-spacing: -.025em; line-height: 1; }
+
+    /* Heatmap */
+    .hm-wrap { padding: 13px 14px 12px; }
+    .hm-grid { display: grid; grid-template-columns: repeat(22, 1fr); gap: 3px; margin-bottom: 10px; }
+    .hm-c { aspect-ratio: 1; border-radius: 2px; background: #1e1e1e; }
+    .hm-c.b1 { background: #1e3a5f; }
+    .hm-c.b2 { background: #1d4ed8; }
+    .hm-c.b3 { background: #3b82f6; }
+    .hm-c.b4 { background: #60a5fa; }
+    .hm-note { font-size: 12px; color: #4a4a4a; }
+
+    /* ── Path bar ── */
+    .path-bar { display: flex; align-items: center; gap: 0; padding: 8px 16px; border-top: 1px solid #1e1e1e; font-size: 12px; color: #444; flex-shrink: 0; position: relative; }
+    .path-seg { display: flex; align-items: center; gap: 5px; }
+    .path-seg i { font-size: 10px; }
+    .path-dot { margin: 0 8px; color: #2a2a2a; }
+    .path-extra { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+    .path-extra-btn { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 5px; color: #3a3a3a; font-size: 11px; transition: background .1s, color .1s; }
+    .path-extra-btn:hover { background: rgba(255,255,255,.06); color: #777; }
+
+    /* Pixel art character */
+    .pixel-char { position: absolute; right: 20px; bottom: 0; width: 44px; height: 44px; image-rendering: pixelated; }
+
+    /* ── Banner ── */
+    .banner { display: flex; align-items: center; justify-content: space-between; padding: 9px 16px; background: #111; border-top: 1px solid #1e1e1e; font-size: 13px; color: #555; flex-shrink: 0; }
+    .banner-link { color: #555; font-size: 13px; transition: color .12s; }
+    .banner-link:hover { color: #999; }
+
+    /* ── Input ── */
+    .inp-wrap { padding: 10px 14px 12px; flex-shrink: 0; }
+    .inp-box { background: #171717; border: 1px solid #252525; border-radius: 11px; overflow: hidden; transition: border-color .15s; }
+    .inp-box:focus-within { border-color: #333; }
+    .inp-row { display: flex; align-items: center; gap: 8px; padding: 12px 14px 10px; }
+    .inp-field { flex: 1; background: transparent; border: none; outline: none; color: #d0d0d0; font-size: 14px; font-family: inherit; resize: none; min-height: 24px; max-height: 100px; line-height: 1.5; }
+    .inp-field::placeholder { color: #3a3a3a; }
+    .inp-send { width: 28px; height: 28px; border-radius: 7px; background: rgba(255,255,255,.06); display: flex; align-items: center; justify-content: center; color: #444; font-size: 12px; flex-shrink: 0; transition: background .12s, color .12s; }
+    .inp-send:hover { background: rgba(255,255,255,.1); color: #888; }
+    .inp-ctrl { display: flex; align-items: center; justify-content: space-between; padding: 7px 12px 9px; border-top: 1px solid #1e1e1e; }
+    .inp-ctrl-l { display: flex; align-items: center; gap: 3px; }
+    .inp-btn { display: flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 6px; font-size: 12px; color: #4a4a4a; border: 1px solid #222; transition: background .1s, color .1s; }
+    .inp-btn:hover { background: rgba(255,255,255,.05); color: #888; border-color: #2e2e2e; }
+    .inp-icon-btn { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #3a3a3a; font-size: 13px; transition: background .1s, color .1s; }
+    .inp-icon-btn:hover { background: rgba(255,255,255,.05); color: #777; }
+    .inp-ctrl-r { display: flex; align-items: center; gap: 8px; }
+    .model-name { font-size: 12px; color: #4a4a4a; }
+    .model-level { font-size: 12px; color: #4a4a4a; display: flex; align-items: center; gap: 5px; }
+    .model-dot { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid #555; }
+
+    /* ── SECTION panes (chat) ── */
+    .chat-scroll { flex: 1; overflow-y: auto; padding: 32px 0 16px; }
+    .chat-scroll::-webkit-scrollbar { width: 6px; }
+    .chat-scroll::-webkit-scrollbar-thumb { background: #1e1e1e; border-radius: 3px; }
+    .chat-wrap { max-width: 660px; margin: 0 auto; padding: 0 24px; }
+
+    .mu { display: flex; justify-content: flex-end; margin-bottom: 20px; }
+    .mu-b { background: #1c1c1c; border: 1px solid #252525; border-radius: 16px 16px 4px 16px; padding: 10px 16px; max-width: 80%; font-size: 14px; color: #d0d0d0; line-height: 1.5; }
+
+    .mc { display: flex; gap: 11px; margin-bottom: 28px; }
+    .mc-av { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; margin-top: 2px; background: linear-gradient(135deg,#e06432 0%,#9333ea 100%); display: flex; align-items: center; justify-content: center; }
+    .mc-av svg { width: 13px; height: 13px; }
+    .mc-body { flex: 1; min-width: 0; }
+    .mc-name { font-size: 13px; font-weight: 600; color: #d0d0d0; margin-bottom: 8px; }
+    .mc-text { font-size: 14px; color: #c0c0c0; line-height: 1.65; }
+    .mc-text p { margin-bottom: 12px; }
+    .mc-text p:last-child { margin-bottom: 0; }
+    .mc-text strong { color: #e0e0e0; }
+    .mc-text a { color: #e06432; }
+
+    /* Cards inside chat */
+    .c-card { background: #171717; border: 1px solid #222; border-radius: 9px; padding: 13px 16px; margin-bottom: 9px; }
+    .c-card-title { font-size: 13px; font-weight: 600; color: #d0d0d0; margin-bottom: 2px; }
+    .c-card-sub { font-size: 11px; color: #3a3a3a; margin-bottom: 7px; }
+    .c-card-body { font-size: 13px; color: #666; line-height: 1.55; }
+
+    .edu { background: #171717; border: 1px solid #222; border-radius: 8px; padding: 11px 14px; margin-bottom: 7px; }
+    .edu-row { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 2px; }
+    .edu-sch { font-size: 13px; font-weight: 600; color: #c0c0c0; }
+    .edu-yr { font-size: 11px; color: #3a3a3a; flex-shrink: 0; }
+    .edu-inst { font-size: 11px; color: #3a3a3a; margin-bottom: 2px; }
+    .edu-deg { font-size: 13px; color: #e06432; font-weight: 500; }
+    .edu-note { font-size: 11px; color: #3a3a3a; margin-top: 1px; }
+
+    .fg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 9px; }
+    .fg-item { background: #171717; border: 1px solid #222; border-radius: 7px; padding: 8px 11px; font-size: 13px; color: #666; line-height: 1.4; }
+
+    .pj { background: #171717; border: 1px solid #222; border-radius: 9px; padding: 14px 16px; margin-bottom: 9px; transition: border-color .1s; }
+    .pj:hover { border-color: #2e2e2e; }
+    .pj-top { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .pj-icon { font-size: 20px; }
+    .pj-links { display: flex; gap: 5px; }
+    .pj-link { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: #444; border: 1px solid #222; border-radius: 5px; padding: 3px 8px; text-decoration: none; transition: color .1s, border-color .1s; }
+    .pj-link:hover { color: #888; border-color: #333; }
+    .pj-cats { font-size: 11px; color: #3a3a3a; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 5px; }
+    .pj-name { font-size: 15px; font-weight: 700; color: #d0d0d0; margin-bottom: 5px; }
+    .pj-desc { font-size: 13px; color: #666; line-height: 1.5; margin-bottom: 8px; }
+    .pj-stack { display: flex; flex-wrap: wrap; gap: 4px; }
+    .pj-tag { font-size: 11px; background: rgba(255,255,255,.04); border: 1px solid #222; border-radius: 4px; padding: 2px 7px; color: #4a4a4a; }
+
+    .sk-sec { margin-bottom: 14px; }
+    .sk-hdr { font-size: 11px; color: #e06432; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 7px; }
+    .sk-grid { display: flex; flex-wrap: wrap; gap: 5px; }
+    .sk-b { background: rgba(255,255,255,.04); border: 1px solid #222; border-radius: 5px; padding: 4px 10px; font-size: 12px; color: #666; }
+
+    .tl { display: flex; gap: 11px; margin-bottom: 16px; }
+    .tl-l { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 10px; padding-top: 4px; }
+    .tl-dot { width: 8px; height: 8px; border-radius: 50%; background: #e06432; flex-shrink: 0; }
+    .tl-line { flex: 1; width: 1px; background: #1e1e1e; margin-top: 3px; }
+    .tl-b { flex: 1; }
+    .tl-date { font-size: 11px; color: #3a3a3a; margin-bottom: 2px; }
+    .tl-role { font-size: 14px; font-weight: 600; color: #d0d0d0; margin-bottom: 2px; }
+    .tl-org  { font-size: 12px; color: #e06432; margin-bottom: 4px; }
+    .tl-desc { font-size: 13px; color: #666; line-height: 1.5; margin-bottom: 6px; }
+    .tl-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tl-tag  { font-size: 11px; background: rgba(224,100,50,.08); border: 1px solid rgba(224,100,50,.2); border-radius: 4px; padding: 2px 6px; color: #e06432; }
+
+    .sec-hdr { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: #333; margin: 14px 0 8px; }
+
+    .ct-link { display: flex; align-items: center; gap: 10px; background: #171717; border: 1px solid #222; border-radius: 8px; padding: 10px 13px; margin-bottom: 6px; text-decoration: none; transition: border-color .1s; }
+    .ct-link:hover { border-color: #2e2e2e; }
+    .ct-icon { width: 32px; height: 32px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+    .ct-info { flex: 1; }
+    .ct-plat { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 1px; }
+    .ct-val  { font-size: 12px; color: #555; }
+    .ct-arr  { color: #333; font-size: 13px; }
+
+    .cf { display: grid; gap: 9px; }
+    .cf-lbl { font-size: 10px; color: #3a3a3a; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 3px; display: block; }
+    .cf-in, .cf-ta { width: 100%; background: #171717; border: 1px solid #222; border-radius: 7px; padding: 8px 12px; color: #c0c0c0; font-size: 13px; font-family: inherit; outline: none; transition: border-color .15s; }
+    .cf-in:focus, .cf-ta:focus { border-color: #e06432; }
+    .cf-in::placeholder, .cf-ta::placeholder { color: #2e2e2e; }
+    .cf-ta { resize: vertical; min-height: 80px; }
+    .cf-sub { background: #e06432; color: #fff; border-radius: 7px; padding: 8px 16px; font-size: 13px; font-weight: 600; font-family: inherit; transition: background .12s; display: inline-flex; align-items: center; gap: 6px; }
+    .cf-sub:hover { background: #f07040; }
+    .cf-ok { display: none; margin-top: 6px; font-size: 13px; color: #34d399; background: rgba(52,211,153,.06); border: 1px solid rgba(52,211,153,.16); border-radius: 7px; padding: 8px 12px; }
+
+    .rm-name { font-size: 1.4rem; font-weight: 700; color: #d0d0d0; margin-bottom: 3px; }
+    .rm-role { font-size: 13px; color: #555; margin-bottom: 12px; }
+    .rm-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
+    .rm-pill { font-size: 11px; border-radius: 20px; padding: 2px 9px; border: 1px solid currentColor; opacity: .7; }
+    .rm-h2 { font-size: 13px; font-weight: 700; color: #c0c0c0; margin: 13px 0 6px; }
+    .rm-p  { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 8px; }
+    .rm-dots { list-style: none; display: grid; gap: 4px; margin-bottom: 8px; }
+    .rm-dots li { font-size: 13px; color: #666; line-height: 1.5; }
+    .rm-sr { display: flex; align-items: flex-start; gap: 7px; margin-bottom: 7px; }
+    .rm-sl { font-size: 11px; color: #3a3a3a; min-width: 62px; padding-top: 2px; font-family: monospace; }
+    .rm-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .rm-tag { font-size: 11px; background: rgba(255,255,255,.03); border: 1px solid #1e1e1e; border-radius: 3px; padding: 2px 6px; color: #555; }
+    .rm-conn { list-style: none; margin-bottom: 10px; }
+    .rm-conn li { font-size: 13px; color: #555; margin-bottom: 3px; font-family: monospace; }
+    .rm-conn a { color: #e06432; }
+    .rm-copy { background: rgba(255,255,255,.02); border: 1px solid #1e1e1e; border-radius: 8px; padding: 11px 14px; margin: 12px 0; font-size: 12px; color: #3a3a3a; line-height: 1.6; }
+    .rm-copy h3 { font-size: 12px; color: #555; margin-bottom: 5px; }
+    .rm-copy p { margin-bottom: 5px; }
+    .rm-cv { display: inline-flex; align-items: center; gap: 6px; background: rgba(224,100,50,.08); border: 1px solid rgba(224,100,50,.2); border-radius: 7px; padding: 8px 14px; font-size: 13px; color: #e06432; text-decoration: none; transition: background .12s; }
+    .rm-cv:hover { background: rgba(224,100,50,.15); }
+    .rm-footer { margin-top: 16px; padding-top: 12px; border-top: 1px solid #1e1e1e; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: 11px; color: #333; }
 
     /* ── Mobile nav ── */
-    #cl-mob-nav {
-      display: none;
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-      background: var(--sb); border-top: 1px solid var(--border);
-      padding: 6px 0 env(safe-area-inset-bottom, 6px);
-    }
-    .cl-mob-items { display: flex; justify-content: space-around; }
-    .cl-mob-item {
-      display: flex; flex-direction: column; align-items: center; gap: 3px;
-      padding: 6px 10px; border-radius: 8px;
-      color: var(--fg3); font-size: 11px;
-      transition: color .12s;
-      min-width: 48px;
-    }
-    .cl-mob-item i { font-size: 18px; }
-    .cl-mob-item.active { color: var(--amber); }
+    #mob { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: #0f0f0f; border-top: 1px solid #1e1e1e; }
+    .mob-row { display: flex; justify-content: space-around; padding: 6px 0 env(safe-area-inset-bottom,6px); }
+    .mob-i { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 5px 8px; color: #3a3a3a; font-size: 11px; border-radius: 7px; }
+    .mob-i i { font-size: 17px; }
+    .mob-i.on { color: #e06432; }
 
     /* ── Command palette ── */
-    #cmd-palette {
-      position: fixed; inset: 0; z-index: 9000;
-      background: rgba(0,0,0,.6); backdrop-filter: blur(4px);
-      display: none; align-items: flex-start; justify-content: center;
-      padding-top: 80px;
-    }
-    #cmd-palette.open { display: flex; }
-    .cmd-box {
-      background: #1c1c1c; border: 1px solid #333;
-      border-radius: 12px; width: 560px; max-width: 92vw;
-      box-shadow: 0 20px 60px rgba(0,0,0,.7);
-      overflow: hidden;
-    }
-    .cmd-inp-row {
-      display: flex; align-items: center; gap: 8px;
-      padding: 0 14px; border-bottom: 1px solid var(--border);
-    }
-    .cmd-arrow { color: var(--amber); font-size: 16px; font-weight: 300; }
-    .cmd-inp {
-      flex: 1; background: transparent; border: none; outline: none;
-      color: var(--fg); font-size: 14px; font-family: var(--font);
-      padding: 14px 0;
-    }
-    .cmd-inp::placeholder { color: var(--fg3); }
-    .cmd-ech {
-      font-size: 11px; color: var(--fg3); border: 1px solid var(--border);
-      border-radius: 4px; padding: 2px 6px; font-family: var(--font);
-      background: rgba(255,255,255,.04);
-    }
-    .cmd-ech:hover { color: var(--fg); }
-    .cmd-results { max-height: 340px; overflow-y: auto; }
-    .cmd-results::-webkit-scrollbar { width: 4px; }
-    .cmd-results::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
-    .cmd-section {
-      padding: 8px 14px 4px; font-size: 11px; color: var(--fg3);
-      font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
-    }
-    .cmd-item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 9px 14px; transition: background .1s;
-    }
-    .cmd-item:hover, .cmd-item.pal-active { background: var(--active); }
-    .cmd-item-ico { width: 20px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-    .cmd-item-name { flex: 1; font-size: 13px; color: var(--fg); }
-    .cmd-item-path { font-size: 11px; color: var(--fg3); font-family: var(--mono); }
-    .cmd-footer {
-      padding: 8px 14px; border-top: 1px solid var(--border);
-      display: flex; gap: 10px; flex-wrap: wrap;
-      font-size: 11px; color: var(--fg3);
-    }
-    .cmd-sep { color: var(--fg3); opacity: .4; }
+    #pal { position: fixed; inset: 0; z-index: 9000; background: rgba(0,0,0,.7); backdrop-filter: blur(3px); display: none; align-items: flex-start; justify-content: center; padding-top: 80px; }
+    #pal.open { display: flex; }
+    .pal-box { background: #131313; border: 1px solid #2a2a2a; border-radius: 11px; width: 520px; max-width: 92vw; box-shadow: 0 20px 60px rgba(0,0,0,.85); overflow: hidden; }
+    .pal-inp-row { display: flex; align-items: center; gap: 7px; padding: 0 12px; border-bottom: 1px solid #1e1e1e; }
+    .pal-arrow { color: #e06432; font-size: 14px; }
+    .pal-inp { flex: 1; background: transparent; border: none; outline: none; color: #d0d0d0; font-size: 14px; font-family: inherit; padding: 13px 0; }
+    .pal-inp::placeholder { color: #333; }
+    .pal-esc { font-size: 11px; color: #3a3a3a; border: 1px solid #222; border-radius: 4px; padding: 2px 5px; background: rgba(255,255,255,.03); }
+    .pal-esc:hover { color: #777; }
+    .pal-res { max-height: 320px; overflow-y: auto; }
+    .pal-item { display: flex; align-items: center; gap: 9px; padding: 9px 12px; transition: background .1s; }
+    .pal-item:hover, .pal-item.on { background: rgba(255,255,255,.06); }
+    .pal-ico { width: 18px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .pal-name { flex: 1; font-size: 13px; color: #c0c0c0; }
+    .pal-foot { padding: 7px 12px; border-top: 1px solid #1e1e1e; display: flex; gap: 10px; font-size: 11px; color: #333; }
 
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
-      #cl-sidebar { display: none; }
-      #cl-mob-nav { display: block; }
-      .cl-chat { padding-bottom: 72px; }
-      .cl-suggestions { grid-template-columns: 1fr; }
-      .cl-focus-grid { grid-template-columns: 1fr; }
-      .cl-form-row { grid-template-columns: 1fr; }
+    @media(max-width: 768px) {
+      #sb { display: none; }
+      #mob { display: block; }
+      .chat-scroll { padding-bottom: 68px; }
+      .fg-grid { grid-template-columns: 1fr; }
+      .sg { grid-template-columns: repeat(2,1fr); }
+      .home-inner { padding: 0 16px; }
+      .pixel-char { display: none; }
     }
-    @media (min-width: 769px) {
-      #cl-mob-nav { display: none; }
-    }
+    @media(min-width: 769px) { #mob { display: none; } }
   </style>
 </head>
 <body>
 
-<!-- Custom cursor -->
-<div id="cl-cursor">
-  <div class="cur-v top"></div>
-  <div class="cur-v bot"></div>
-  <div class="cur-h lft"></div>
-  <div class="cur-h rgt"></div>
-  <div class="cur-dot"></div>
+<!-- Cursor -->
+<div id="csr">
+  <div class="v t"></div><div class="v b"></div>
+  <div class="h l"></div><div class="h r"></div>
+  <div class="d"></div>
 </div>
 
 <!-- Loader -->
-<div id="loading" role="status" aria-label="Chargement">
-  <div class="ld-marquee" aria-hidden="true">
-    <div class="ld-marquee-inner">
-      DÉVELOPPEUR WEB&nbsp;•&nbsp;INGÉNIEUR RÉSEAU&nbsp;•&nbsp;CYBERSÉCURITÉ&nbsp;•&nbsp;CLOUD&nbsp;•&nbsp;
-      DÉVELOPPEUR WEB&nbsp;•&nbsp;INGÉNIEUR RÉSEAU&nbsp;•&nbsp;CYBERSÉCURITÉ&nbsp;•&nbsp;CLOUD&nbsp;•&nbsp;
-    </div>
+<div id="loading">
+  <div class="ld-mq" aria-hidden="true">
+    <div class="ld-mq-i">DÉVELOPPEUR WEB&nbsp;•&nbsp;INGÉNIEUR RÉSEAU&nbsp;•&nbsp;CYBERSÉCURITÉ&nbsp;•&nbsp;CLOUD&nbsp;•&nbsp;DÉVELOPPEUR WEB&nbsp;•&nbsp;INGÉNIEUR RÉSEAU&nbsp;•&nbsp;CYBERSÉCURITÉ&nbsp;•&nbsp;CLOUD&nbsp;•&nbsp;</div>
   </div>
-  <div class="ld-pill" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progression du chargement" id="ld-progress">
-    <span class="ld-label">CHARGEMENT</span>
-    <span class="ld-pct" id="ld-text">0%</span>
-    <div class="ld-cursor"></div>
+  <div class="ld-pill" id="ldp" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <span class="ld-lbl">CHARGEMENT</span>
+    <span class="ld-pct" id="ldt">0%</span>
+    <div class="ld-cur"></div>
   </div>
 </div>
 
 <!-- App -->
-<div id="cl-app">
+<div id="app">
 
   <!-- Sidebar -->
-  <aside id="cl-sidebar">
-    <div class="cl-sb-top">
-      <div class="cl-logo">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="lg1" x1="20" y1="0" x2="20" y2="40" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#D97706"/>
-              <stop offset="45%" stop-color="#DC2626"/>
-              <stop offset="100%" stop-color="#9333EA"/>
-            </linearGradient>
-          </defs>
-          <path d="M20 4 L22 16 L34 10 L26 20 L34 30 L22 24 L20 36 L18 24 L6 30 L14 20 L6 10 L18 16 Z" fill="url(#lg1)"/>
-        </svg>
-      </div>
-      <span class="cl-brand">Portfolio <span>CA</span></span>
+  <aside id="sb">
+    <!-- Tabs -->
+    <div class="sb-tabs">
+      <button class="sb-tab" onclick="openSection('about')" title="À propos">
+        <i class="fa-regular fa-comment-dots"></i> Chat
+      </button>
+      <button class="sb-tab" onclick="openSection('projets')" title="Projets">
+        <i class="fa-solid fa-users"></i> Cowork
+      </button>
+      <button class="sb-tab on" onclick="openSection('home')" title="Portfolio">
+        <i class="fa-solid fa-code"></i> Code
+      </button>
     </div>
 
-    <button class="cl-new-btn" onclick="openSection('home')">
-      <i class="fa-solid fa-plus"></i>
-      Nouvelle conversation
+    <!-- Fixed nav items -->
+    <button class="sb-new" onclick="openSection('home')">
+      <i class="fa-solid fa-plus"></i> Nouvelle session
     </button>
+    <div class="sb-item" onclick="openSection('competences')" style="cursor:pointer">
+      <i class="fa-solid fa-bolt"></i> Routines
+    </div>
+    <div class="sb-item" onclick="openSection('parcours')" style="cursor:pointer">
+      <i class="fa-solid fa-wand-magic-sparkles"></i> Personnaliser
+    </div>
+    <div class="sb-item" style="cursor:pointer">
+      <i class="fa-solid fa-chevron-down" style="font-size:10px"></i> Plus.
+    </div>
 
-    <div class="cl-nav-section-label">Sections</div>
+    <div class="sb-scroll">
+      <div class="sb-sep"></div>
 
-    <nav class="cl-nav">
-      <div class="cl-nav-item active" id="nav-home" onclick="openSection('home')">
-        <i class="fa-solid fa-house"></i> Accueil
+      <!-- Épinglé -->
+      <div class="sb-sec-label">Épinglé</div>
+      <button class="sb-sess" onclick="openSection('projets')">
+        <span>GUEZE — Application de tontine</span>
+      </button>
+
+      <div class="sb-sep"></div>
+
+      <!-- Récents -->
+      <div class="sb-sec-label">
+        Récents
+        <span class="sort"><i class="fa-solid fa-arrow-down-short-wide"></i></span>
       </div>
-      <div class="cl-nav-item" id="nav-about" onclick="openSection('about')">
-        <i class="fa-solid fa-user"></i> À propos de Credo
-      </div>
-      <div class="cl-nav-item" id="nav-projets" onclick="openSection('projets')">
-        <i class="fa-solid fa-folder-open"></i> Mes projets
-      </div>
-      <div class="cl-nav-item" id="nav-competences" onclick="openSection('competences')">
-        <i class="fa-solid fa-code"></i> Compétences &amp; Stack
-      </div>
-      <div class="cl-nav-item" id="nav-parcours" onclick="openSection('parcours')">
-        <i class="fa-solid fa-briefcase"></i> Parcours professionnel
-      </div>
-      <div class="cl-nav-item" id="nav-contact" onclick="openSection('contact')">
-        <i class="fa-solid fa-envelope"></i> Me contacter
-      </div>
-      <div class="cl-nav-item" id="nav-readme" onclick="openSection('readme')">
-        <i class="fa-solid fa-file-lines"></i> README.md
-      </div>
-      <a class="cl-nav-item" href="/assets/Credo_Ahiafor_CV.pdf" download="Credo_Ahiafor_CV.pdf" style="text-decoration:none">
-        <i class="fa-solid fa-file-pdf" style="color:#f44336"></i> Télécharger le CV
+      <button class="sb-sess on" id="s-home" onclick="openSection('home')">
+        <span>Portfolio Credo project setup</span>
+      </button>
+      <button class="sb-sess" id="s-about" onclick="openSection('about')">
+        <span>À propos de Credo Ahiafor</span>
+      </button>
+      <button class="sb-sess" id="s-projets" onclick="openSection('projets')">
+        <span>Mes projets web</span>
+      </button>
+      <button class="sb-sess" id="s-competences" onclick="openSection('competences')">
+        <span>Compétences &amp; Stack technique</span>
+      </button>
+      <button class="sb-sess" id="s-parcours" onclick="openSection('parcours')">
+        <span>Parcours professionnel</span>
+      </button>
+      <button class="sb-sess" id="s-contact" onclick="openSection('contact')">
+        <span>Me contacter</span>
+      </button>
+      <button class="sb-sess" id="s-readme" onclick="openSection('readme')">
+        <span>README.md</span>
+      </button>
+      <a class="sb-sess" href="/assets/Credo_Ahiafor_CV.pdf" download style="display:flex;align-items:center;gap:9px">
+        <span>Télécharger le CV PDF</span>
       </a>
-    </nav>
+    </div>
 
-    <div class="cl-sb-bottom">
-      <div class="cl-avatar">CA</div>
-      <div class="cl-user-info">
-        <div class="cl-user-name">Credo Ahiafor</div>
-        <div class="cl-user-role">Ingénieur Réseaux &amp; Sécurité</div>
+    <!-- Bottom user row -->
+    <div class="sb-bottom">
+      <div class="sb-av">CA</div>
+      <div>
+        <span class="sb-uname">Crédo</span>
+        <span class="sb-badge">Pro</span>
       </div>
+      <i class="fa-solid fa-chevron-down sb-chev" style="font-size:10px"></i>
     </div>
   </aside>
 
   <!-- Main -->
-  <main id="cl-main">
-
-    <!-- Top bar -->
-    <div id="cl-topbar">
-      <div class="cl-model-pill">
-        <i class="fa-solid fa-circle" style="font-size:7px"></i>
-        Portfolio · credo-ahiafor.vercel.app
-      </div>
-      <div class="cl-topbar-actions">
-        <button class="cl-tb-btn" title="Rechercher (Ctrl+K)" onclick="openPalette()">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-        <a class="cl-tb-btn" href="/assets/Credo_Ahiafor_CV.pdf" download="Credo_Ahiafor_CV.pdf" title="Télécharger le CV">
-          <i class="fa-solid fa-download"></i>
-        </a>
-        <button class="cl-tb-btn" onclick="openSection('contact')" title="Me contacter">
-          <i class="fa-solid fa-paper-plane"></i>
-        </button>
-      </div>
-    </div>
+  <main id="main">
 
     <!-- ── HOME ── -->
-    <div class="cl-pane active" id="cl-home">
-      <div class="cl-home-inner">
-        <div class="cl-home-av">CA</div>
-        <div class="cl-home-title">Bonjour, je suis Credo Ahiafor</div>
-        <div class="cl-home-sub">Ingénieur Réseaux &amp; Sécurité · Développeur Web · Lomé, Togo 🇹🇬</div>
-        <div class="cl-typing-wrap">
-          <span id="typing-text"></span><span class="cl-type-cur"></span>
-        </div>
-        <div class="cl-suggestions">
-          <button class="cl-sug-card" onclick="openSection('about')">
-            <div class="cl-sug-title"><i class="fa-solid fa-user"></i>À propos de moi</div>
-            <div class="cl-sug-desc">Mon parcours, ma formation et mes motivations</div>
-          </button>
-          <button class="cl-sug-card" onclick="openSection('projets')">
-            <div class="cl-sug-title"><i class="fa-solid fa-folder-open"></i>Mes projets</div>
-            <div class="cl-sug-desc">Cabinet BEGO, Afinah Closet, GUEZE et plus</div>
-          </button>
-          <button class="cl-sug-card" onclick="openSection('competences')">
-            <div class="cl-sug-title"><i class="fa-solid fa-code"></i>Stack technique</div>
-            <div class="cl-sug-desc">Réseaux, cybersécurité, web, cloud</div>
-          </button>
-          <button class="cl-sug-card" onclick="openSection('contact')">
-            <div class="cl-sug-title"><i class="fa-solid fa-envelope"></i>Me contacter</div>
-            <div class="cl-sug-desc">Disponible pour freelance et missions</div>
-          </button>
+    <div class="pane on" id="p-home">
+      <div class="home-scroll">
+        <div class="home-inner">
+
+          <!-- Greeting -->
+          <div class="home-star">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="gstar" x1="20" y1="2" x2="20" y2="38" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#e06432"/>
+                  <stop offset="100%" stop-color="#e06432" stop-opacity=".7"/>
+                </linearGradient>
+              </defs>
+              <path d="M20 2 L22.5 15 L36 10 L26.5 20 L36 30 L22.5 25 L20 38 L17.5 25 L4 30 L13.5 20 L4 10 L17.5 15 Z" fill="url(#gstar)"/>
+            </svg>
+            <h1 class="home-greeting">Quoi de prévu, visiteur ?</h1>
+          </div>
+
+          <!-- Stats card -->
+          <div class="sc">
+            <!-- Header -->
+            <div class="sc-head">
+              <div class="sc-tabs">
+                <button class="sc-tab on" id="sct-apercu" onclick="switchSCTab('apercu')">Aperçu</button>
+                <button class="sc-tab" id="sct-formation" onclick="switchSCTab('formation')">Formation</button>
+              </div>
+              <div class="sc-filters">
+                <button class="sc-f on" id="scf-tout" onclick="switchSCF('tout')">Tout</button>
+                <button class="sc-f" id="scf-pro" onclick="switchSCF('pro')">Pro</button>
+                <button class="sc-f" id="scf-form" onclick="switchSCF('form')">Form.</button>
+              </div>
+            </div>
+
+            <!-- Stats grid (Aperçu) -->
+            <div id="sg-apercu">
+              <div class="sg">
+                <div class="sg-cell"><div class="sg-lbl">Projets</div><div class="sg-val">5+</div></div>
+                <div class="sg-cell"><div class="sg-lbl">Clients</div><div class="sg-val">3</div></div>
+                <div class="sg-cell"><div class="sg-lbl">Technologies</div><div class="sg-val">30+</div></div>
+                <div class="sg-cell"><div class="sg-lbl">Années exp.</div><div class="sg-val">5+</div></div>
+                <div class="sg-cell"><div class="sg-lbl">Commits GitHub</div><div class="sg-val">200+</div></div>
+                <div class="sg-cell"><div class="sg-lbl">Déploiements</div><div class="sg-val">5</div></div>
+                <div class="sg-cell"><div class="sg-lbl">Heure de pointe</div><div class="sg-val">17 h</div></div>
+                <div class="sg-cell"><div class="sg-lbl">Stack favori</div><div class="sg-val" style="font-size:14px">React</div></div>
+              </div>
+            </div>
+
+            <!-- Stats grid (Formation) -->
+            <div id="sg-formation" style="display:none">
+              <div class="sg">
+                <div class="sg-cell"><div class="sg-lbl">Diplômes</div><div class="sg-val">3</div></div>
+                <div class="sg-cell"><div class="sg-lbl">Licences</div><div class="sg-val">2</div></div>
+                <div class="sg-cell"><div class="sg-lbl">Master</div><div class="sg-val">M2</div></div>
+                <div class="sg-cell"><div class="sg-lbl">Baccalauréat</div><div class="sg-val">Série D</div></div>
+                <div class="sg-cell"><div class="sg-lbl">Spécialité 1</div><div class="sg-val" style="font-size:13px">Réseaux</div></div>
+                <div class="sg-cell"><div class="sg-lbl">Spécialité 2</div><div class="sg-val" style="font-size:13px">Sécu.</div></div>
+                <div class="sg-cell"><div class="sg-lbl">Diplômé</div><div class="sg-val">2026</div></div>
+                <div class="sg-cell"><div class="sg-lbl">École</div><div class="sg-val" style="font-size:12px">ESGIS</div></div>
+              </div>
+            </div>
+
+            <!-- Heatmap -->
+            <div class="hm-wrap">
+              <div class="hm-grid" id="hm-grid"></div>
+              <div class="hm-note">Disponible pour des missions freelance depuis Lomé, Togo 🇹🇬</div>
+            </div>
+          </div>
+
         </div>
       </div>
-      <div class="cl-input-wrap">
-        <div class="cl-input-box">
-          <textarea class="cl-input-field" placeholder="Posez une question ou naviguez via la sidebar…" rows="1" onkeydown="handleHomeInput(event)" oninput="autoResize(this)"></textarea>
-          <button class="cl-send-btn" title="Envoyer"><i class="fa-solid fa-arrow-up"></i></button>
+
+      <!-- Path bar + pixel char -->
+      <div class="path-bar" id="path-bar">
+        <div class="path-seg"><i class="fa-solid fa-display"></i> Local</div>
+        <span class="path-dot">·</span>
+        <div class="path-seg"><i class="fa-regular fa-folder"></i> <span id="path-project">portfolio-credo</span></div>
+        <span class="path-dot">·</span>
+        <div class="path-seg"><i class="fa-solid fa-code-branch"></i> main</div>
+        <span class="path-dot">·</span>
+        <div class="path-seg"><i class="fa-regular fa-square" style="font-size:9px"></i> vercel</div>
+        <div class="path-extra">
+          <button class="path-extra-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
         </div>
-        <div class="cl-input-hint">Appuyez sur <strong>Ctrl+K</strong> pour la palette de commandes</div>
+        <!-- Pixel art character -->
+        <div class="pixel-char" aria-hidden="true">
+          <svg viewBox="0 0 11 12" width="44" height="48" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+            <rect x="2" y="0" width="1" height="2" fill="#c45220"/>
+            <rect x="8" y="0" width="1" height="2" fill="#c45220"/>
+            <rect x="1" y="0" width="2" height="1" fill="#c45220"/>
+            <rect x="8" y="0" width="2" height="1" fill="#c45220"/>
+            <rect x="1" y="2" width="9" height="5" fill="#e06432"/>
+            <rect x="2" y="3" width="2" height="2" fill="#7a2e0e"/>
+            <rect x="7" y="3" width="2" height="2" fill="#7a2e0e"/>
+            <rect x="3" y="3" width="1" height="1" fill="#fff"/>
+            <rect x="8" y="3" width="1" height="1" fill="#fff"/>
+            <rect x="3" y="6" width="5" height="1" fill="#c45220"/>
+            <rect x="2" y="7" width="7" height="3" fill="#c45220"/>
+            <rect x="2" y="10" width="2" height="1" fill="#e06432"/>
+            <rect x="7" y="10" width="2" height="1" fill="#e06432"/>
+            <rect x="1" y="8" width="1" height="2" fill="#e06432"/>
+            <rect x="9" y="8" width="1" height="2" fill="#e06432"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Banner -->
+      <div class="banner">
+        <span>Disponible pour des missions freelance &amp; collaborations · Lomé, Togo 🇹🇬</span>
+        <a class="banner-link" onclick="openSection('contact')" style="cursor:pointer">Me contacter →</a>
+      </div>
+
+      <!-- Input -->
+      <div class="inp-wrap">
+        <div class="inp-box">
+          <div class="inp-row">
+            <textarea class="inp-field" id="home-inp" placeholder="Décrivez une tâche ou posez une question." rows="1" onkeydown="homeKey(event)" oninput="autoResize(this)"></textarea>
+            <button class="inp-send" title="Envoyer"><i class="fa-solid fa-arrow-turn-down"></i></button>
+          </div>
+          <div class="inp-ctrl">
+            <div class="inp-ctrl-l">
+              <button class="inp-btn" onclick="openSection('contact')">Accepter les modifications</button>
+              <button class="inp-icon-btn" onclick="openPalette()" title="Ctrl+K"><i class="fa-solid fa-plus"></i></button>
+              <button class="inp-icon-btn" title="Micro"><i class="fa-solid fa-microphone"></i></button>
+              <button class="inp-icon-btn" title="Options"><i class="fa-solid fa-chevron-down" style="font-size:10px"></i></button>
+            </div>
+            <div class="inp-ctrl-r">
+              <span class="model-name">Portfolio 2026</span>
+              <span class="model-level">Ingénieur <div class="model-dot" style="background:#e06432;border-color:#e06432"></div></span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- ── ABOUT ── -->
-    <div class="cl-pane" id="cl-about">
-      <div class="cl-chat">
-        <div class="cl-msg-wrap">
-
-          <div class="cl-user-msg">
-            <div class="cl-user-bubble">Parle-moi de Credo Ahiafor</div>
-          </div>
-
-          <div class="cl-claude-msg">
-            <div class="cl-claude-av">
-              <svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="lg2" x1="20" y1="0" x2="20" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#D97706"/><stop offset="45%" stop-color="#DC2626"/><stop offset="100%" stop-color="#9333EA"/></linearGradient></defs><path d="M20 4 L22 16 L34 10 L26 20 L34 30 L22 24 L20 36 L18 24 L6 30 L14 20 L6 10 L18 16 Z" fill="url(#lg2)"/></svg>
-            </div>
-            <div class="cl-claude-body">
-              <div class="cl-claude-name">Portfolio</div>
-              <div class="cl-claude-text">
+    <div class="pane" id="p-about">
+      <div class="chat-scroll">
+        <div class="chat-wrap">
+          <div class="mu"><div class="mu-b">Parle-moi de Credo Ahiafor</div></div>
+          <div class="mc">
+            <div class="mc-av"><svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="g2" x1="20" y1="2" x2="20" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e06432"/><stop offset="100%" stop-color="#9333ea"/></linearGradient></defs><path d="M20 2 L22.5 15 L36 10 L26.5 20 L36 30 L22.5 25 L20 38 L17.5 25 L4 30 L13.5 20 L4 10 L17.5 15 Z" fill="url(#g2)"/></svg></div>
+            <div class="mc-body">
+              <div class="mc-name">Portfolio</div>
+              <div class="mc-text">
                 <p>Bonjour ! Je suis <strong>Credo Ahiafor</strong>, ingénieur en <strong>réseaux &amp; sécurité</strong> et <strong>développeur web freelance</strong> basé à <strong>Lomé, Togo</strong>. Je construis des systèmes web robustes et des infrastructures réseau sécurisées — du câble au code.</p>
                 <p>Actuellement en <strong>Master 2 Systèmes, Réseaux &amp; Sécurité</strong> à l'ESGIS Togo, je combine expertise technique et sens pratique pour livrer des solutions qui marchent vraiment.</p>
-
-                <div class="cl-sec-hdr">Focus Actuel</div>
-                <div class="cl-focus-grid">
-                  <div class="cl-focus-item">🌐 Développement web freelance — Cabinet BEGO, Afinah Closet, GUEZE</div>
-                  <div class="cl-focus-item">🔒 Cybersécurité &amp; infrastructure réseau Cisco</div>
-                  <div class="cl-focus-item">⚛️ Applications React full-stack &amp; WordPress RGPD</div>
-                  <div class="cl-focus-item">☁️ Cloud Azure &amp; virtualisation serveurs</div>
-                  <div class="cl-focus-item">🛒 E-commerce Shopify &amp; WooCommerce</div>
-                  <div class="cl-focus-item">📚 Toujours apprenant, toujours en construction</div>
+                <div class="sec-hdr">Focus Actuel</div>
+                <div class="fg-grid">
+                  <div class="fg-item">🌐 Développement web freelance — Cabinet BEGO, Afinah Closet, GUEZE</div>
+                  <div class="fg-item">🔒 Cybersécurité &amp; infrastructure réseau Cisco</div>
+                  <div class="fg-item">⚛️ Applications React full-stack &amp; WordPress RGPD</div>
+                  <div class="fg-item">☁️ Cloud Azure &amp; virtualisation serveurs</div>
+                  <div class="fg-item">🛒 E-commerce Shopify &amp; WooCommerce</div>
+                  <div class="fg-item">📚 Toujours apprenant, toujours en construction</div>
                 </div>
-
-                <div class="cl-sec-hdr">Formation</div>
-
-                <div class="cl-edu-card">
-                  <div class="cl-edu-row">
-                    <span class="cl-edu-school">🎓 ESGIS Togo</span>
-                    <span class="cl-edu-years">2024 — 2026</span>
-                  </div>
-                  <div class="cl-edu-inst">École Supérieure de Génie Informatique et des Sciences</div>
-                  <div class="cl-edu-degree">Master 2 — Systèmes, Réseaux &amp; Sécurité</div>
-                </div>
-
-                <div class="cl-edu-card">
-                  <div class="cl-edu-row">
-                    <span class="cl-edu-school">🎓 UCAO-ISTIN · Lomé</span>
-                    <span class="cl-edu-years">2022 — 2024</span>
-                  </div>
-                  <div class="cl-edu-inst">Université Catholique de l'Afrique de l'Ouest</div>
-                  <div class="cl-edu-degree">Licence — Développement d'Applications</div>
-                  <div class="cl-edu-note">Mention : PASSABLE</div>
-                </div>
-
-                <div class="cl-edu-card">
-                  <div class="cl-edu-row">
-                    <span class="cl-edu-school">🎓 UCAO · Lomé</span>
-                    <span class="cl-edu-years">2020 — 2022</span>
-                  </div>
-                  <div class="cl-edu-inst">Université Catholique de l'Afrique de l'Ouest</div>
-                  <div class="cl-edu-degree">Licence — Réseaux &amp; Télécommunications</div>
-                  <div class="cl-edu-note">Mention : PASSABLE</div>
-                </div>
-
-                <div class="cl-edu-card">
-                  <div class="cl-edu-row">
-                    <span class="cl-edu-school">🏫 Collège Protestant · Kpalimé</span>
-                    <span class="cl-edu-years">2019 — 2020</span>
-                  </div>
-                  <div class="cl-edu-degree">Baccalauréat — Série D</div>
-                </div>
+                <div class="sec-hdr">Formation</div>
+                <div class="edu"><div class="edu-row"><span class="edu-sch">🎓 ESGIS Togo</span><span class="edu-yr">2024 — 2026</span></div><div class="edu-inst">École Supérieure de Génie Informatique et des Sciences</div><div class="edu-deg">Master 2 — Systèmes, Réseaux &amp; Sécurité</div></div>
+                <div class="edu"><div class="edu-row"><span class="edu-sch">🎓 UCAO-ISTIN · Lomé</span><span class="edu-yr">2022 — 2024</span></div><div class="edu-inst">Université Catholique de l'Afrique de l'Ouest</div><div class="edu-deg">Licence — Développement d'Applications</div><div class="edu-note">Mention : PASSABLE</div></div>
+                <div class="edu"><div class="edu-row"><span class="edu-sch">🎓 UCAO · Lomé</span><span class="edu-yr">2020 — 2022</span></div><div class="edu-inst">Université Catholique de l'Afrique de l'Ouest</div><div class="edu-deg">Licence — Réseaux &amp; Télécommunications</div><div class="edu-note">Mention : PASSABLE</div></div>
+                <div class="edu"><div class="edu-row"><span class="edu-sch">🏫 Collège Protestant · Kpalimé</span><span class="edu-yr">2019 — 2020</span></div><div class="edu-deg">Baccalauréat — Série D</div></div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
-      <div class="cl-input-wrap">
-        <div class="cl-input-box">
-          <textarea class="cl-input-field" placeholder="Naviguez via la sidebar ou Ctrl+K…" rows="1" readonly></textarea>
-          <button class="cl-send-btn"><i class="fa-solid fa-arrow-up"></i></button>
-        </div>
-      </div>
+      <div class="banner"><span>À propos · Credo Ahiafor</span><a class="banner-link" onclick="openSection('contact')" style="cursor:pointer">Me contacter →</a></div>
+      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Décrivez une tâche ou posez une question." rows="1" readonly></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn" onclick="openSection('contact')">Accepter les modifications</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><span class="model-name">Portfolio 2026</span><span class="model-level">Ingénieur <div class="model-dot" style="background:#e06432;border-color:#e06432"></div></span></div></div></div></div>
     </div>
 
     <!-- ── PROJETS ── -->
-    <div class="cl-pane" id="cl-projets">
-      <div class="cl-chat">
-        <div class="cl-msg-wrap">
-
-          <div class="cl-user-msg">
-            <div class="cl-user-bubble">Montre-moi tes projets</div>
-          </div>
-
-          <div class="cl-claude-msg">
-            <div class="cl-claude-av">
-              <svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="lg3" x1="20" y1="0" x2="20" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#D97706"/><stop offset="45%" stop-color="#DC2626"/><stop offset="100%" stop-color="#9333EA"/></linearGradient></defs><path d="M20 4 L22 16 L34 10 L26 20 L34 30 L22 24 L20 36 L18 24 L6 30 L14 20 L6 10 L18 16 Z" fill="url(#lg3)"/></svg>
-            </div>
-            <div class="cl-claude-body">
-              <div class="cl-claude-name">Portfolio</div>
-              <div class="cl-claude-text">
-                <p>Voici les projets que j'ai construits et livrés. Chacun représente un défi technique résolu et un client satisfait.</p>
-
-                <div class="cl-pj-card">
-                  <div class="cl-pj-top">
-                    <span class="cl-pj-icon">🏥</span>
-                    <div class="cl-pj-links">
-                      <a href="https://cabinetbego.com" target="_blank" rel="noopener" class="cl-pj-link">
-                        <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i> Voir le site
-                      </a>
-                    </div>
-                  </div>
-                  <div class="cl-pj-cats">WordPress · Vitrine · Professionnel</div>
-                  <div class="cl-pj-name">Cabinet BEGO</div>
-                  <div class="cl-pj-desc">Site vitrine pour un cabinet d'études et de gestion des organisations. Design soigné, SEO optimisé, formulaire de contact, hébergement sécurisé conforme RGPD.</div>
-                  <div class="cl-pj-stack">
-                    <span class="cl-pj-tag">WordPress</span>
-                    <span class="cl-pj-tag">WooCommerce</span>
-                    <span class="cl-pj-tag">SEO</span>
-                    <span class="cl-pj-tag">RGPD</span>
-                  </div>
-                </div>
-
-                <div class="cl-pj-card">
-                  <div class="cl-pj-top">
-                    <span class="cl-pj-icon">👗</span>
-                    <div class="cl-pj-links">
-                      <a href="https://afinahcloset.com" target="_blank" rel="noopener" class="cl-pj-link">
-                        <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i> Voir le site
-                      </a>
-                    </div>
-                  </div>
-                  <div class="cl-pj-cats">Shopify · E-commerce · Mode Africaine</div>
-                  <div class="cl-pj-name">Afinah Closet</div>
-                  <div class="cl-pj-desc">Boutique e-commerce de mode africaine modeste. Catalogue produits, gestion des commandes, paiement sécurisé et livraison internationale.</div>
-                  <div class="cl-pj-stack">
-                    <span class="cl-pj-tag">Shopify</span>
-                    <span class="cl-pj-tag">Liquid</span>
-                    <span class="cl-pj-tag">CSS</span>
-                    <span class="cl-pj-tag">E-commerce</span>
-                  </div>
-                </div>
-
-                <div class="cl-pj-card">
-                  <div class="cl-pj-top">
-                    <span class="cl-pj-icon">🐷</span>
-                    <div class="cl-pj-links">
-                      <a href="https://github.com/GRIIINDER/tontine-app" target="_blank" rel="noopener" class="cl-pj-link">
-                        <i class="fa-brands fa-github" style="font-size:11px"></i> GitHub
-                      </a>
-                      <a href="https://gueze.vercel.app" target="_blank" rel="noopener" class="cl-pj-link">
-                        <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i> Live
-                      </a>
-                    </div>
-                  </div>
-                  <div class="cl-pj-cats">Full Stack · SaaS · Fintech</div>
-                  <div class="cl-pj-name">GUEZE</div>
-                  <div class="cl-pj-desc">Application SaaS de gestion de tontines (épargne collective). OAuth Google, notifications temps réel, tableau de bord et gestion des cycles de paiement.</div>
-                  <div class="cl-pj-stack">
-                    <span class="cl-pj-tag">React</span>
-                    <span class="cl-pj-tag">Next.js</span>
-                    <span class="cl-pj-tag">Supabase</span>
-                    <span class="cl-pj-tag">PostgreSQL</span>
-                    <span class="cl-pj-tag">TypeScript</span>
-                  </div>
-                </div>
-
+    <div class="pane" id="p-projets">
+      <div class="chat-scroll">
+        <div class="chat-wrap">
+          <div class="mu"><div class="mu-b">Montre-moi tes projets</div></div>
+          <div class="mc">
+            <div class="mc-av"><svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="g3" x1="20" y1="2" x2="20" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e06432"/><stop offset="100%" stop-color="#9333ea"/></linearGradient></defs><path d="M20 2 L22.5 15 L36 10 L26.5 20 L36 30 L22.5 25 L20 38 L17.5 25 L4 30 L13.5 20 L4 10 L17.5 15 Z" fill="url(#g3)"/></svg></div>
+            <div class="mc-body">
+              <div class="mc-name">Portfolio</div>
+              <div class="mc-text">
+                <p>Voici les projets que j'ai construits et livrés.</p>
+                <div class="pj"><div class="pj-top"><span class="pj-icon">🏥</span><div class="pj-links"><a href="https://cabinetbego.com" target="_blank" rel="noopener" class="pj-link"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i> Voir le site</a></div></div><div class="pj-cats">WordPress · Vitrine · Professionnel</div><div class="pj-name">Cabinet BEGO</div><div class="pj-desc">Site vitrine pour un cabinet d'études et de gestion des organisations. Design soigné, SEO optimisé, formulaire de contact, hébergement sécurisé conforme RGPD.</div><div class="pj-stack"><span class="pj-tag">WordPress</span><span class="pj-tag">WooCommerce</span><span class="pj-tag">SEO</span><span class="pj-tag">RGPD</span></div></div>
+                <div class="pj"><div class="pj-top"><span class="pj-icon">👗</span><div class="pj-links"><a href="https://afinahcloset.com" target="_blank" rel="noopener" class="pj-link"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i> Voir le site</a></div></div><div class="pj-cats">Shopify · E-commerce · Mode Africaine</div><div class="pj-name">Afinah Closet</div><div class="pj-desc">Boutique e-commerce de mode africaine modeste. Catalogue produits, gestion des commandes, paiement sécurisé et livraison internationale.</div><div class="pj-stack"><span class="pj-tag">Shopify</span><span class="pj-tag">Liquid</span><span class="pj-tag">CSS</span><span class="pj-tag">E-commerce</span></div></div>
+                <div class="pj"><div class="pj-top"><span class="pj-icon">🐷</span><div class="pj-links"><a href="https://github.com/GRIIINDER/tontine-app" target="_blank" rel="noopener" class="pj-link"><i class="fa-brands fa-github"></i> GitHub</a><a href="https://gueze.vercel.app" target="_blank" rel="noopener" class="pj-link"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i> Live</a></div></div><div class="pj-cats">Full Stack · SaaS · Fintech</div><div class="pj-name">GUEZE</div><div class="pj-desc">Application SaaS de gestion de tontines. OAuth Google, notifications temps réel, tableau de bord et gestion des cycles de paiement.</div><div class="pj-stack"><span class="pj-tag">React</span><span class="pj-tag">Next.js</span><span class="pj-tag">Supabase</span><span class="pj-tag">PostgreSQL</span><span class="pj-tag">TypeScript</span></div></div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
-      <div class="cl-input-wrap">
-        <div class="cl-input-box">
-          <textarea class="cl-input-field" placeholder="Naviguez via la sidebar ou Ctrl+K…" rows="1" readonly></textarea>
-          <button class="cl-send-btn"><i class="fa-solid fa-arrow-up"></i></button>
-        </div>
-      </div>
+      <div class="banner"><span>Projets · 3 livrés</span><a class="banner-link" onclick="openSection('contact')" style="cursor:pointer">Collaborer →</a></div>
+      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Décrivez une tâche ou posez une question." rows="1" readonly></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn" onclick="openSection('contact')">Accepter les modifications</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><span class="model-name">Portfolio 2026</span><span class="model-level">Ingénieur <div class="model-dot" style="background:#e06432;border-color:#e06432"></div></span></div></div></div></div>
     </div>
 
     <!-- ── COMPÉTENCES ── -->
-    <div class="cl-pane" id="cl-competences">
-      <div class="cl-chat">
-        <div class="cl-msg-wrap">
-
-          <div class="cl-user-msg">
-            <div class="cl-user-bubble">Quelles sont tes compétences techniques ?</div>
-          </div>
-
-          <div class="cl-claude-msg">
-            <div class="cl-claude-av">
-              <svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="lg4" x1="20" y1="0" x2="20" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#D97706"/><stop offset="45%" stop-color="#DC2626"/><stop offset="100%" stop-color="#9333EA"/></linearGradient></defs><path d="M20 4 L22 16 L34 10 L26 20 L34 30 L22 24 L20 36 L18 24 L6 30 L14 20 L6 10 L18 16 Z" fill="url(#lg4)"/></svg>
-            </div>
-            <div class="cl-claude-body">
-              <div class="cl-claude-name">Portfolio</div>
-              <div class="cl-claude-text">
-                <p>Mon stack couvre l'ensemble de la chaîne — du réseau physique jusqu'au code applicatif.</p>
-
-                <div class="cl-sk-section">
-                  <div class="cl-sk-hdr">Développement logiciel</div>
-                  <div class="cl-sk-grid">
-                    <span class="cl-sk-badge">Python</span><span class="cl-sk-badge">Java</span>
-                    <span class="cl-sk-badge">C / C++</span><span class="cl-sk-badge">C#</span>
-                    <span class="cl-sk-badge">VB.NET</span><span class="cl-sk-badge">HTML5 / CSS3</span>
-                    <span class="cl-sk-badge">POO</span><span class="cl-sk-badge">Design Patterns</span>
-                    <span class="cl-sk-badge">UML</span><span class="cl-sk-badge">MERISE</span>
-                    <span class="cl-sk-badge">Agile / Scrum</span><span class="cl-sk-badge">ITIL</span>
-                  </div>
-                </div>
-
-                <div class="cl-sk-section">
-                  <div class="cl-sk-hdr">Web &amp; CMS</div>
-                  <div class="cl-sk-grid">
-                    <span class="cl-sk-badge">WordPress</span><span class="cl-sk-badge">Shopify</span>
-                    <span class="cl-sk-badge">WooCommerce</span><span class="cl-sk-badge">React</span>
-                    <span class="cl-sk-badge">Next.js</span><span class="cl-sk-badge">Hébergement</span>
-                    <span class="cl-sk-badge">DNS</span><span class="cl-sk-badge">SSL / TLS</span>
-                    <span class="cl-sk-badge">Oracle</span><span class="cl-sk-badge">MySQL</span>
-                    <span class="cl-sk-badge">PostgreSQL</span>
-                  </div>
-                </div>
-
-                <div class="cl-sk-section">
-                  <div class="cl-sk-hdr">Systèmes &amp; Réseaux</div>
-                  <div class="cl-sk-grid">
-                    <span class="cl-sk-badge">Linux</span><span class="cl-sk-badge">Windows Server</span>
-                    <span class="cl-sk-badge">PowerShell</span><span class="cl-sk-badge">Cisco</span>
-                    <span class="cl-sk-badge">VLAN</span><span class="cl-sk-badge">Datacenter</span>
-                    <span class="cl-sk-badge">Virtualisation</span><span class="cl-sk-badge">Clusters</span>
-                    <span class="cl-sk-badge">Microsoft Exchange</span>
-                    <span class="cl-sk-badge">Téléphonie / fibre optique</span>
-                  </div>
-                </div>
-
-                <div class="cl-sk-section">
-                  <div class="cl-sk-hdr">Cybersécurité &amp; Cloud</div>
-                  <div class="cl-sk-grid">
-                    <span class="cl-sk-badge">CEH</span><span class="cl-sk-badge">CCNP Security</span>
-                    <span class="cl-sk-badge">Pare-feu</span><span class="cl-sk-badge">Cryptographie</span>
-                    <span class="cl-sk-badge">Sécurité WLAN</span><span class="cl-sk-badge">Veritas</span>
-                    <span class="cl-sk-badge">Droit du numérique</span>
-                    <span class="cl-sk-badge">Azure</span><span class="cl-sk-badge">IoT</span>
-                    <span class="cl-sk-badge">BI</span><span class="cl-sk-badge">IA / ML</span>
-                  </div>
-                </div>
-
+    <div class="pane" id="p-competences">
+      <div class="chat-scroll">
+        <div class="chat-wrap">
+          <div class="mu"><div class="mu-b">Quelles sont tes compétences techniques ?</div></div>
+          <div class="mc">
+            <div class="mc-av"><svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="g4" x1="20" y1="2" x2="20" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e06432"/><stop offset="100%" stop-color="#9333ea"/></linearGradient></defs><path d="M20 2 L22.5 15 L36 10 L26.5 20 L36 30 L22.5 25 L20 38 L17.5 25 L4 30 L13.5 20 L4 10 L17.5 15 Z" fill="url(#g4)"/></svg></div>
+            <div class="mc-body">
+              <div class="mc-name">Portfolio</div>
+              <div class="mc-text">
+                <p>Mon stack couvre l'ensemble de la chaîne — du réseau physique au code applicatif.</p>
+                <div class="sk-sec"><div class="sk-hdr">Développement logiciel</div><div class="sk-grid"><span class="sk-b">Python</span><span class="sk-b">Java</span><span class="sk-b">C / C++</span><span class="sk-b">C#</span><span class="sk-b">VB.NET</span><span class="sk-b">HTML5 / CSS3</span><span class="sk-b">POO</span><span class="sk-b">Design Patterns</span><span class="sk-b">UML</span><span class="sk-b">MERISE</span><span class="sk-b">Agile / Scrum</span><span class="sk-b">ITIL</span></div></div>
+                <div class="sk-sec"><div class="sk-hdr">Web &amp; CMS</div><div class="sk-grid"><span class="sk-b">WordPress</span><span class="sk-b">Shopify</span><span class="sk-b">WooCommerce</span><span class="sk-b">React</span><span class="sk-b">Next.js</span><span class="sk-b">Hébergement</span><span class="sk-b">DNS</span><span class="sk-b">SSL / TLS</span><span class="sk-b">Oracle</span><span class="sk-b">MySQL</span><span class="sk-b">PostgreSQL</span></div></div>
+                <div class="sk-sec"><div class="sk-hdr">Systèmes &amp; Réseaux</div><div class="sk-grid"><span class="sk-b">Linux</span><span class="sk-b">Windows Server</span><span class="sk-b">PowerShell</span><span class="sk-b">Cisco</span><span class="sk-b">VLAN</span><span class="sk-b">Datacenter</span><span class="sk-b">Virtualisation</span><span class="sk-b">Clusters</span><span class="sk-b">Microsoft Exchange</span><span class="sk-b">Téléphonie / fibre</span></div></div>
+                <div class="sk-sec"><div class="sk-hdr">Cybersécurité &amp; Cloud</div><div class="sk-grid"><span class="sk-b">CEH</span><span class="sk-b">CCNP Security</span><span class="sk-b">Pare-feu</span><span class="sk-b">Cryptographie</span><span class="sk-b">Sécurité WLAN</span><span class="sk-b">Veritas</span><span class="sk-b">Droit du numérique</span><span class="sk-b">Azure</span><span class="sk-b">IoT</span><span class="sk-b">BI</span><span class="sk-b">IA / ML</span></div></div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
-      <div class="cl-input-wrap">
-        <div class="cl-input-box">
-          <textarea class="cl-input-field" placeholder="Naviguez via la sidebar ou Ctrl+K…" rows="1" readonly></textarea>
-          <button class="cl-send-btn"><i class="fa-solid fa-arrow-up"></i></button>
-        </div>
-      </div>
+      <div class="banner"><span>Stack technique · 30+ technologies</span><a class="banner-link" onclick="openSection('contact')" style="cursor:pointer">Me contacter →</a></div>
+      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Décrivez une tâche ou posez une question." rows="1" readonly></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn" onclick="openSection('contact')">Accepter les modifications</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><span class="model-name">Portfolio 2026</span><span class="model-level">Ingénieur <div class="model-dot" style="background:#e06432;border-color:#e06432"></div></span></div></div></div></div>
     </div>
 
     <!-- ── PARCOURS ── -->
-    <div class="cl-pane" id="cl-parcours">
-      <div class="cl-chat">
-        <div class="cl-msg-wrap">
-
-          <div class="cl-user-msg">
-            <div class="cl-user-bubble">Quel est ton parcours professionnel ?</div>
-          </div>
-
-          <div class="cl-claude-msg">
-            <div class="cl-claude-av">
-              <svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="lg5" x1="20" y1="0" x2="20" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#D97706"/><stop offset="45%" stop-color="#DC2626"/><stop offset="100%" stop-color="#9333EA"/></linearGradient></defs><path d="M20 4 L22 16 L34 10 L26 20 L34 30 L22 24 L20 36 L18 24 L6 30 L14 20 L6 10 L18 16 Z" fill="url(#lg5)"/></svg>
-            </div>
-            <div class="cl-claude-body">
-              <div class="cl-claude-name">Portfolio</div>
-              <div class="cl-claude-text">
-                <p>Mon parcours combine expérience pratique sur le terrain et formation académique solide.</p>
-
-                <div class="cl-sec-hdr">Expérience Professionnelle</div>
-
-                <div class="cl-tl-item">
-                  <div class="cl-tl-left"><div class="cl-tl-dot"></div><div class="cl-tl-line"></div></div>
-                  <div class="cl-tl-body">
-                    <div class="cl-tl-date">Sept. 2025 — Présent</div>
-                    <div class="cl-tl-role">Développeur Web Freelance</div>
-                    <div class="cl-tl-org">@ Indépendant · Lomé, Togo</div>
-                    <div class="cl-tl-desc">Création et maintenance de sites web professionnels. Projets WordPress RGPD, Shopify e-commerce mode modeste, application React de tontine digitale.</div>
-                    <div class="cl-tl-tags">
-                      <span class="cl-tl-tag">WordPress</span><span class="cl-tl-tag">Shopify</span>
-                      <span class="cl-tl-tag">React</span><span class="cl-tl-tag">Next.js</span><span class="cl-tl-tag">RGPD</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="cl-tl-item">
-                  <div class="cl-tl-left"><div class="cl-tl-dot"></div></div>
-                  <div class="cl-tl-body">
-                    <div class="cl-tl-date">Fév. — Juin 2022</div>
-                    <div class="cl-tl-role">Stagiaire Technicien Réseau</div>
-                    <div class="cl-tl-org">@ CFAO Infrastructure · Lomé, Togo</div>
-                    <div class="cl-tl-desc">Configuration et mise en service d'équipements réseau et de postes clients. Maintenance préventive du parc informatique, résolution d'incidents. Installation d'imprimantes réseau.</div>
-                    <div class="cl-tl-tags">
-                      <span class="cl-tl-tag">Cisco</span><span class="cl-tl-tag">Windows Server</span>
-                      <span class="cl-tl-tag">VLAN</span><span class="cl-tl-tag">Maintenance</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="cl-sec-hdr">Formation</div>
-
-                <div class="cl-tl-item">
-                  <div class="cl-tl-left"><div class="cl-tl-dot"></div><div class="cl-tl-line"></div></div>
-                  <div class="cl-tl-body">
-                    <div class="cl-tl-date">2023 — 2026</div>
-                    <div class="cl-tl-role">Master 2 — Systèmes, Réseaux &amp; Sécurité</div>
-                    <div class="cl-tl-org">@ ESGIS Togo · Lomé</div>
-                    <div class="cl-tl-desc">Formation avancée en cybersécurité, architectures réseaux enterprise, virtualisation et cloud. Diplômé.</div>
-                    <div class="cl-tl-tags">
-                      <span class="cl-tl-tag">Cybersécurité</span><span class="cl-tl-tag">Réseaux</span>
-                      <span class="cl-tl-tag">Cloud</span><span class="cl-tl-tag">Virtualisation</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="cl-tl-item">
-                  <div class="cl-tl-left"><div class="cl-tl-dot"></div><div class="cl-tl-line"></div></div>
-                  <div class="cl-tl-body">
-                    <div class="cl-tl-date">2022 — 2024</div>
-                    <div class="cl-tl-role">Licence — Développement d'Applications</div>
-                    <div class="cl-tl-org">@ UCAO-ISTIN · Lomé — Mention PASSABLE</div>
-                    <div class="cl-tl-desc">Génie logiciel, algorithmique, bases de données, développement orienté objet et conception UML.</div>
-                    <div class="cl-tl-tags">
-                      <span class="cl-tl-tag">POO</span><span class="cl-tl-tag">Java</span>
-                      <span class="cl-tl-tag">UML</span><span class="cl-tl-tag">SQL</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="cl-tl-item">
-                  <div class="cl-tl-left"><div class="cl-tl-dot"></div><div class="cl-tl-line"></div></div>
-                  <div class="cl-tl-body">
-                    <div class="cl-tl-date">2020 — 2022</div>
-                    <div class="cl-tl-role">Licence — Réseaux &amp; Télécommunications</div>
-                    <div class="cl-tl-org">@ UCAO · Lomé — Mention PASSABLE</div>
-                    <div class="cl-tl-desc">Architecture réseaux, protocoles de communication, télécommunications et sécurité des systèmes d'information.</div>
-                    <div class="cl-tl-tags">
-                      <span class="cl-tl-tag">Réseaux</span><span class="cl-tl-tag">Protocoles</span><span class="cl-tl-tag">Télécom</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="cl-tl-item">
-                  <div class="cl-tl-left"><div class="cl-tl-dot"></div></div>
-                  <div class="cl-tl-body">
-                    <div class="cl-tl-date">2019 — 2020</div>
-                    <div class="cl-tl-role">Baccalauréat — Série D</div>
-                    <div class="cl-tl-org">@ Collège Protestant · Kpalimé, Togo</div>
-                    <div class="cl-tl-desc">Baccalauréat scientifique, série D — Sciences de la vie et de la terre et Mathématiques.</div>
-                    <div class="cl-tl-tags">
-                      <span class="cl-tl-tag">Mathématiques</span><span class="cl-tl-tag">SVT</span><span class="cl-tl-tag">Sciences</span>
-                    </div>
-                  </div>
-                </div>
-
+    <div class="pane" id="p-parcours">
+      <div class="chat-scroll">
+        <div class="chat-wrap">
+          <div class="mu"><div class="mu-b">Quel est ton parcours professionnel ?</div></div>
+          <div class="mc">
+            <div class="mc-av"><svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="g5" x1="20" y1="2" x2="20" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e06432"/><stop offset="100%" stop-color="#9333ea"/></linearGradient></defs><path d="M20 2 L22.5 15 L36 10 L26.5 20 L36 30 L22.5 25 L20 38 L17.5 25 L4 30 L13.5 20 L4 10 L17.5 15 Z" fill="url(#g5)"/></svg></div>
+            <div class="mc-body">
+              <div class="mc-name">Portfolio</div>
+              <div class="mc-text">
+                <div class="sec-hdr">Expérience Professionnelle</div>
+                <div class="tl"><div class="tl-l"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-b"><div class="tl-date">Sept. 2025 — Présent</div><div class="tl-role">Développeur Web Freelance</div><div class="tl-org">@ Indépendant · Lomé, Togo</div><div class="tl-desc">Création et maintenance de sites web professionnels. Projets WordPress RGPD, Shopify e-commerce mode modeste, application React de tontine digitale.</div><div class="tl-tags"><span class="tl-tag">WordPress</span><span class="tl-tag">Shopify</span><span class="tl-tag">React</span><span class="tl-tag">Next.js</span><span class="tl-tag">RGPD</span></div></div></div>
+                <div class="tl"><div class="tl-l"><div class="tl-dot"></div></div><div class="tl-b"><div class="tl-date">Fév. — Juin 2022</div><div class="tl-role">Stagiaire Technicien Réseau</div><div class="tl-org">@ CFAO Infrastructure · Lomé, Togo</div><div class="tl-desc">Configuration et mise en service d'équipements réseau. Maintenance préventive, résolution d'incidents, installation d'imprimantes réseau.</div><div class="tl-tags"><span class="tl-tag">Cisco</span><span class="tl-tag">Windows Server</span><span class="tl-tag">VLAN</span><span class="tl-tag">Maintenance</span></div></div></div>
+                <div class="sec-hdr">Formation</div>
+                <div class="tl"><div class="tl-l"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-b"><div class="tl-date">2023 — 2026</div><div class="tl-role">Master 2 — Systèmes, Réseaux &amp; Sécurité</div><div class="tl-org">@ ESGIS Togo · Lomé</div><div class="tl-desc">Formation avancée en cybersécurité, architectures réseaux enterprise, virtualisation et cloud.</div><div class="tl-tags"><span class="tl-tag">Cybersécurité</span><span class="tl-tag">Réseaux</span><span class="tl-tag">Cloud</span><span class="tl-tag">Virtualisation</span></div></div></div>
+                <div class="tl"><div class="tl-l"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-b"><div class="tl-date">2022 — 2024</div><div class="tl-role">Licence — Développement d'Applications</div><div class="tl-org">@ UCAO-ISTIN · Lomé — Mention PASSABLE</div><div class="tl-desc">Génie logiciel, algorithmique, bases de données, développement orienté objet et conception UML.</div><div class="tl-tags"><span class="tl-tag">POO</span><span class="tl-tag">Java</span><span class="tl-tag">UML</span><span class="tl-tag">SQL</span></div></div></div>
+                <div class="tl"><div class="tl-l"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-b"><div class="tl-date">2020 — 2022</div><div class="tl-role">Licence — Réseaux &amp; Télécommunications</div><div class="tl-org">@ UCAO · Lomé — Mention PASSABLE</div><div class="tl-desc">Architecture réseaux, protocoles de communication, télécommunications et sécurité des systèmes d'information.</div><div class="tl-tags"><span class="tl-tag">Réseaux</span><span class="tl-tag">Protocoles</span><span class="tl-tag">Télécom</span></div></div></div>
+                <div class="tl"><div class="tl-l"><div class="tl-dot"></div></div><div class="tl-b"><div class="tl-date">2019 — 2020</div><div class="tl-role">Baccalauréat — Série D</div><div class="tl-org">@ Collège Protestant · Kpalimé, Togo</div><div class="tl-desc">Baccalauréat scientifique, série D.</div><div class="tl-tags"><span class="tl-tag">Mathématiques</span><span class="tl-tag">SVT</span><span class="tl-tag">Sciences</span></div></div></div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
-      <div class="cl-input-wrap">
-        <div class="cl-input-box">
-          <textarea class="cl-input-field" placeholder="Naviguez via la sidebar ou Ctrl+K…" rows="1" readonly></textarea>
-          <button class="cl-send-btn"><i class="fa-solid fa-arrow-up"></i></button>
-        </div>
-      </div>
+      <div class="banner"><span>Parcours professionnel · Lomé, Togo</span><a class="banner-link" onclick="openSection('contact')" style="cursor:pointer">Me contacter →</a></div>
+      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Décrivez une tâche ou posez une question." rows="1" readonly></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn" onclick="openSection('contact')">Accepter les modifications</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><span class="model-name">Portfolio 2026</span><span class="model-level">Ingénieur <div class="model-dot" style="background:#e06432;border-color:#e06432"></div></span></div></div></div></div>
     </div>
 
     <!-- ── CONTACT ── -->
-    <div class="cl-pane" id="cl-contact">
-      <div class="cl-chat">
-        <div class="cl-msg-wrap">
-
-          <div class="cl-user-msg">
-            <div class="cl-user-bubble">Comment te contacter ?</div>
-          </div>
-
-          <div class="cl-claude-msg">
-            <div class="cl-claude-av">
-              <svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="lg6" x1="20" y1="0" x2="20" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#D97706"/><stop offset="45%" stop-color="#DC2626"/><stop offset="100%" stop-color="#9333EA"/></linearGradient></defs><path d="M20 4 L22 16 L34 10 L26 20 L34 30 L22 24 L20 36 L18 24 L6 30 L14 20 L6 10 L18 16 Z" fill="url(#lg6)"/></svg>
-            </div>
-            <div class="cl-claude-body">
-              <div class="cl-claude-name">Portfolio</div>
-              <div class="cl-claude-text">
-                <p>Disponible pour des missions freelance, collaborations et opportunités depuis Lomé. N'hésitez pas à me contacter via l'un de ces canaux.</p>
-
-                <div class="cl-sec-hdr">Me Retrouver Sur</div>
-
-                <a href="mailto:ahiafor.credo@gmail.com" class="cl-ct-link">
-                  <div class="cl-ct-icon" style="background:rgba(52,211,153,.1);color:#34d399"><i class="fa-solid fa-envelope"></i></div>
-                  <div class="cl-ct-info">
-                    <div class="cl-ct-platform" style="color:#34d399">EMAIL</div>
-                    <div class="cl-ct-val">ahiafor.credo@gmail.com</div>
-                  </div>
-                  <span class="cl-ct-arrow">↗</span>
-                </a>
-
-                <a href="tel:+22892236379" class="cl-ct-link">
-                  <div class="cl-ct-icon" style="background:rgba(147,51,234,.1);color:#a855f7"><i class="fa-solid fa-phone"></i></div>
-                  <div class="cl-ct-info">
-                    <div class="cl-ct-platform" style="color:#a855f7">TÉLÉPHONE</div>
-                    <div class="cl-ct-val">+228 92 23 63 79</div>
-                  </div>
-                  <span class="cl-ct-arrow">↗</span>
-                </a>
-
-                <a href="https://www.linkedin.com/in/credoahiafor" target="_blank" rel="noopener" class="cl-ct-link">
-                  <div class="cl-ct-icon" style="background:rgba(10,102,194,.12);color:#0a66c2"><i class="fa-brands fa-linkedin"></i></div>
-                  <div class="cl-ct-info">
-                    <div class="cl-ct-platform" style="color:#0a66c2">LINKEDIN</div>
-                    <div class="cl-ct-val">linkedin.com/in/credoahiafor</div>
-                  </div>
-                  <span class="cl-ct-arrow">↗</span>
-                </a>
-
-                <a href="https://github.com/GRIIINDER" target="_blank" rel="noopener" class="cl-ct-link">
-                  <div class="cl-ct-icon" style="background:rgba(255,255,255,.06);color:#d1d5db"><i class="fa-brands fa-github"></i></div>
-                  <div class="cl-ct-info">
-                    <div class="cl-ct-platform" style="color:#d1d5db">GITHUB</div>
-                    <div class="cl-ct-val">github.com/GRIIINDER</div>
-                  </div>
-                  <span class="cl-ct-arrow">↗</span>
-                </a>
-
-                <div class="cl-ct-link" style="pointer-events:none">
-                  <div class="cl-ct-icon" style="background:rgba(217,119,6,.1);color:var(--amber)"><i class="fa-solid fa-location-dot"></i></div>
-                  <div class="cl-ct-info">
-                    <div class="cl-ct-platform" style="color:var(--amber)">LOCALISATION</div>
-                    <div class="cl-ct-val">Segbé-Zanvi · Lomé, Togo</div>
-                  </div>
-                  <span class="cl-ct-arrow" style="opacity:0">↗</span>
-                </div>
-
-                <div class="cl-sec-hdr" style="margin-top:20px">Envoyer un Message</div>
-
-                <form class="cl-form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                  <div>
-                    <label class="cl-label" for="cf-name">Votre nom *</label>
-                    <input type="text" id="cf-name" name="name" required class="cl-finput" placeholder="John Doe">
-                  </div>
-                  <div>
-                    <label class="cl-label" for="cf-email">Votre email *</label>
-                    <input type="email" id="cf-email" name="email" required class="cl-finput" placeholder="john@example.com">
-                  </div>
-                  <div>
-                    <label class="cl-label" for="cf-sub">Sujet</label>
-                    <input type="text" id="cf-sub" name="subject" class="cl-finput" placeholder="Collaboration freelance…">
-                  </div>
-                  <div>
-                    <label class="cl-label" for="cf-msg">Message *</label>
-                    <textarea id="cf-msg" name="message" required class="cl-ftextarea" placeholder="Votre message…"></textarea>
-                  </div>
-                  <div>
-                    <button type="submit" class="cl-fsubmit cf-btn">
-                      <i class="fa-solid fa-paper-plane"></i> Envoyer le message
-                    </button>
-                    <div class="cf-ok" id="cf-ok">Message envoyé avec succès ✓</div>
-                  </div>
+    <div class="pane" id="p-contact">
+      <div class="chat-scroll">
+        <div class="chat-wrap">
+          <div class="mu"><div class="mu-b">Comment te contacter ?</div></div>
+          <div class="mc">
+            <div class="mc-av"><svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="g6" x1="20" y1="2" x2="20" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e06432"/><stop offset="100%" stop-color="#9333ea"/></linearGradient></defs><path d="M20 2 L22.5 15 L36 10 L26.5 20 L36 30 L22.5 25 L20 38 L17.5 25 L4 30 L13.5 20 L4 10 L17.5 15 Z" fill="url(#g6)"/></svg></div>
+            <div class="mc-body">
+              <div class="mc-name">Portfolio</div>
+              <div class="mc-text">
+                <p>Disponible pour des missions freelance et collaborations. N'hésitez pas à me contacter.</p>
+                <div class="sec-hdr">Canaux de contact</div>
+                <a href="mailto:ahiafor.credo@gmail.com" class="ct-link"><div class="ct-icon" style="background:rgba(52,211,153,.08);color:#34d399"><i class="fa-solid fa-envelope"></i></div><div class="ct-info"><div class="ct-plat" style="color:#34d399">EMAIL</div><div class="ct-val">ahiafor.credo@gmail.com</div></div><span class="ct-arr">↗</span></a>
+                <a href="tel:+22892236379" class="ct-link"><div class="ct-icon" style="background:rgba(147,51,234,.08);color:#a855f7"><i class="fa-solid fa-phone"></i></div><div class="ct-info"><div class="ct-plat" style="color:#a855f7">TÉLÉPHONE</div><div class="ct-val">+228 92 23 63 79</div></div><span class="ct-arr">↗</span></a>
+                <a href="https://www.linkedin.com/in/credoahiafor" target="_blank" rel="noopener" class="ct-link"><div class="ct-icon" style="background:rgba(10,102,194,.1);color:#0a66c2"><i class="fa-brands fa-linkedin"></i></div><div class="ct-info"><div class="ct-plat" style="color:#0a66c2">LINKEDIN</div><div class="ct-val">linkedin.com/in/credoahiafor</div></div><span class="ct-arr">↗</span></a>
+                <a href="https://github.com/GRIIINDER" target="_blank" rel="noopener" class="ct-link"><div class="ct-icon" style="background:rgba(255,255,255,.05);color:#c0c0c0"><i class="fa-brands fa-github"></i></div><div class="ct-info"><div class="ct-plat" style="color:#c0c0c0">GITHUB</div><div class="ct-val">github.com/GRIIINDER</div></div><span class="ct-arr">↗</span></a>
+                <div class="ct-link" style="pointer-events:none"><div class="ct-icon" style="background:rgba(224,100,50,.08);color:#e06432"><i class="fa-solid fa-location-dot"></i></div><div class="ct-info"><div class="ct-plat" style="color:#e06432">LOCALISATION</div><div class="ct-val">Segbé-Zanvi · Lomé, Togo</div></div><span class="ct-arr" style="opacity:0">↗</span></div>
+                <div class="sec-hdr" style="margin-top:18px">Envoyer un message</div>
+                <form class="cf" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                  <div><label class="cf-lbl" for="cf-name">Votre nom *</label><input type="text" id="cf-name" name="name" required class="cf-in" placeholder="John Doe"></div>
+                  <div><label class="cf-lbl" for="cf-email">Votre email *</label><input type="email" id="cf-email" name="email" required class="cf-in" placeholder="john@example.com"></div>
+                  <div><label class="cf-lbl" for="cf-sub">Sujet</label><input type="text" id="cf-sub" name="subject" class="cf-in" placeholder="Collaboration freelance…"></div>
+                  <div><label class="cf-lbl" for="cf-msg">Message *</label><textarea id="cf-msg" name="message" required class="cf-ta" placeholder="Votre message…"></textarea></div>
+                  <div><button type="submit" class="cf-sub cf-btn"><i class="fa-solid fa-paper-plane"></i> Envoyer le message</button><div class="cf-ok" id="cf-ok">Message envoyé avec succès ✓</div></div>
                 </form>
-
               </div>
             </div>
           </div>
-
         </div>
       </div>
-      <div class="cl-input-wrap">
-        <div class="cl-input-box">
-          <textarea class="cl-input-field" placeholder="Naviguez via la sidebar ou Ctrl+K…" rows="1" readonly></textarea>
-          <button class="cl-send-btn"><i class="fa-solid fa-arrow-up"></i></button>
-        </div>
-      </div>
+      <div class="banner"><span>Contact · Lomé, Togo 🇹🇬</span></div>
+      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Décrivez une tâche ou posez une question." rows="1" readonly></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn">Accepter les modifications</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><span class="model-name">Portfolio 2026</span><span class="model-level">Ingénieur <div class="model-dot" style="background:#e06432;border-color:#e06432"></div></span></div></div></div></div>
     </div>
 
     <!-- ── README ── -->
-    <div class="cl-pane" id="cl-readme">
-      <div class="cl-chat">
-        <div class="cl-msg-wrap">
-
-          <div class="cl-claude-msg">
-            <div class="cl-claude-av">
-              <svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="lg7" x1="20" y1="0" x2="20" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#D97706"/><stop offset="45%" stop-color="#DC2626"/><stop offset="100%" stop-color="#9333EA"/></linearGradient></defs><path d="M20 4 L22 16 L34 10 L26 20 L34 30 L22 24 L20 36 L18 24 L6 30 L14 20 L6 10 L18 16 Z" fill="url(#lg7)"/></svg>
-            </div>
-            <div class="cl-claude-body">
-              <div class="cl-claude-name">README.md</div>
-              <div class="cl-claude-text">
-                <div class="cl-rm-name">Credo Ahiafor</div>
-                <div class="cl-rm-role">Ingénieur Réseaux &amp; Sécurité · Développeur Web · Lomé, Togo 🇹🇬</div>
-
-                <div class="cl-rm-pills">
-                  <span class="cl-rm-pill" style="color:#2196f3">🔵 Cisco</span>
-                  <span class="cl-rm-pill" style="color:#4caf50">🟢 Python</span>
-                  <span class="cl-rm-pill" style="color:#61dafb">⚛ React</span>
-                  <span class="cl-rm-pill" style="color:#D97706">🟠 WordPress</span>
-                  <span class="cl-rm-pill" style="color:#a855f7">🐧 Linux</span>
-                </div>
-
-                <div class="cl-rm-h2">🛡️ À Propos</div>
-                <div class="cl-rm-p">Passionné par la cybersécurité, les architectures réseaux et le développement web, j'accompagne entreprises et entrepreneurs dans leurs projets numériques depuis 5 ans. La rigueur et l'authenticité sont au cœur de ma façon de travailler.</div>
-                <ul class="cl-rm-dots">
-                  <li>🔒 Conception d'architectures <strong>réseau sécurisées</strong> (Cisco, VLAN, VPN)</li>
-                  <li>🌐 Développement web full-stack : WordPress, React, Shopify</li>
-                  <li>⚡ Automatisation &amp; scripting Python pour l'administration réseau</li>
-                  <li>✨ Toujours apprenant, toujours en construction</li>
-                </ul>
-
-                <div class="cl-rm-h2">Stack</div>
-                <div class="cl-rm-stack-row">
-                  <span class="cl-rm-stack-lbl">Réseaux:</span>
-                  <div class="cl-rm-tags">
-                    <span class="cl-rm-tag">Cisco</span><span class="cl-rm-tag">VLAN</span>
-                    <span class="cl-rm-tag">VPN</span><span class="cl-rm-tag">Wireshark</span>
-                    <span class="cl-rm-tag">Datacenter</span>
-                  </div>
-                </div>
-                <div class="cl-rm-stack-row">
-                  <span class="cl-rm-stack-lbl">Sécurité:</span>
-                  <div class="cl-rm-tags">
-                    <span class="cl-rm-tag">CEH</span><span class="cl-rm-tag">CCNP Security</span>
-                    <span class="cl-rm-tag">Pare-feu</span><span class="cl-rm-tag">Cryptographie</span>
-                  </div>
-                </div>
-                <div class="cl-rm-stack-row">
-                  <span class="cl-rm-stack-lbl">Dev Web:</span>
-                  <div class="cl-rm-tags">
-                    <span class="cl-rm-tag">React</span><span class="cl-rm-tag">WordPress</span>
-                    <span class="cl-rm-tag">Shopify</span><span class="cl-rm-tag">HTML/CSS</span>
-                    <span class="cl-rm-tag">JavaScript</span>
-                  </div>
-                </div>
-                <div class="cl-rm-stack-row">
-                  <span class="cl-rm-stack-lbl">Cloud/OS:</span>
-                  <div class="cl-rm-tags">
-                    <span class="cl-rm-tag">Azure</span><span class="cl-rm-tag">Linux</span>
-                    <span class="cl-rm-tag">Windows Server</span><span class="cl-rm-tag">Git</span>
-                  </div>
-                </div>
-
-                <div class="cl-rm-h2">Contact</div>
-                <ul class="cl-rm-conn">
-                  <li><span style="color:var(--fg3)">Email:    </span> <a href="mailto:ahiafor.credo@gmail.com">ahiafor.credo@gmail.com</a></li>
-                  <li><span style="color:var(--fg3)">GitHub:   </span> <a href="https://github.com/GRIIINDER" target="_blank" rel="noopener">GRIIINDER</a></li>
-                  <li><span style="color:var(--fg3)">LinkedIn: </span> <a href="https://www.linkedin.com/in/credoahiafor" target="_blank" rel="noopener">credoahiafor</a></li>
-                  <li><span style="color:var(--fg3)">Tél. :    </span> <a href="tel:+22892236379">+228 92 23 63 79</a></li>
-                </ul>
-
-                <div class="cl-rm-copy">
-                  <h3>© Copyright &amp; Usage</h3>
-                  <p>Ce portfolio, y compris son design et tous ses éléments visuels, a été <strong style="color:var(--fg2)">conçu et développé par Credo Ahiafor</strong>. Tous droits réservés.</p>
-                  <p>Vous n'êtes <span style="color:#f87171">pas autorisé</span> à copier, cloner ou reproduire ce portfolio en tout ou en partie sans autorisation écrite préalable.</p>
-                </div>
-
-                <a href="/assets/Credo_Ahiafor_CV.pdf" download="Credo_Ahiafor_CV.pdf" class="cl-rm-cv">
-                  <i class="fa-solid fa-file-pdf"></i>
-                  Credo_Ahiafor_CV.pdf — Télécharger
-                </a>
-
-                <div class="cl-rm-footer">
-                  <span>© 2026 Credo Ahiafor · Tous droits réservés</span>
-                  <span>Made with ❤ from Lomé, Togo 🇹🇬</span>
-                </div>
+    <div class="pane" id="p-readme">
+      <div class="chat-scroll">
+        <div class="chat-wrap">
+          <div class="mc">
+            <div class="mc-av"><svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="g7" x1="20" y1="2" x2="20" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e06432"/><stop offset="100%" stop-color="#9333ea"/></linearGradient></defs><path d="M20 2 L22.5 15 L36 10 L26.5 20 L36 30 L22.5 25 L20 38 L17.5 25 L4 30 L13.5 20 L4 10 L17.5 15 Z" fill="url(#g7)"/></svg></div>
+            <div class="mc-body">
+              <div class="mc-name">README.md</div>
+              <div class="mc-text">
+                <div class="rm-name">Credo Ahiafor</div>
+                <div class="rm-role">Ingénieur Réseaux &amp; Sécurité · Développeur Web · Lomé, Togo 🇹🇬</div>
+                <div class="rm-pills"><span class="rm-pill" style="color:#2196f3">🔵 Cisco</span><span class="rm-pill" style="color:#4caf50">🟢 Python</span><span class="rm-pill" style="color:#61dafb">⚛ React</span><span class="rm-pill" style="color:#e06432">🟠 WordPress</span><span class="rm-pill" style="color:#a855f7">🐧 Linux</span></div>
+                <div class="rm-h2">🛡️ À Propos</div>
+                <div class="rm-p">Passionné par la cybersécurité, les architectures réseaux et le développement web, j'accompagne entreprises et entrepreneurs dans leurs projets numériques depuis 5 ans.</div>
+                <ul class="rm-dots"><li>🔒 Conception d'architectures <strong>réseau sécurisées</strong> (Cisco, VLAN, VPN)</li><li>🌐 Développement web full-stack : WordPress, React, Shopify</li><li>⚡ Automatisation &amp; scripting Python pour l'administration réseau</li><li>✨ Toujours apprenant, toujours en construction</li></ul>
+                <div class="rm-h2">Stack</div>
+                <div class="rm-sr"><span class="rm-sl">Réseaux:</span><div class="rm-tags"><span class="rm-tag">Cisco</span><span class="rm-tag">VLAN</span><span class="rm-tag">VPN</span><span class="rm-tag">Wireshark</span><span class="rm-tag">Datacenter</span></div></div>
+                <div class="rm-sr"><span class="rm-sl">Sécurité:</span><div class="rm-tags"><span class="rm-tag">CEH</span><span class="rm-tag">CCNP Security</span><span class="rm-tag">Pare-feu</span><span class="rm-tag">Cryptographie</span></div></div>
+                <div class="rm-sr"><span class="rm-sl">Dev Web:</span><div class="rm-tags"><span class="rm-tag">React</span><span class="rm-tag">WordPress</span><span class="rm-tag">Shopify</span><span class="rm-tag">HTML/CSS</span><span class="rm-tag">JavaScript</span></div></div>
+                <div class="rm-sr"><span class="rm-sl">Cloud/OS:</span><div class="rm-tags"><span class="rm-tag">Azure</span><span class="rm-tag">Linux</span><span class="rm-tag">Windows Server</span><span class="rm-tag">Git</span></div></div>
+                <div class="rm-h2">Contact</div>
+                <ul class="rm-conn"><li><span style="color:#333">Email:    </span><a href="mailto:ahiafor.credo@gmail.com">ahiafor.credo@gmail.com</a></li><li><span style="color:#333">GitHub:   </span><a href="https://github.com/GRIIINDER" target="_blank" rel="noopener">GRIIINDER</a></li><li><span style="color:#333">LinkedIn: </span><a href="https://www.linkedin.com/in/credoahiafor" target="_blank" rel="noopener">credoahiafor</a></li><li><span style="color:#333">Tél. :    </span><a href="tel:+22892236379">+228 92 23 63 79</a></li></ul>
+                <div class="rm-copy"><h3>© Copyright &amp; Usage</h3><p>Ce portfolio a été <strong style="color:#666">conçu et développé par Credo Ahiafor</strong>. Tous droits réservés.</p><p>Non autorisé à copier ou reproduire sans permission écrite préalable.</p></div>
+                <a href="/assets/Credo_Ahiafor_CV.pdf" download="Credo_Ahiafor_CV.pdf" class="rm-cv"><i class="fa-solid fa-file-pdf"></i> Credo_Ahiafor_CV.pdf — Télécharger</a>
+                <div class="rm-footer"><span>© 2026 Credo Ahiafor · Tous droits réservés</span><span>Made with ❤ from Lomé, Togo 🇹🇬</span></div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
-      <div class="cl-input-wrap">
-        <div class="cl-input-box">
-          <textarea class="cl-input-field" placeholder="Naviguez via la sidebar ou Ctrl+K…" rows="1" readonly></textarea>
-          <button class="cl-send-btn"><i class="fa-solid fa-arrow-up"></i></button>
-        </div>
-      </div>
+      <div class="banner"><span>README.md · portfolio-credo</span></div>
+      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Décrivez une tâche ou posez une question." rows="1" readonly></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn">Accepter les modifications</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><span class="model-name">Portfolio 2026</span><span class="model-level">Ingénieur <div class="model-dot" style="background:#e06432;border-color:#e06432"></div></span></div></div></div></div>
     </div>
 
   </main>
 </div>
 
 <!-- Mobile nav -->
-<nav id="cl-mob-nav" aria-label="Navigation mobile">
-  <div class="cl-mob-items">
-    <button class="cl-mob-item active" id="mob-home" onclick="openSection('home')">
-      <i class="fa-solid fa-house"></i><span>Accueil</span>
-    </button>
-    <button class="cl-mob-item" id="mob-about" onclick="openSection('about')">
-      <i class="fa-solid fa-user"></i><span>À Propos</span>
-    </button>
-    <button class="cl-mob-item" id="mob-projets" onclick="openSection('projets')">
-      <i class="fa-solid fa-folder-open"></i><span>Projets</span>
-    </button>
-    <button class="cl-mob-item" id="mob-competences" onclick="openSection('competences')">
-      <i class="fa-solid fa-code"></i><span>Skills</span>
-    </button>
-    <button class="cl-mob-item" id="mob-parcours" onclick="openSection('parcours')">
-      <i class="fa-solid fa-briefcase"></i><span>Parcours</span>
-    </button>
-    <button class="cl-mob-item" id="mob-contact" onclick="openSection('contact')">
-      <i class="fa-solid fa-envelope"></i><span>Contact</span>
-    </button>
+<nav id="mob">
+  <div class="mob-row">
+    <button class="mob-i on" id="m-home" onclick="openSection('home')"><i class="fa-solid fa-house"></i><span>Accueil</span></button>
+    <button class="mob-i" id="m-about" onclick="openSection('about')"><i class="fa-solid fa-user"></i><span>À Propos</span></button>
+    <button class="mob-i" id="m-projets" onclick="openSection('projets')"><i class="fa-solid fa-folder-open"></i><span>Projets</span></button>
+    <button class="mob-i" id="m-competences" onclick="openSection('competences')"><i class="fa-solid fa-code"></i><span>Skills</span></button>
+    <button class="mob-i" id="m-parcours" onclick="openSection('parcours')"><i class="fa-solid fa-briefcase"></i><span>Parcours</span></button>
+    <button class="mob-i" id="m-contact" onclick="openSection('contact')"><i class="fa-solid fa-envelope"></i><span>Contact</span></button>
   </div>
 </nav>
 
 <!-- Command palette -->
-<div id="cmd-palette" onclick="if(event.target===this)closePalette()">
-  <div class="cmd-box">
-    <div class="cmd-inp-row">
-      <span class="cmd-arrow">›</span>
-      <input id="cmd-inp" class="cmd-inp" type="text"
-        placeholder="Naviguer vers une section…"
-        oninput="filterPalette()" onkeydown="palKey(event)">
-      <button class="cmd-ech" onclick="closePalette()">Éch</button>
+<div id="pal" onclick="if(event.target===this)closePalette()">
+  <div class="pal-box">
+    <div class="pal-inp-row">
+      <span class="pal-arrow">›</span>
+      <input id="pal-inp" class="pal-inp" type="text" placeholder="Naviguer vers une section…" oninput="filterPal()" onkeydown="palKey(event)">
+      <button class="pal-esc" onclick="closePalette()">Éch</button>
     </div>
-    <div id="cmd-results" class="cmd-results"></div>
-    <div class="cmd-footer">
-      <span>↑↓ naviguer</span><span class="cmd-sep">·</span>
-      <span>↵ ouvrir</span><span class="cmd-sep">·</span>
-      <span>Éch fermer</span>
-    </div>
+    <div id="pal-res" class="pal-res"></div>
+    <div class="pal-foot"><span>↑↓ naviguer</span><span>·</span><span>↵ ouvrir</span><span>·</span><span>Éch fermer</span></div>
   </div>
 </div>
 
 <script>
-/* ── Custom Cursor ── */
+/* ── Cursor ── */
 (function(){
-  var cur = document.getElementById('cl-cursor');
-  cur.style.opacity = '0';
+  var c = document.getElementById('csr');
+  c.style.opacity = '0';
   document.addEventListener('mousemove', function(e){
-    cur.style.transform = 'translate(' + (e.clientX - 9) + 'px,' + (e.clientY - 9) + 'px)';
-    cur.style.opacity = '1';
+    c.style.transform = 'translate('+(e.clientX-9)+'px,'+(e.clientY-9)+'px)';
+    c.style.opacity = '1';
   });
-  document.addEventListener('mouseleave', function(){ cur.style.opacity = '0'; });
+  document.addEventListener('mouseleave', function(){ c.style.opacity = '0'; });
 })();
 
 /* ── Loader ── */
 (function(){
-  var screen  = document.getElementById('loading');
-  var pctEl   = document.getElementById('ld-text');
-  var progress= document.getElementById('ld-progress');
-  var pct = 0;
+  var scr = document.getElementById('loading');
+  var pct = document.getElementById('ldt');
+  var prg = document.getElementById('ldp');
+  var p = 0;
   function finish(){
-    pctEl.textContent = '100%';
-    progress.setAttribute('aria-valuenow', 100);
-    setTimeout(function(){
-      pctEl.textContent = 'BIENVENUE';
-      setTimeout(function(){ screen.classList.add('out'); }, 3000);
-    }, 1000);
+    pct.textContent = '100%'; prg.setAttribute('aria-valuenow',100);
+    setTimeout(function(){ pct.textContent = 'BIENVENUE'; setTimeout(function(){ scr.classList.add('out'); },3000); },1000);
   }
   var iv = setInterval(function(){
-    pct += Math.random() * 3 + 1.2;
-    if(pct >= 100){ pct = 100; clearInterval(iv); finish(); return; }
-    pctEl.textContent = Math.round(pct) + '%';
-    progress.setAttribute('aria-valuenow', Math.round(pct));
-  }, 110);
-  setTimeout(function(){ clearInterval(iv); screen.classList.add('out'); }, 12000);
+    p += Math.random()*3+1.2;
+    if(p>=100){ p=100; clearInterval(iv); finish(); return; }
+    pct.textContent = Math.round(p)+'%'; prg.setAttribute('aria-valuenow',Math.round(p));
+  },110);
+  setTimeout(function(){ clearInterval(iv); scr.classList.add('out'); },12000);
+})();
+
+/* ── Heatmap generator ── */
+(function(){
+  var grid = document.getElementById('hm-grid');
+  if(!grid) return;
+  var ROWS=7, COLS=22;
+  /* Blue cells pattern: cluster toward right columns */
+  var blue = {
+    '0-20':'b1','1-20':'b2','1-21':'b3','2-21':'b2','2-20':'b1',
+    '3-19':'b1','3-20':'b3','3-21':'b2','4-20':'b2','4-21':'b1',
+    '5-21':'b3','5-20':'b2','6-21':'b2','6-20':'b1'
+  };
+  for(var r=0;r<ROWS;r++){
+    for(var c=0;c<COLS;c++){
+      var key=r+'-'+c;
+      var div=document.createElement('div');
+      div.className='hm-c'+(blue[key]?' '+blue[key]:'');
+      grid.appendChild(div);
+    }
+  }
 })();
 
 /* ── Navigation ── */
-var currentSection = 'home';
-
+var cur = 'home';
 function openSection(id){
-  document.querySelectorAll('.cl-pane').forEach(function(el){ el.classList.remove('active'); });
-  var pane = document.getElementById('cl-' + id);
-  if(pane){ pane.classList.add('active'); }
+  document.querySelectorAll('.pane').forEach(function(el){ el.classList.remove('on'); });
+  var p = document.getElementById('p-'+id);
+  if(p) p.classList.add('on');
 
-  document.querySelectorAll('.cl-nav-item').forEach(function(el){ el.classList.remove('active'); });
-  var nav = document.getElementById('nav-' + id);
-  if(nav) nav.classList.add('active');
+  document.querySelectorAll('.sb-sess').forEach(function(el){ el.classList.remove('on'); });
+  var s = document.getElementById('s-'+id);
+  if(s) s.classList.add('on');
 
-  document.querySelectorAll('.cl-mob-item').forEach(function(el){ el.classList.remove('active'); });
-  var mob = document.getElementById('mob-' + id);
-  if(mob) mob.classList.add('active');
+  document.querySelectorAll('.mob-i').forEach(function(el){ el.classList.remove('on'); });
+  var m = document.getElementById('m-'+id);
+  if(m) m.classList.add('on');
 
-  /* scroll chat to top */
-  if(pane){
-    var chat = pane.querySelector('.cl-chat');
-    if(chat) chat.scrollTop = 0;
-  }
-  currentSection = id;
+  if(p){ var cs=p.querySelector('.chat-scroll'); if(cs) cs.scrollTop=0; }
+  cur = id;
 }
 
 /* Home input: navigate by keyword */
-function handleHomeInput(e){
-  if(e.key !== 'Enter') return;
+function homeKey(e){
+  if(e.key!=='Enter') return;
   e.preventDefault();
-  var val = e.target.value.trim().toLowerCase();
-  if(!val){ openPalette(); return; }
-  var map = {
-    'about':'about','propos':'about','qui':'about',
-    'projet':'projets','projects':'projets',
-    'skill':'competences','competence':'competences','stack':'competences','technique':'competences',
-    'parcours':'parcours','experience':'parcours','carriere':'parcours',
-    'contact':'contact','email':'contact','message':'contact',
-    'readme':'readme','cv':'readme'
-  };
-  var dest = null;
-  for(var k in map){ if(val.includes(k)){ dest = map[k]; break; } }
-  if(dest) openSection(dest);
-  else openPalette();
-  e.target.value = '';
+  var v=e.target.value.trim().toLowerCase();
+  if(!v){ openPalette(); return; }
+  var map={'about':'about','propos':'about','qui':'about','projet':'projets','projects':'projets','skill':'competences','compet':'competences','stack':'competences','parcours':'parcours','experience':'parcours','contact':'contact','email':'contact','readme':'readme','cv':'readme'};
+  var dest=null;
+  for(var k in map){ if(v.includes(k)){ dest=map[k]; break; } }
+  if(dest) openSection(dest); else openPalette();
+  e.target.value='';
 }
+function autoResize(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,100)+'px'; }
 
-function autoResize(el){
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+/* ── Stats card tab/filter ── */
+function switchSCTab(t){
+  document.querySelectorAll('.sc-tab').forEach(function(el){ el.classList.remove('on'); });
+  document.getElementById('sct-'+t).classList.add('on');
+  document.getElementById('sg-apercu').style.display = (t==='apercu')?'':'none';
+  document.getElementById('sg-formation').style.display = (t==='formation')?'':'none';
 }
-
-/* ── Typing animation ── */
-(function(){
-  var phrases = [
-    'Ingénieur Réseaux & Sécurité',
-    'Développeur Web Full-Stack',
-    'Expert Cybersécurité',
-    'Consultant Cloud & Infrastructure'
-  ];
-  var el = document.getElementById('typing-text');
-  if(!el) return;
-  var pi = 0, ci = 0, del = false;
-  function tick(){
-    var phrase = phrases[pi];
-    if(!del){
-      el.textContent = phrase.slice(0, ci + 1); ci++;
-      if(ci === phrase.length){ del = true; setTimeout(tick, 2000); return; }
-      setTimeout(tick, 65);
-    } else {
-      el.textContent = phrase.slice(0, ci - 1); ci--;
-      if(ci === 0){ del = false; pi = (pi + 1) % phrases.length; }
-      setTimeout(tick, 38);
-    }
-  }
-  setTimeout(tick, 900);
-})();
+function switchSCF(f){
+  document.querySelectorAll('.sc-f').forEach(function(el){ el.classList.remove('on'); });
+  document.getElementById('scf-'+f).classList.add('on');
+}
 
 /* ── Contact form ── */
 (function(){
-  var form = document.getElementById('contact-form');
+  var form=document.getElementById('contact-form');
   if(!form) return;
-  form.addEventListener('submit', async function(e){
+  form.addEventListener('submit',async function(e){
     e.preventDefault();
-    var btn  = form.querySelector('.cf-btn');
-    var ok   = document.getElementById('cf-ok');
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Envoi…';
-    try {
-      var res = await fetch(form.action, { method:'POST', body:new FormData(form), headers:{Accept:'application/json'} });
-      if(res.ok){
-        form.reset(); ok.style.display = 'block';
-        btn.innerHTML = '<i class="fa-solid fa-check"></i> Envoyé';
-      } else { throw new Error(); }
-    } catch(err){
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Envoyer le message';
-      alert('Erreur lors de l\'envoi. Contactez-moi directement par email.');
-    }
+    var btn=form.querySelector('.cf-btn'), ok=document.getElementById('cf-ok');
+    btn.disabled=true; btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Envoi…';
+    try{
+      var res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
+      if(res.ok){ form.reset(); ok.style.display='block'; btn.innerHTML='<i class="fa-solid fa-check"></i> Envoyé'; }
+      else{ throw new Error(); }
+    }catch(err){ btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> Envoyer le message'; alert('Erreur. Contactez-moi directement par email.'); }
   });
 })();
 
 /* ── Command palette ── */
-var PAL_SECTIONS = [
-  { id:'home',        label:'Accueil — Portfolio',    icon:'fa-house' },
-  { id:'about',       label:'À propos de Credo',      icon:'fa-user' },
-  { id:'projets',     label:'Mes projets',            icon:'fa-folder-open' },
-  { id:'competences', label:'Compétences & Stack',    icon:'fa-code' },
-  { id:'parcours',    label:'Parcours professionnel', icon:'fa-briefcase' },
-  { id:'contact',     label:'Me contacter',           icon:'fa-envelope' },
-  { id:'readme',      label:'README.md',              icon:'fa-file-lines' },
-  { id:'cv',          label:'Credo_Ahiafor_CV.pdf — Télécharger', icon:'fa-file-pdf', href:'/assets/Credo_Ahiafor_CV.pdf' }
+var PAL=[
+  {id:'home',       label:'Accueil — Portfolio',    icon:'fa-house'},
+  {id:'about',      label:'À propos de Credo',      icon:'fa-user'},
+  {id:'projets',    label:'Mes projets',             icon:'fa-folder-open'},
+  {id:'competences',label:'Compétences & Stack',     icon:'fa-code'},
+  {id:'parcours',   label:'Parcours professionnel',  icon:'fa-briefcase'},
+  {id:'contact',    label:'Me contacter',            icon:'fa-envelope'},
+  {id:'readme',     label:'README.md',               icon:'fa-file-lines'},
+  {id:'cv',         label:'Credo_Ahiafor_CV.pdf',   icon:'fa-file-pdf', href:'/assets/Credo_Ahiafor_CV.pdf'}
 ];
-
-var palIdx = -1;
-
+var pi=-1;
 function openPalette(){
-  var pal = document.getElementById('cmd-palette');
-  pal.classList.add('open');
-  var inp = document.getElementById('cmd-inp');
-  inp.value = '';
-  filterPalette();
-  setTimeout(function(){ inp.focus(); }, 40);
+  document.getElementById('pal').classList.add('open');
+  var inp=document.getElementById('pal-inp');
+  inp.value=''; filterPal(); setTimeout(function(){ inp.focus(); },40);
 }
-function closePalette(){
-  document.getElementById('cmd-palette').classList.remove('open');
-  palIdx = -1;
-}
-function filterPalette(){
-  var q = document.getElementById('cmd-inp').value.trim().toLowerCase();
-  var html = '';
-
-  PAL_SECTIONS.forEach(function(s, i){
-    if(q && !s.label.toLowerCase().includes(q) && !s.id.includes(q)) return;
-    var iconColor = (s.id === 'cv') ? '#f44336' : 'var(--amber)';
-    html += '<div class="cmd-item" data-i="' + i + '">' +
-      '<span class="cmd-item-ico"><i class="fa-solid ' + s.icon + '" style="color:' + iconColor + ';font-size:13px"></i></span>' +
-      '<span class="cmd-item-name">' + s.label + '</span>' +
-      '</div>';
+function closePalette(){ document.getElementById('pal').classList.remove('open'); pi=-1; }
+function filterPal(){
+  var q=document.getElementById('pal-inp').value.trim().toLowerCase();
+  var html='';
+  PAL.forEach(function(s,i){
+    if(q&&!s.label.toLowerCase().includes(q)&&!s.id.includes(q)) return;
+    var ic=(s.id==='cv')?'#e06432':'#555';
+    html+='<div class="pal-item" data-i="'+i+'"><span class="pal-ico"><i class="fa-solid '+s.icon+'" style="color:'+ic+';font-size:12px"></i></span><span class="pal-name">'+s.label+'</span></div>';
   });
-
-  if(!html) html = '<div style="padding:16px 14px;color:var(--fg3);font-size:13px">Aucun résultat</div>';
-  var res = document.getElementById('cmd-results');
-  res.innerHTML = html;
-  palIdx = -1;
-
-  res.querySelectorAll('.cmd-item').forEach(function(el){
-    el.addEventListener('click', function(){
-      var idx = +el.dataset.i;
-      var s = PAL_SECTIONS[idx];
-      closePalette();
-      if(s.href) window.open(s.href, '_blank');
-      else openSection(s.id);
+  if(!html) html='<div style="padding:14px 12px;color:#333;font-size:13px">Aucun résultat</div>';
+  var res=document.getElementById('pal-res');
+  res.innerHTML=html; pi=-1;
+  res.querySelectorAll('.pal-item').forEach(function(el){
+    el.addEventListener('click',function(){
+      var s=PAL[+el.dataset.i]; closePalette();
+      if(s.href) window.open(s.href,'_blank'); else openSection(s.id);
     });
   });
 }
 function palKey(e){
-  var items = document.querySelectorAll('#cmd-results .cmd-item');
+  var items=document.querySelectorAll('#pal-res .pal-item');
   if(!items.length) return;
-  if(e.key === 'ArrowDown'){ e.preventDefault(); palIdx = Math.min(palIdx+1, items.length-1); }
-  else if(e.key === 'ArrowUp'){ e.preventDefault(); palIdx = Math.max(palIdx-1, 0); }
-  else if(e.key === 'Enter'){ e.preventDefault(); if(palIdx >= 0 && items[palIdx]) items[palIdx].click(); return; }
-  else if(e.key === 'Escape'){ closePalette(); return; }
-  else { return; }
-  items.forEach(function(el,i){ el.classList.toggle('pal-active', i === palIdx); });
-  if(items[palIdx]) items[palIdx].scrollIntoView({block:'nearest'});
+  if(e.key==='ArrowDown'){ e.preventDefault(); pi=Math.min(pi+1,items.length-1); }
+  else if(e.key==='ArrowUp'){ e.preventDefault(); pi=Math.max(pi-1,0); }
+  else if(e.key==='Enter'){ e.preventDefault(); if(pi>=0&&items[pi]) items[pi].click(); return; }
+  else if(e.key==='Escape'){ closePalette(); return; }
+  else{ return; }
+  items.forEach(function(el,i){ el.classList.toggle('on',i===pi); });
+  if(items[pi]) items[pi].scrollIntoView({block:'nearest'});
 }
-document.addEventListener('keydown', function(e){
-  if((e.ctrlKey || e.metaKey) && e.key === 'k'){ e.preventDefault(); openPalette(); }
-  if(e.key === 'Escape' && document.getElementById('cmd-palette').classList.contains('open')) closePalette();
+document.addEventListener('keydown',function(e){
+  if((e.ctrlKey||e.metaKey)&&e.key==='k'){ e.preventDefault(); openPalette(); }
+  if(e.key==='Escape'&&document.getElementById('pal').classList.contains('open')) closePalette();
 });
 </script>
 
