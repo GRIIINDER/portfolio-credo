@@ -399,17 +399,28 @@
     .cf-ok         { color:var(--green); font-size:13px; font-family:var(--font-mono); display:none; margin-top:4px; }
 
     /* ── README pane ── */
-    .rm-h1 { font-size:1.8rem; color:var(--fg); font-family:var(--font-ui); font-weight:700; margin-bottom:10px; }
-    .rm-h2 { font-size:1rem; color:var(--fg); font-family:var(--font-ui); font-weight:600; margin:24px 0 10px; }
-    .rm-hr { border:none; border-top:1px solid var(--border); margin:14px 0; }
-    .rm-p  { color:var(--fg2); line-height:1.72; font-size:13px; font-family:var(--font-ui); margin-bottom:12px; }
-    .rm-badges { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px; }
-    .rm-badge { display:inline-flex; align-items:center; gap:5px; background:var(--bg2); border:1px solid var(--border); border-radius:3px; padding:2px 10px; font-size:11px; color:var(--fg2); font-family:var(--font-mono); }
-    .rm-ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
-    .rm-ul li { font-size:13px; color:var(--fg2); font-family:var(--font-ui); }
-    .rm-ul li::before { content:'▸ '; color:var(--accent); }
-    .rm-a { color:var(--accent); text-decoration:none; }
-    .rm-a:hover { text-decoration:underline; }
+    .rm-name      { font-size:clamp(2.2rem,7vw,4rem); font-weight:800; color:var(--fg); font-family:var(--font-ui); letter-spacing:-.02em; margin:8px 0 12px; }
+    .rm-role      { font-size:13px; color:var(--fg3); font-family:var(--font-mono); margin-bottom:16px; }
+    .rm-pills     { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px; }
+    .rm-pill      { display:inline-flex; align-items:center; gap:6px; border-radius:4px; padding:4px 12px; font-size:12px; font-family:var(--font-mono); font-weight:600; border:1px solid; }
+    .rm-section   { font-size:1.5rem; font-weight:700; color:var(--fg); font-family:var(--font-ui); margin:32px 0 14px; }
+    .rm-p         { color:var(--fg2); line-height:1.8; font-size:13px; font-family:var(--font-ui); margin-bottom:10px; }
+    .rm-dots      { list-style:none; display:flex; flex-direction:column; gap:7px; margin-bottom:4px; }
+    .rm-dots li   { font-size:13px; color:var(--fg2); font-family:var(--font-mono); padding-left:4px; }
+    .rm-stack-row { display:flex; align-items:baseline; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+    .rm-stack-lbl { font-size:12px; color:var(--fg3); font-family:var(--font-mono); min-width:72px; flex-shrink:0; }
+    .rm-tags      { display:flex; flex-wrap:wrap; gap:6px; }
+    .rm-tag       { background:var(--bg3); border:1px solid var(--border); border-radius:3px; padding:2px 9px; font-size:11px; color:var(--fg2); font-family:var(--font-mono); }
+    .rm-conn-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .rm-conn-list li { font-size:13px; color:var(--fg2); font-family:var(--font-mono); }
+    .rm-conn-list li span { color:var(--fg3); }
+    .rm-conn-list a { color:var(--accent); text-decoration:none; }
+    .rm-conn-list a:hover { text-decoration:underline; }
+    .rm-copy-box  { border:1px solid var(--border); border-radius:6px; padding:20px 22px; margin-top:36px; }
+    .rm-copy-box h3 { font-size:13px; font-weight:700; color:var(--fg2); font-family:var(--font-mono); margin-bottom:12px; }
+    .rm-copy-box p  { font-size:12px; color:var(--fg3); font-family:var(--font-mono); line-height:1.7; margin-bottom:8px; }
+    .rm-copy-box p:last-child { margin-bottom:0; }
+    .rm-footer    { margin-top:28px; padding-top:16px; border-top:1px solid var(--border); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:11px; color:var(--fg3); font-family:var(--font-mono); }
 
     /* ── Status bar ── */
     #vsc-status {
@@ -1072,29 +1083,87 @@
         <!-- ─ README.md ─ -->
         <div class="pane" id="pane-readme">
           <div class="p-hdr"># README.md</div>
-          <h1 class="rm-h1">Credo Ahiafor</h1>
-          <hr class="rm-hr">
-          <p class="rm-p">Ingénieur Réseaux &amp; Sécurité · Développeur Web · Lomé, Togo</p>
-          <div class="rm-badges">
-            <span class="rm-badge"><i class="fa-solid fa-location-dot" style="color:var(--accent)"></i> Lomé, Togo</span>
-            <span class="rm-badge"><i class="fa-solid fa-graduation-cap" style="color:var(--accent)"></i> Master 2 SRS — ESGIS 2026</span>
-            <span class="rm-badge"><i class="fa-solid fa-circle" style="color:#27c93f;font-size:8px"></i> Disponible en freelance</span>
+
+          <h1 class="rm-name">Credo Ahiafor</h1>
+          <div class="rm-role">Network &amp; Security Engineer · Développeur Web · Lomé, Togo 🇹🇬</div>
+
+          <div class="rm-pills">
+            <span class="rm-pill" style="background:rgba(0,122,204,.15);color:var(--accent);border-color:rgba(0,122,204,.4)">🔵 Cisco</span>
+            <span class="rm-pill" style="background:rgba(78,201,176,.15);color:var(--teal);border-color:rgba(78,201,176,.4)">🟢 Python</span>
+            <span class="rm-pill" style="background:rgba(97,218,251,.12);color:#61dafb;border-color:rgba(97,218,251,.35)">⚛ React</span>
+            <span class="rm-pill" style="background:rgba(206,146,120,.15);color:var(--orange);border-color:rgba(206,146,120,.4)">🟠 WordPress</span>
+            <span class="rm-pill" style="background:rgba(197,134,192,.15);color:var(--purple);border-color:rgba(197,134,192,.4)">🐧 Linux</span>
           </div>
-          <h2 class="rm-h2">À propos</h2>
-          <p class="rm-p">Passionné par la cybersécurité, les architectures réseaux et le développement web, j'accompagne entreprises et entrepreneurs dans leurs projets numériques depuis 5+ ans.</p>
-          <h2 class="rm-h2">Compétences clés</h2>
-          <ul class="rm-ul">
-            <li>Réseaux Cisco · VLAN · Datacenter · Virtualisation</li>
-            <li>Cybersécurité · CEH · CCNP Security · Pare-feu · Cryptographie</li>
-            <li>Développement Web · WordPress · Shopify · React</li>
-            <li>Cloud · Azure · Linux · Windows Server</li>
+
+          <h2 class="rm-section">🛡️ About</h2>
+          <p class="rm-p">Passionné par la cybersécurité, les architectures réseaux et le développement web, j'accompagne entreprises et entrepreneurs dans leurs projets numériques depuis 5 ans. La rigueur et l'authenticité sont au cœur de ma façon de travailler.</p>
+          <ul class="rm-dots">
+            <li>🔒 Conception d'architectures <strong>réseau sécurisées</strong> (Cisco, VLAN, VPN)</li>
+            <li>🌐 Développement web full-stack : WordPress, React, Shopify</li>
+            <li>⚡ Automatisation &amp; scripting Python pour l'administration réseau</li>
+            <li>✨ Always learning, always building</li>
           </ul>
-          <h2 class="rm-h2">Contact</h2>
-          <ul class="rm-ul">
-            <li><a href="mailto:ahiafor.credo@gmail.com" class="rm-a">ahiafor.credo@gmail.com</a></li>
-            <li><a href="https://github.com/GRIIINDER" target="_blank" rel="noopener" class="rm-a">github.com/GRIIINDER</a></li>
-            <li><a href="https://www.linkedin.com/in/credoahiafor" target="_blank" rel="noopener" class="rm-a">linkedin.com/in/credoahiafor</a></li>
+
+          <h2 class="rm-section">Stack</h2>
+          <div class="rm-stack-row">
+            <span class="rm-stack-lbl">Réseaux:</span>
+            <div class="rm-tags">
+              <span class="rm-tag">Cisco</span>
+              <span class="rm-tag">VLAN</span>
+              <span class="rm-tag">VPN</span>
+              <span class="rm-tag">Wireshark</span>
+              <span class="rm-tag">Datacenter</span>
+            </div>
+          </div>
+          <div class="rm-stack-row">
+            <span class="rm-stack-lbl">Sécurité:</span>
+            <div class="rm-tags">
+              <span class="rm-tag">CEH</span>
+              <span class="rm-tag">CCNP Security</span>
+              <span class="rm-tag">Pare-feu</span>
+              <span class="rm-tag">Cryptographie</span>
+            </div>
+          </div>
+          <div class="rm-stack-row">
+            <span class="rm-stack-lbl">Dev Web:</span>
+            <div class="rm-tags">
+              <span class="rm-tag">React</span>
+              <span class="rm-tag">WordPress</span>
+              <span class="rm-tag">Shopify</span>
+              <span class="rm-tag">HTML/CSS</span>
+              <span class="rm-tag">JavaScript</span>
+            </div>
+          </div>
+          <div class="rm-stack-row">
+            <span class="rm-stack-lbl">Cloud/OS:</span>
+            <div class="rm-tags">
+              <span class="rm-tag">Azure</span>
+              <span class="rm-tag">Linux</span>
+              <span class="rm-tag">Windows Server</span>
+              <span class="rm-tag">Git</span>
+            </div>
+          </div>
+
+          <h2 class="rm-section">Connect</h2>
+          <ul class="rm-conn-list">
+            <li><span>Email:    </span> <a href="mailto:ahiafor.credo@gmail.com">ahiafor.credo@gmail.com</a></li>
+            <li><span>GitHub:   </span> <a href="https://github.com/GRIIINDER" target="_blank" rel="noopener">GRIIINDER</a></li>
+            <li><span>LinkedIn: </span> <a href="https://www.linkedin.com/in/credoahiafor" target="_blank" rel="noopener">credoahiafor</a></li>
+            <li><span>Phone:    </span> <a href="tel:+22892236379">+228 92 23 63 79</a></li>
           </ul>
+
+          <div class="rm-copy-box">
+            <h3>© Copyright &amp; Usage</h3>
+            <p>Ce portfolio, y compris son design, son layout thème VS Code et tous ses éléments visuels, a été <strong style="color:var(--fg2)">conçu et développé par Credo Ahiafor</strong>. Tous droits réservés.</p>
+            <p>Vous n'êtes <span style="color:var(--orange)">pas autorisé</span> à copier, cloner ou reproduire ce portfolio en tout ou en partie sans autorisation écrite préalable.</p>
+            <p>Si ce portfolio vous a inspiré, construisez quelque chose d'<strong style="color:var(--fg2)">original</strong> qui reflète votre propre identité.</p>
+          </div>
+
+          <div class="rm-footer">
+            <span>© 2026 Credo Ahiafor · Tous droits réservés</span>
+            <span>Made with ❤ from Lomé, Togo 🇹🇬</span>
+          </div>
+
         </div>
 
       </div><!-- /vsc-panes -->
