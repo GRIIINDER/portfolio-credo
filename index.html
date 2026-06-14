@@ -443,8 +443,11 @@
     @media(max-width:800px){
       :root { --side-w: 0px; --act-w: 0px; }
       #vsc-sidebar, #vsc-actbar, #vsc-menu { display: none; }
+      /* Fix: give #vsc-main a single column so #vsc-editor is visible */
+      #vsc-main { grid-template-columns: 1fr; }
       #vsc {
         height: calc(100vh - 56px);
+        height: calc(100svh - 56px);
         grid-template-rows: var(--title-h) 1fr var(--status-h);
       }
       .vsc-winctrls { display: none; }
@@ -456,18 +459,19 @@
       #vsc-editor { grid-template-rows: var(--tab-h) 1fr; }
       .vsc-tab { min-width: 90px; }
       #vsc-panes { padding: 20px 16px; }
-      .hero-photo { width: 90px; height: 90px; }
-      .hero-row { gap: 20px; }
       #mob-nav { display: flex; }
     }
 
     @media(max-width:480px){
       #vsc-panes { padding: 16px 12px; }
       .vsc-tab { min-width: 72px; }
-      .hero-name { font-size: clamp(1.6rem, 7vw, 2.5rem); }
       .proj-grid { grid-template-columns: 1fr; }
       .stat { min-width: 70px; padding: 12px 14px; }
       .about-stats { gap: 10px; }
+      .hstat { min-width: 70px; padding: 14px 10px; }
+      .hstat-val { font-size: 1.5rem; }
+      .hero-ctas { gap: 8px; }
+      .hcta { padding: 9px 18px; font-size: 12px; }
     }
     ::-webkit-scrollbar{width:6px;height:6px}
     ::-webkit-scrollbar-track{background:transparent}
