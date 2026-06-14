@@ -19,18 +19,6 @@
     #csr-dot { position: fixed; z-index: 99999; pointer-events: none; width: 5px; height: 5px; background: rgba(255,255,255,.95); border-radius: 50%; top: 0; left: 0; will-change: transform; opacity: 0; }
     #csr-ring { position: fixed; z-index: 99998; pointer-events: none; width: 22px; height: 22px; border: 1.5px solid rgba(255,255,255,.45); border-radius: 50%; top: 0; left: 0; will-change: transform; opacity: 0; }
 
-    /* ── Loader ── */
-    #loading { position: fixed; inset: 0; z-index: 9998; background: #0f0f0f; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: opacity .6s, visibility .6s; }
-    #loading.out { opacity: 0; visibility: hidden; pointer-events: none; }
-    .ld-mq { position: absolute; inset: 0; display: flex; align-items: center; overflow: hidden; pointer-events: none; }
-    .ld-mq-i { display: flex; white-space: nowrap; font-size: clamp(5rem,12vw,11rem); font-weight: 900; letter-spacing: -.03em; text-transform: uppercase; color: rgba(255,255,255,.025); animation: mqs 14s linear infinite; }
-    @keyframes mqs { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-    .ld-pill { position: relative; display: flex; align-items: center; gap: 1.2rem; background: #080808; border: 1px solid rgba(224,100,50,.3); border-radius: 999px; padding: .85rem 1.5rem .85rem 1.75rem; min-width: 270px; box-shadow: -6px 0 40px rgba(224,100,50,.22), 0 0 60px rgba(224,100,50,.06); overflow: hidden; }
-    .ld-pill::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 72px; background: linear-gradient(90deg,rgba(224,100,50,.7) 0%,transparent 100%); border-radius: 999px 0 0 999px; }
-    .ld-lbl, .ld-pct { z-index: 1; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; }
-    .ld-pct { margin-left: auto; min-width: 4.5ch; text-align: right; letter-spacing: .05em; }
-    .ld-cur { width: 14px; height: 18px; background: #e06432; border-radius: 2px; z-index: 1; flex-shrink: 0; animation: blink .8s step-end infinite; }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
     /* ── App ── */
     #app { display: flex; height: 100vh; width: 100vw; overflow: hidden; }
@@ -72,7 +60,6 @@
     .sb-av { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg,#e06432 0%,#9333ea 100%); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #fff; flex-shrink: 0; }
     .sb-uname { font-size: 13px; color: #d0d0d0; font-weight: 500; }
     .sb-badge { display: inline-block; font-size: 10px; color: #4a4a4a; border: 1px solid #333; border-radius: 3px; padding: 0px 4px; margin-left: 5px; vertical-align: middle; }
-    .sb-chev { margin-left: auto; color: #3a3a3a; font-size: 11px; }
 
     /* ── Main ── */
     #main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #0f0f0f; position: relative; }
@@ -308,17 +295,6 @@
 <div id="csr-dot"></div>
 <div id="csr-ring"></div>
 
-<!-- Loader -->
-<div id="loading">
-  <div class="ld-mq" aria-hidden="true">
-    <div class="ld-mq-i">DÉVELOPPEUR WEB&nbsp;•&nbsp;INGÉNIEUR RÉSEAU&nbsp;•&nbsp;CYBERSÉCURITÉ&nbsp;•&nbsp;CLOUD&nbsp;•&nbsp;DÉVELOPPEUR WEB&nbsp;•&nbsp;INGÉNIEUR RÉSEAU&nbsp;•&nbsp;CYBERSÉCURITÉ&nbsp;•&nbsp;CLOUD&nbsp;•&nbsp;</div>
-  </div>
-  <div class="ld-pill" id="ldp" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-    <span class="ld-lbl">CHARGEMENT</span>
-    <span class="ld-pct" id="ldt">0%</span>
-    <div class="ld-cur"></div>
-  </div>
-</div>
 
 <!-- App -->
 <div id="app">
@@ -390,7 +366,6 @@
         <span class="sb-uname">Crédo</span>
         <span class="sb-badge">Pro</span>
       </div>
-      <i class="fa-solid fa-chevron-down sb-chev" style="font-size:10px"></i>
     </div>
   </aside>
 
@@ -772,23 +747,6 @@
   })();
 })();
 
-/* ── Loader ── */
-(function(){
-  var scr = document.getElementById('loading');
-  var pct = document.getElementById('ldt');
-  var prg = document.getElementById('ldp');
-  var p = 0;
-  function finish(){
-    pct.textContent = '100%'; prg.setAttribute('aria-valuenow',100);
-    setTimeout(function(){ pct.textContent = 'BIENVENUE'; setTimeout(function(){ scr.classList.add('out'); },3000); },1000);
-  }
-  var iv = setInterval(function(){
-    p += Math.random()*3+1.2;
-    if(p>=100){ p=100; clearInterval(iv); finish(); return; }
-    pct.textContent = Math.round(p)+'%'; prg.setAttribute('aria-valuenow',Math.round(p));
-  },110);
-  setTimeout(function(){ clearInterval(iv); scr.classList.add('out'); },12000);
-})();
 
 /* ── Heatmap generator ── */
 (function(){
