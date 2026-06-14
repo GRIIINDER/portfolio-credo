@@ -327,14 +327,14 @@
   <aside id="sb">
     <!-- Tabs -->
     <div class="sb-tabs">
-      <button class="sb-tab" id="tab-discuter" onclick="openSection('contact');setTab('discuter')" title="Me contacter">
-        <i class="fa-regular fa-comment-dots"></i> Discuter
+      <button class="sb-tab on" id="tab-portfolio" onclick="openSection('home');setTab('portfolio')" title="Vue d'ensemble">
+        <i class="fa-solid fa-code"></i> Portfolio
       </button>
       <button class="sb-tab" id="tab-collaborer" onclick="openSection('projets');setTab('collaborer')" title="Mes projets">
         <i class="fa-solid fa-users"></i> Collaborer
       </button>
-      <button class="sb-tab on" id="tab-portfolio" onclick="openSection('home');setTab('portfolio')" title="Vue d'ensemble">
-        <i class="fa-solid fa-code"></i> Portfolio
+      <button class="sb-tab" id="tab-discuter" onclick="openSection('contact');setTab('discuter')" title="Me contacter">
+        <i class="fa-regular fa-comment-dots"></i> Discuter
       </button>
     </div>
 
@@ -349,17 +349,14 @@
       <i class="fa-solid fa-wand-magic-sparkles"></i> Mon profil
     </div>
     <div class="sb-item" onclick="openSection('readme')" style="cursor:pointer">
-      <i class="fa-solid fa-chevron-down" style="font-size:10px"></i> Voir tout
+      <i class="fa-solid fa-file-lines" style="font-size:10px"></i> Résumé complet
     </div>
 
     <div class="sb-scroll">
       <div class="sb-sep"></div>
 
       <!-- Récents -->
-      <div class="sb-sec-label">
-        Récents
-        <span class="sort"><i class="fa-solid fa-arrow-down-short-wide"></i></span>
-      </div>
+      <div class="sb-sec-label">Navigation</div>
       <button class="sb-sess on" id="s-home" onclick="openSection('home')">
         <span>Portfolio Credo project setup</span>
       </button>
@@ -516,12 +513,12 @@
       <div class="inp-wrap">
         <div class="inp-box">
           <div class="inp-row">
-            <textarea class="inp-field" id="home-inp" placeholder="Décrivez une tâche ou posez une question." rows="1" onkeydown="homeKey(event)" oninput="autoResize(this)"></textarea>
+            <textarea class="inp-field" id="home-inp" placeholder="Rechercher une section… (ex : projets, contact)" rows="1" onkeydown="homeKey(event)" oninput="autoResize(this)"></textarea>
             <button class="inp-send" title="Envoyer"><i class="fa-solid fa-arrow-turn-down"></i></button>
           </div>
           <div class="inp-ctrl">
             <div class="inp-ctrl-l">
-              <button class="inp-btn" onclick="openSection('contact')">Accepter les modifications</button>
+              <button class="inp-btn" onclick="openSection('contact')">Me contacter</button>
               <button class="inp-icon-btn" onclick="openPalette()" title="Ctrl+K"><i class="fa-solid fa-plus"></i></button>
               <button class="inp-icon-btn" title="Micro"><i class="fa-solid fa-microphone"></i></button>
               <button class="inp-icon-btn" title="Options"><i class="fa-solid fa-chevron-down" style="font-size:10px"></i></button>
@@ -567,7 +564,7 @@
         </div>
       </div>
       <div class="banner"><span>À propos · Credo Ahiafor</span><a class="banner-link" onclick="openSection('contact')" style="cursor:pointer">Me contacter →</a></div>
-      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Décrivez une tâche ou posez une question." rows="1"></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn" onclick="openSection('contact')">Accepter les modifications</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><a class="model-name" href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Portfolio 2026</a><span class="model-level">Ingénieur <div class="model-dot" onclick="openSection('contact');setTab('discuter')" title="Disponible pour missions freelance" style="background:#e06432;border-color:#e06432;cursor:pointer"></div></span></div></div></div></div>
+      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Rechercher une section… (ex : projets, contact)" rows="1"></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn" onclick="openSection('contact')">Me contacter</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><a class="model-name" href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Portfolio 2026</a><span class="model-level">Ingénieur <div class="model-dot" onclick="openSection('contact');setTab('discuter')" title="Disponible pour missions freelance" style="background:#e06432;border-color:#e06432;cursor:pointer"></div></span></div></div></div></div>
     </div>
 
     <!-- ── PROJETS ── -->
@@ -590,7 +587,7 @@
         </div>
       </div>
       <div class="banner"><span>Projets · 3 livrés</span><a class="banner-link" onclick="openSection('contact')" style="cursor:pointer">Collaborer →</a></div>
-      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Décrivez une tâche ou posez une question." rows="1"></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn" onclick="openSection('contact')">Accepter les modifications</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><a class="model-name" href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Portfolio 2026</a><span class="model-level">Ingénieur <div class="model-dot" onclick="openSection('contact');setTab('discuter')" title="Disponible pour missions freelance" style="background:#e06432;border-color:#e06432;cursor:pointer"></div></span></div></div></div></div>
+      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Rechercher une section… (ex : projets, contact)" rows="1"></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn" onclick="openSection('contact')">Me contacter</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><a class="model-name" href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Portfolio 2026</a><span class="model-level">Ingénieur <div class="model-dot" onclick="openSection('contact');setTab('discuter')" title="Disponible pour missions freelance" style="background:#e06432;border-color:#e06432;cursor:pointer"></div></span></div></div></div></div>
     </div>
 
     <!-- ── COMPÉTENCES ── -->
@@ -614,7 +611,7 @@
         </div>
       </div>
       <div class="banner"><span>Stack technique · 30+ technologies</span><a class="banner-link" onclick="openSection('contact')" style="cursor:pointer">Me contacter →</a></div>
-      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Décrivez une tâche ou posez une question." rows="1"></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn" onclick="openSection('contact')">Accepter les modifications</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><a class="model-name" href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Portfolio 2026</a><span class="model-level">Ingénieur <div class="model-dot" onclick="openSection('contact');setTab('discuter')" title="Disponible pour missions freelance" style="background:#e06432;border-color:#e06432;cursor:pointer"></div></span></div></div></div></div>
+      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Rechercher une section… (ex : projets, contact)" rows="1"></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn" onclick="openSection('contact')">Me contacter</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><a class="model-name" href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Portfolio 2026</a><span class="model-level">Ingénieur <div class="model-dot" onclick="openSection('contact');setTab('discuter')" title="Disponible pour missions freelance" style="background:#e06432;border-color:#e06432;cursor:pointer"></div></span></div></div></div></div>
     </div>
 
     <!-- ── PARCOURS ── -->
@@ -641,7 +638,7 @@
         </div>
       </div>
       <div class="banner"><span>Parcours professionnel · Lomé, Togo</span><a class="banner-link" onclick="openSection('contact')" style="cursor:pointer">Me contacter →</a></div>
-      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Décrivez une tâche ou posez une question." rows="1"></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn" onclick="openSection('contact')">Accepter les modifications</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><a class="model-name" href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Portfolio 2026</a><span class="model-level">Ingénieur <div class="model-dot" onclick="openSection('contact');setTab('discuter')" title="Disponible pour missions freelance" style="background:#e06432;border-color:#e06432;cursor:pointer"></div></span></div></div></div></div>
+      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Rechercher une section… (ex : projets, contact)" rows="1"></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn" onclick="openSection('contact')">Me contacter</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><a class="model-name" href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Portfolio 2026</a><span class="model-level">Ingénieur <div class="model-dot" onclick="openSection('contact');setTab('discuter')" title="Disponible pour missions freelance" style="background:#e06432;border-color:#e06432;cursor:pointer"></div></span></div></div></div></div>
     </div>
 
     <!-- ── CONTACT ── -->
@@ -675,7 +672,7 @@
         </div>
       </div>
       <div class="banner"><span>Contact · Lomé, Togo 🇹🇬</span></div>
-      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Décrivez une tâche ou posez une question." rows="1"></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn">Accepter les modifications</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><a class="model-name" href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Portfolio 2026</a><span class="model-level">Ingénieur <div class="model-dot" onclick="openSection('contact');setTab('discuter')" title="Disponible pour missions freelance" style="background:#e06432;border-color:#e06432;cursor:pointer"></div></span></div></div></div></div>
+      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Rechercher une section… (ex : projets, contact)" rows="1"></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn">Me contacter</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><a class="model-name" href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Portfolio 2026</a><span class="model-level">Ingénieur <div class="model-dot" onclick="openSection('contact');setTab('discuter')" title="Disponible pour missions freelance" style="background:#e06432;border-color:#e06432;cursor:pointer"></div></span></div></div></div></div>
     </div>
 
     <!-- ── README ── -->
@@ -709,7 +706,7 @@
         </div>
       </div>
       <div class="banner"><span>README.md · portfolio-credo</span></div>
-      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Décrivez une tâche ou posez une question." rows="1"></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn">Accepter les modifications</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><a class="model-name" href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Portfolio 2026</a><span class="model-level">Ingénieur <div class="model-dot" onclick="openSection('contact');setTab('discuter')" title="Disponible pour missions freelance" style="background:#e06432;border-color:#e06432;cursor:pointer"></div></span></div></div></div></div>
+      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Rechercher une section… (ex : projets, contact)" rows="1"></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn">Me contacter</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><a class="model-name" href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Portfolio 2026</a><span class="model-level">Ingénieur <div class="model-dot" onclick="openSection('contact');setTab('discuter')" title="Disponible pour missions freelance" style="background:#e06432;border-color:#e06432;cursor:pointer"></div></span></div></div></div></div>
     </div>
 
   </main>
@@ -816,6 +813,12 @@
 
 /* ── Navigation ── */
 var cur = 'home';
+var TAB_MAP = {
+  'home':'portfolio','about':'portfolio','competences':'portfolio',
+  'parcours':'portfolio','readme':'portfolio',
+  'projets':'collaborer',
+  'contact':'discuter'
+};
 function setTab(name){
   document.querySelectorAll('.sb-tab').forEach(function(el){ el.classList.remove('on'); });
   var t = document.getElementById('tab-'+name);
@@ -834,6 +837,7 @@ function openSection(id){
   var m = document.getElementById('m-'+id);
   if(m) m.classList.add('on');
 
+  if(TAB_MAP[id]) setTab(TAB_MAP[id]);
   if(p){ var cs=p.querySelector('.chat-scroll'); if(cs) cs.scrollTop=0; }
   cur = id;
 }
