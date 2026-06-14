@@ -36,8 +36,7 @@
       --active:  #37373d;
       --font-mono: 'JetBrains Mono', Consolas, monospace;
       --font-ui:   'Inter', sans-serif;
-      --title-h: 30px;
-      --menu-h:  28px;
+      --title-h: 36px;
       --act-w:   48px;
       --side-w:  230px;
       --tab-h:   35px;
@@ -125,43 +124,57 @@
     /* ── VSCode Shell ── */
     #vsc {
       display: grid;
-      grid-template-rows: var(--title-h) var(--menu-h) 1fr var(--status-h);
+      grid-template-rows: var(--title-h) 1fr var(--status-h);
       height: 100vh; width: 100vw; overflow: hidden;
     }
 
-    /* Title bar */
+    /* ── Cursor Title Bar ── */
     #vsc-title {
-      background: #323233;
-      display: flex; align-items: center;
-      border-bottom: 1px solid #191919;
-      user-select: none; position: relative;
+      background: #181818;
+      display: flex; align-items: stretch;
+      border-bottom: 1px solid #2a2a2a;
+      user-select: none; z-index: 10;
     }
-    .vsc-tls { display:flex; align-items:center; gap:8px; padding:0 14px; }
+    .vsc-tls { display:flex; align-items:center; gap:7px; padding:0 12px; flex-shrink:0; }
     .vsc-tl  { width:12px; height:12px; border-radius:50%; }
     .vsc-tl.r{background:#ff5f56} .vsc-tl.y{background:#ffbd2e} .vsc-tl.g{background:#27c93f}
-    .vsc-title-txt {
-      position:absolute; left:50%; transform:translateX(-50%);
-      font-size:12px; color:#ccc; font-family:var(--font-ui); white-space:nowrap;
+    .cur-logo-wrap { display:flex; align-items:center; padding:0 6px 0 0; flex-shrink:0; }
+    .cur-menus { display:flex; align-items:stretch; }
+    .cur-mi {
+      display:flex; align-items:center; padding:0 9px;
+      font-size:12px; color:#ababab; font-family:var(--font-ui); transition:background .1s;
     }
-    .vsc-winctrls { margin-left:auto; display:flex; }
+    .cur-mi:hover { background:rgba(255,255,255,.07); color:#e0e0e0; }
+    .cur-flex { flex:1; min-width:8px; }
+    .cur-search-btn {
+      display:flex; align-items:center; gap:8px; justify-content:space-between;
+      background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.1);
+      border-radius:6px; padding:0 10px; margin:5px 8px; min-width:150px;
+      font-size:12px; color:#777; font-family:var(--font-ui);
+      cursor:pointer; white-space:nowrap; transition:background .15s;
+    }
+    .cur-search-btn:hover { background:rgba(255,255,255,.1); color:#bbb; }
+    .cur-search-kdb { font-size:10px; color:#444; }
+    .cur-title-right { display:flex; align-items:center; gap:2px; padding:0 4px; flex-shrink:0; }
+    .cur-cta-btn {
+      background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.14);
+      border-radius:5px; color:#d0d0d0; padding:3px 11px; margin-right:4px;
+      font-size:11.5px; font-family:var(--font-ui); cursor:pointer;
+      white-space:nowrap; transition:background .15s;
+    }
+    .cur-cta-btn:hover { background:rgba(255,255,255,.17); color:#fff; }
+    .cur-ico {
+      width:28px; height:28px; display:flex; align-items:center; justify-content:center;
+      color:#666; border-radius:4px; font-size:13px; transition:background .1s; cursor:pointer;
+    }
+    .cur-ico:hover { background:rgba(255,255,255,.08); color:#ccc; }
+    .vsc-winctrls { display:flex; align-items:stretch; margin-left:4px; }
     .vsc-wc {
-      width:46px; height:30px; display:flex; align-items:center; justify-content:center;
-      font-size:11px; color:#ccc; transition:background .1s;
+      width:46px; display:flex; align-items:center; justify-content:center;
+      font-size:11px; color:#888; transition:background .1s;
     }
-    .vsc-wc:hover { background:rgba(255,255,255,.1); }
-    .vsc-wc.cl:hover { background:#e81123; }
-
-    /* Menu bar */
-    #vsc-menu {
-      background: #3c3c3c;
-      display: flex; align-items: center; padding: 0 8px;
-      border-bottom: 1px solid #252526; user-select: none;
-    }
-    .vsc-mi {
-      padding: 4px 10px; font-size:12px; color:#ccc;
-      font-family:var(--font-ui); border-radius:3px; transition:background .1s;
-    }
-    .vsc-mi:hover { background:rgba(255,255,255,.1); }
+    .vsc-wc:hover { background:rgba(255,255,255,.1); color:#ccc; }
+    .vsc-wc.cl:hover { background:#e81123; color:#fff; }
 
     /* Main 3-col */
     #vsc-main {
@@ -464,7 +477,7 @@
 
     @media(max-width:800px){
       :root { --side-w: 0px; --act-w: 0px; }
-      #vsc-sidebar, #vsc-actbar, #vsc-menu { display: none; }
+      #vsc-sidebar, #vsc-actbar { display: none; }
       /* Fix: give #vsc-main a single column so #vsc-editor is visible */
       #vsc-main { grid-template-columns: 1fr; }
       #vsc {
@@ -504,109 +517,13 @@
     ::-webkit-scrollbar-thumb{background:#424242;border-radius:3px}
     *{scrollbar-width:thin;scrollbar-color:#424242 transparent}
 
-    /* ── Copilot ── */
-    .vsc-sb-copilot {
-      margin: 8px 10px 10px;
-      display: flex; align-items: center; gap: 8px;
-      padding: 7px 10px; border-radius: 6px;
-      border: 1px solid rgba(110,64,201,.25);
-      background: rgba(110,64,201,.07);
-      cursor: pointer; transition: background .15s;
-      font-size: 11.5px; font-weight: 500;
-      color: #9370db; font-family: var(--font-ui);
-    }
-    .vsc-sb-copilot:hover { background: rgba(110,64,201,.16); }
     .vsc-f:hover .vsc-f-dl { opacity: 1 !important; color: #f44336; }
-    .cop-star { flex-shrink:0; position:relative; display:flex; }
-    .cop-dot {
-      position:absolute; top:-3px; right:-3px;
-      width:5px; height:5px; border-radius:50%;
-      background:#6e40c9; animation: cop-pulse 2s infinite;
-    }
-    @keyframes cop-pulse {
-      0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(1.6)}
-    }
-    #cop-panel {
-      position:fixed; top:0; right:0;
-      width:340px; height:100%; z-index:500;
-      background:var(--bg); border-left:1px solid var(--border);
-      display:flex; flex-direction:column;
-      transform:translateX(100%); transition:transform .25s ease;
-    }
-    #cop-panel.open { transform:translateX(0); box-shadow:-8px 0 24px rgba(0,0,0,.4); }
-    .cop-hdr {
-      display:flex; align-items:center; justify-content:space-between;
-      padding:12px 14px; border-bottom:1px solid var(--border);
-      background:rgba(110,64,201,.07); flex-shrink:0;
-    }
-    .cop-hdr-ttl {
-      display:flex; align-items:center; gap:8px;
-      font-size:13px; font-weight:600; color:#9370db; font-family:var(--font-ui);
-    }
-    .cop-close {
-      background:none; border:none; color:var(--fg3); cursor:pointer;
-      font-size:18px; width:26px; height:26px;
-      display:flex; align-items:center; justify-content:center;
-      border-radius:4px; transition:background .12s;
-    }
-    .cop-close:hover { background:rgba(255,255,255,.08); color:var(--fg); }
-    .cop-body {
-      flex:1; overflow-y:auto; padding:16px;
-      display:flex; flex-direction:column; gap:12px;
-    }
-    .cop-msg { display:flex; flex-direction:column; }
-    .cop-msg.cop-user { align-items:flex-end; }
-    .cop-msg.cop-bot  { align-items:flex-start; }
-    .cop-bubble {
-      max-width:88%; padding:9px 13px; border-radius:8px;
-      font-size:12.5px; line-height:1.65; font-family:var(--font-ui);
-    }
-    .cop-bot  .cop-bubble {
-      background:rgba(110,64,201,.10); border:1px solid rgba(110,64,201,.22); color:var(--fg2);
-    }
-    .cop-user .cop-bubble {
-      background:rgba(0,122,204,.12); border:1px solid rgba(0,122,204,.25); color:var(--fg);
-    }
-    .cop-typing { display:inline-flex; gap:4px; align-items:center; height:16px; }
-    .cop-typing span {
-      width:5px; height:5px; border-radius:50%; background:#9370db;
-      animation:cop-blink 1.2s infinite;
-    }
-    .cop-typing span:nth-child(2){animation-delay:.2s}
-    .cop-typing span:nth-child(3){animation-delay:.4s}
-    @keyframes cop-blink {
-      0%,80%,100%{opacity:.2;transform:scale(.9)} 40%{opacity:1;transform:scale(1.1)}
-    }
-    .cop-chips {
-      padding:0 12px 10px;
-      display:flex; flex-wrap:wrap; gap:6px; flex-shrink:0;
-    }
-    .cop-chip {
-      background:rgba(110,64,201,.08); border:1px solid rgba(110,64,201,.22);
-      border-radius:20px; color:#9370db; font-size:11px; font-family:var(--font-ui);
-      padding:4px 12px; cursor:pointer; transition:background .15s;
-    }
-    .cop-chip:hover { background:rgba(110,64,201,.2); }
-    .cop-footer {
-      display:flex; gap:8px; padding:10px 12px;
-      border-top:1px solid var(--border); flex-shrink:0;
-    }
-    .cop-input {
-      flex:1; background:rgba(255,255,255,.04);
-      border:1px solid var(--border); border-radius:6px;
-      padding:8px 12px; font-size:12px; color:var(--fg);
-      font-family:var(--font-mono); outline:none; transition:border-color .15s;
-    }
-    .cop-input:focus { border-color:rgba(147,112,219,.5); }
-    .cop-send {
-      background:rgba(110,64,201,.15); border:1px solid rgba(110,64,201,.3);
-      border-radius:6px; color:#9370db; font-size:16px;
-      width:36px; height:36px; display:flex; align-items:center; justify-content:center;
-      cursor:pointer; transition:background .15s; flex-shrink:0;
-    }
-    .cop-send:hover { background:rgba(110,64,201,.3); }
-    @media(max-width:800px){
-      #cop-panel { width:100%; border-left:none; }
+
+    /* ── Cursor Tab badge (status bar) ── */
+    .cur-tab-badge {
+      display:flex; align-items:center; gap:5px;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+      border-radius:4px; padding:0 7px; margin-right:2px;
     }
 
     /* ── Palette de commandes ── */
@@ -693,30 +610,46 @@
 <!-- ━━━ VS Code Shell ━━━ -->
 <div id="vsc">
 
-  <!-- Title Bar -->
+  <!-- Title Bar (Cursor style) -->
   <div id="vsc-title">
     <div class="vsc-tls">
       <div class="vsc-tl r"></div>
       <div class="vsc-tl y"></div>
       <div class="vsc-tl g"></div>
     </div>
-    <div class="vsc-title-txt">credo-ahiafor : portfolio</div>
+    <div class="cur-logo-wrap">
+      <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
+        <path d="M16 2L30 9V23L16 30L2 23V9Z" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
+        <path d="M16 4L28 16L16 28L4 16Z" fill="white" opacity=".9"/>
+        <path d="M16 9L23 16L16 23L9 16Z" fill="#181818"/>
+        <path d="M16 12.5L19.5 16L16 19.5L12.5 16Z" fill="rgba(255,255,255,.55)"/>
+      </svg>
+    </div>
+    <nav class="cur-menus">
+      <div class="cur-mi">Fichier</div>
+      <div class="cur-mi">Édition</div>
+      <div class="cur-mi">Sélection</div>
+      <div class="cur-mi">Affichage</div>
+      <div class="cur-mi">Aller</div>
+      <div class="cur-mi">Exécuter</div>
+      <div class="cur-mi">Terminal</div>
+      <div class="cur-mi">Aide</div>
+    </nav>
+    <div class="cur-flex"></div>
+    <button class="cur-search-btn" onclick="openPalette()">
+      <span><i class="fa-solid fa-magnifying-glass" style="font-size:10px;margin-right:5px;opacity:.6"></i>Rechercher…</span>
+      <span class="cur-search-kdb">Ctrl+P</span>
+    </button>
+    <div class="cur-title-right">
+      <button class="cur-cta-btn" onclick="openPane('contact')">Me Contacter</button>
+      <div class="cur-ico" title="Mise en page"><i class="fa-solid fa-table-columns"></i></div>
+      <div class="cur-ico" title="Paramètres"><i class="fa-solid fa-gear"></i></div>
+    </div>
     <div class="vsc-winctrls">
       <div class="vsc-wc">&#x2014;</div>
       <div class="vsc-wc">&#x25A1;</div>
       <div class="vsc-wc cl">&#x2715;</div>
     </div>
-  </div>
-
-  <!-- Menu Bar -->
-  <div id="vsc-menu">
-    <div class="vsc-mi">Fichier</div>
-    <div class="vsc-mi">Édition</div>
-    <div class="vsc-mi">Affichage</div>
-    <div class="vsc-mi">Aller</div>
-    <div class="vsc-mi">Exécuter</div>
-    <div class="vsc-mi">Terminal</div>
-    <div class="vsc-mi">Aide</div>
   </div>
 
   <!-- Main -->
@@ -766,16 +699,6 @@
         </a>
       </div>
 
-      <div style="margin-top:auto;border-top:1px solid var(--border);padding-top:8px">
-        <button class="vsc-sb-copilot" onclick="toggleCopilot()" title="Ouvrir Credo's Copilot (Ctrl+Shift+C)">
-          <span class="cop-star">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9370db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5L12 2z"></path></svg>
-            <span class="cop-dot"></span>
-          </span>
-          <span style="flex:1;text-align:left">Credo's Copilot</span>
-          <span style="font-size:9px;opacity:.5">AI</span>
-        </button>
-      </div>
     </div>
 
     <!-- Editor -->
@@ -1349,7 +1272,12 @@
   <!-- Status Bar -->
   <div id="vsc-status">
     <div class="vsc-si"><i class="fa-solid fa-code-branch" style="font-size:11px"></i><span>main</span></div>
+    <div class="vsc-si" style="opacity:.6">× 0 △ 0</div>
     <div class="vsc-si-r">
+      <div class="vsc-si cur-tab-badge">
+        <svg width="10" height="10" viewBox="0 0 32 32" fill="none"><path d="M16 4L28 16L16 28L4 16Z" fill="#bbb"/><path d="M16 9L23 16L16 23L9 16Z" fill="#181818"/></svg>
+        Cursor Tab
+      </div>
       <div class="vsc-si" id="st-lang">TypeScript React</div>
       <div class="vsc-si">Ln 1, Col 1</div>
       <div class="vsc-si">UTF-8</div>
@@ -1559,174 +1487,9 @@ renderTabs();
     }
   });
 })();
-/* ── Copilot ── */
-var COP_RESPONSES = [
-  { keys:['bonjour','salut','hello','hi','hey','bonsoir'],
-    reply:'Bonjour ! Je suis l\'assistant IA de <strong>Credo Ahiafor</strong>. Posez-moi n\'importe quelle question sur son profil, ses compétences ou ses projets ! 👋' },
-  { keys:['qui est','about','présente','présentation','profil','credo','toi'],
-    reply:'<strong>Credo Ahiafor</strong> est un Ingénieur Réseaux & Sécurité et Développeur Web basé à Lomé, Togo 🇹🇬. Il cumule 5+ ans d\'expérience en infrastructure réseau, cybersécurité et développement web full-stack.' },
-  { keys:['compétence','skill','stack','technologie','tech','savoir'],
-    reply:'Le stack de Credo :<br><strong>Réseaux :</strong> Cisco, VLAN, VPN, Wireshark<br><strong>Sécurité :</strong> CEH, CCNP Security, Pare-feu<br><strong>Dev Web :</strong> React, WordPress, Shopify, JS<br><strong>Cloud/OS :</strong> Azure, Linux, Windows Server' },
-  { keys:['projet','project','portfolio','réalisation'],
-    reply:'Credo a réalisé des <strong>plateformes e-commerce</strong>, des <strong>sites vitrines</strong>, des <strong>applications de gestion</strong> et des <strong>configurations réseau</strong> d\'entreprise. Ouvre le pane <em>projets.js</em> pour tout voir ! 🚀' },
-  { keys:['experience','expérience','parcours','carrière','poste'],
-    reply:'Credo a une solide expérience : consultant réseau, développeur web freelance et expert cybersécurité. Consulte le pane <em>experience.ts</em> pour tous les détails !' },
-  { keys:['contact','email','téléphone','joindre','écrire','message'],
-    reply:'Contacte Credo ici :<br>📧 <strong>ahiafor.credo@gmail.com</strong><br>📱 <strong>+228 92 23 63 79</strong><br>💼 LinkedIn : <strong>credoahiafor</strong><br>Ou via le pane <em>contact.css</em> !' },
-  { keys:['disponible','available','hire','embaucher','freelance','mission','recrut'],
-    reply:'✅ <strong>Oui, Credo est disponible !</strong> Il est ouvert aux missions freelance, CDD/CDI et collaborations. Écris-lui à ahiafor.credo@gmail.com' },
-  { keys:['formation','diplôme','étude','école','université','master','esgis'],
-    reply:'Credo est titulaire d\'un <strong>Master 2 en Sécurité des Réseaux & Systèmes (SRS)</strong> à l\'ESGIS de Lomé, Togo 🇹🇬, plus plusieurs certifications professionnelles.' },
-  { keys:['localisation','location','pays','togo','lomé','afrique','où'],
-    reply:'Credo est basé à <strong>Lomé, Togo 🇹🇬</strong> (quartier Segbé-Zanvi). Il intervient à distance ou en présentiel.' },
-  { keys:['cisco','réseau','network','infrastructure','vlan','vpn'],
-    reply:'Expert <strong>réseaux Cisco</strong> : VLAN, VPN, routage, switching, datacenter. Il prépare actuellement la certification <strong>CCNP</strong>.' },
-  { keys:['sécurité','security','cybersécurité','cyber','ceh','pentest'],
-    reply:'En cybersécurité : <strong>CEH</strong>, analyse de vulnérabilités, configuration de pare-feux, cryptographie et audit de sécurité réseau.' },
-  { keys:['wordpress','shopify','web','site','react'],
-    reply:'Côté web : <strong>React, WordPress, Shopify</strong>, HTML/CSS/JS. Sites vitrines, e-commerce, applications web de A à Z.' },
-];
 
-function findCopReply(text){
-  var t = text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
-  for(var i=0;i<COP_RESPONSES.length;i++){
-    var r=COP_RESPONSES[i];
-    for(var j=0;j<r.keys.length;j++){
-      if(t.indexOf(r.keys[j])>=0) return r.reply;
-    }
-  }
-  return 'Je ne suis pas sûr de comprendre 🤔 Essaie : <em>compétences</em>, <em>projets</em>, <em>contact</em> ou <em>disponible</em>.';
-}
-
-function toggleCopilot(){
-  var p=document.getElementById('cop-panel');
-  p.classList.toggle('open');
-  if(p.classList.contains('open')) setTimeout(function(){document.getElementById('cop-input').focus();},280);
-}
-
-function copAddMsg(html,isUser){
-  var body=document.getElementById('cop-msgs');
-  var wrap=document.createElement('div');
-  wrap.className='cop-msg '+(isUser?'cop-user':'cop-bot');
-  var bub=document.createElement('div');
-  bub.className='cop-bubble';
-  bub.innerHTML=html;
-  wrap.appendChild(bub);
-  body.appendChild(wrap);
-  body.scrollTop=body.scrollHeight;
-  return bub;
-}
-
-function askCop(q){
-  document.getElementById('cop-input').value='';
-  document.getElementById('cop-chips').style.display='none';
-  copAddMsg(q,true);
-  var bub=copAddMsg('<span class="cop-typing"><span></span><span></span><span></span></span>',false);
-  setTimeout(function(){
-    bub.innerHTML=findCopReply(q);
-    document.getElementById('cop-msgs').scrollTop=9999;
-  },650+Math.random()*350);
-}
-
-function sendCop(){
-  var inp=document.getElementById('cop-input');
-  var q=inp.value.trim();
-  if(!q) return;
-  inp.value='';
-  askCop(q);
-}
-
-document.addEventListener('keydown',function(e){
-  if(e.ctrlKey&&e.shiftKey&&(e.key==='C'||e.key==='c')){
-    e.preventDefault(); toggleCopilot();
-  }
-});
-</script>
-<script>
-/* overwrite askCop with real AI version */
-var copHistory = [];
-var copBusy = false;
-
-function copAddMsg(html, isUser){
-  var body = document.getElementById('cop-msgs');
-  var wrap = document.createElement('div');
-  wrap.className = 'cop-msg ' + (isUser ? 'cop-user' : 'cop-bot');
-  var bub = document.createElement('div');
-  bub.className = 'cop-bubble';
-  bub.innerHTML = html;
-  wrap.appendChild(bub);
-  body.appendChild(wrap);
-  body.scrollTop = body.scrollHeight;
-  return bub;
-}
-
-async function askCop(q){
-  if(copBusy) return;
-  copBusy = true;
-  document.getElementById('cop-input').value = '';
-  document.getElementById('cop-chips').style.display = 'none';
-  copAddMsg(q, true);
-  var bub = copAddMsg('<span class="cop-typing"><span></span><span></span><span></span></span>', false);
-  try {
-    var res = await fetch('/api/copilot', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: q, history: copHistory })
-    });
-    var data = await res.json();
-    var reply = data.reply || "Désolé, je n'ai pas pu répondre.";
-    bub.innerHTML = reply.replace(/\n/g, '<br>');
-    copHistory.push({ role: 'user', content: q });
-    copHistory.push({ role: 'assistant', content: reply });
-    if(copHistory.length > 12) copHistory = copHistory.slice(-12);
-  } catch(err){
-    bub.innerHTML = '⚠️ Connexion impossible. Réessaie dans un instant.';
-  }
-  document.getElementById('cop-msgs').scrollTop = 9999;
-  copBusy = false;
-}
-
-function sendCop(){
-  var inp = document.getElementById('cop-input');
-  var q = inp.value.trim();
-  if(!q || copBusy) return;
-  inp.value = '';
-  askCop(q);
-}
 </script>
 
-<!-- ── Copilot Panel ── -->
-<div id="cop-panel">
-  <div class="cop-hdr">
-    <span class="cop-hdr-ttl">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9370db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5L12 2z"></path></svg>
-      Credo's Copilot
-    </span>
-    <button class="cop-close" onclick="toggleCopilot()" title="Fermer">✕</button>
-  </div>
-
-  <div class="cop-body" id="cop-msgs">
-    <div class="cop-msg cop-bot">
-      <div class="cop-bubble">
-        Bonjour ! Je suis l'assistant IA de <strong>Credo Ahiafor</strong>.<br>
-        Posez-moi une question sur son profil, ses compétences ou ses projets 👋
-      </div>
-    </div>
-  </div>
-
-  <div class="cop-chips" id="cop-chips">
-    <button class="cop-chip" onclick="askCop('Qui est Credo ?')">Qui est Credo ?</button>
-    <button class="cop-chip" onclick="askCop('Ses compétences ?')">Ses compétences ?</button>
-    <button class="cop-chip" onclick="askCop('Ses projets ?')">Ses projets ?</button>
-    <button class="cop-chip" onclick="askCop('Est-il disponible ?')">Est-il disponible ?</button>
-  </div>
-
-  <div class="cop-footer">
-    <input id="cop-input" class="cop-input" type="text" placeholder="Posez une question…"
-      onkeydown="if(event.key==='Enter') sendCop()">
-    <button class="cop-send" onclick="sendCop()" title="Envoyer">→</button>
-  </div>
-</div>
 
 <!-- ── Palette de commandes ── -->
 <div id="cmd-palette" onclick="if(event.target===this)closePalette()">
@@ -1743,7 +1506,7 @@ function sendCop(){
       <span>↑↓ naviguer</span><span class="cmd-sep">·</span>
       <span>↵ ouvrir</span><span class="cmd-sep">·</span>
       <span>Éch fermer</span><span class="cmd-sep">·</span>
-      <span>Astuce&nbsp;: tapez «&nbsp;copilot&nbsp;» pour ouvrir l'IA</span>
+      <span>Astuce&nbsp;: tapez le nom d'un fichier pour y accéder directement</span>
     </div>
   </div>
 </div>
@@ -1753,7 +1516,8 @@ function sendCop(){
 var PDF_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" style="flex-shrink:0"><rect width="24" height="24" rx="3" fill="#f44336" opacity="0.15"></rect><path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="none" stroke="#f44336" stroke-width="1.3"></path><path d="M14 2v5h5" fill="none" stroke="#f44336" stroke-width="1.3"></path><text x="5" y="17" font-family="monospace" font-size="5.5" font-weight="bold" fill="#f44336">PDF</text></svg>';
 
 var PAL_CMDS = [
-  { label: "Ouvrir Credo’s Copilot", key: 'Ctrl+Shift+C', action: function(){ toggleCopilot(); } }
+  { label: ‘Ouvrir la palette de commandes’, key: ‘Ctrl+P’, action: function(){ document.getElementById(‘cmd-inp’).focus(); } },
+  { label: ‘Me Contacter’, key: ‘’, action: function(){ openPane(‘contact’); } }
 ];
 var PAL_FILES = [
   { id:'home',        name:'home.tsx',             path:'src/' },
