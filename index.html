@@ -365,6 +365,9 @@
       <button class="sb-sess" id="s-readme" onclick="openSection('readme')">
         <span>README.md</span>
       </button>
+      <button class="sb-sess" id="s-guide" onclick="openSection('guide')">
+        <span>Guide de navigation</span>
+      </button>
       <a class="sb-sess" href="/assets/Credo_Ahiafor_CV.pdf" download style="display:flex;align-items:center;gap:9px">
         <span>Télécharger le CV PDF</span>
       </a>
@@ -749,6 +752,69 @@
       <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Rechercher une section… (ex : projets, contact)" rows="1"></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn">Me contacter</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><a class="model-name" href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Portfolio 2026</a><span class="model-level">Ingénieur <div class="model-dot" onclick="openSection('contact')" title="Disponible pour missions freelance" style="background:#e06432;border-color:#e06432;cursor:pointer"></div></span></div></div></div></div>
     </div>
 
+    <!-- ── GUIDE ── -->
+    <div class="pane" id="p-guide">
+      <div class="chat-scroll">
+        <div class="chat-wrap">
+          <div class="mu"><div class="mu-b">Comment naviguer dans ce portfolio ?</div></div>
+          <div class="mc">
+            <div class="mc-av"><svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="g-guide" x1="20" y1="2" x2="20" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e06432"/><stop offset="100%" stop-color="#9333ea"/></linearGradient></defs><path d="M20 2 L22.5 15 L36 10 L26.5 20 L36 30 L22.5 25 L20 38 L17.5 25 L4 30 L13.5 20 L4 10 L17.5 15 Z" fill="url(#g-guide)"/></svg></div>
+            <div class="mc-body">
+              <div class="mc-name">Portfolio</div>
+              <div class="mc-text">
+                <p>Bienvenue ! Ce portfolio est organisé comme une interface de chat. Voici tout ce que vous pouvez faire pour explorer le contenu.</p>
+
+                <div class="sec-hdr">Les 3 onglets (colonne gauche)</div>
+                <div class="fg-grid">
+                  <div class="fg-item"><strong style="color:#c0c0c0;">Portfolio</strong> — Vue d'ensemble, À propos, Compétences, Parcours, README</div>
+                  <div class="fg-item"><strong style="color:#c0c0c0;">Collaborer</strong> — Projets réalisés et expériences jury</div>
+                  <div class="fg-item"><strong style="color:#c0c0c0;">Discuter</strong> — Formulaire de contact pour démarrer une mission</div>
+                </div>
+
+                <div class="sec-hdr">La liste de sessions (colonne gauche)</div>
+                <p>Chaque entrée de la liste ouvre directement une section. Cliquez sur n'importe laquelle pour y aller.</p>
+                <div class="fg-grid">
+                  <div class="fg-item" style="cursor:pointer;" onclick="openSection('home')">🏠 <span style="color:#777;">Vue d'ensemble</span></div>
+                  <div class="fg-item" style="cursor:pointer;" onclick="openSection('about')">👤 <span style="color:#777;">À propos de Credo Ahiafor</span></div>
+                  <div class="fg-item" style="cursor:pointer;" onclick="openSection('projets')">📁 <span style="color:#777;">Mes projets web</span></div>
+                  <div class="fg-item" style="cursor:pointer;" onclick="openSection('competences')">⚡ <span style="color:#777;">Compétences &amp; Stack</span></div>
+                  <div class="fg-item" style="cursor:pointer;" onclick="openSection('parcours')">💼 <span style="color:#777;">Parcours professionnel</span></div>
+                  <div class="fg-item" style="cursor:pointer;" onclick="openSection('contact')">✉️ <span style="color:#777;">Me contacter</span></div>
+                </div>
+
+                <div class="sec-hdr">La barre de recherche (en bas de chaque section)</div>
+                <p>Tapez un mot-clé dans le champ en bas et appuyez sur <kbd style="background:#2a2a2a;border:1px solid #333;border-radius:3px;padding:1px 5px;font-size:11px;color:#999;">Entrée</kbd> pour naviguer directement.</p>
+                <div class="fg-grid">
+                  <div class="fg-item"><code style="color:#e06432;font-size:12px;">"projets"</code> → Mes projets</div>
+                  <div class="fg-item"><code style="color:#e06432;font-size:12px;">"contact"</code> → Formulaire de contact</div>
+                  <div class="fg-item"><code style="color:#e06432;font-size:12px;">"compétences"</code> → Stack technique</div>
+                  <div class="fg-item"><code style="color:#e06432;font-size:12px;">"parcours"</code> → Expériences</div>
+                  <div class="fg-item"><code style="color:#e06432;font-size:12px;">"readme"</code> → Vue complète</div>
+                  <div class="fg-item"><code style="color:#e06432;font-size:12px;">"aide"</code> → Ce guide</div>
+                </div>
+
+                <div class="sec-hdr">La palette de commandes</div>
+                <p>Cliquez sur le bouton <strong style="color:#c0c0c0;">+</strong> (en bas de n'importe quelle section) ou appuyez sur <kbd style="background:#2a2a2a;border:1px solid #333;border-radius:3px;padding:1px 5px;font-size:11px;color:#999;">Ctrl K</kbd> pour ouvrir la palette et accéder à toutes les sections d'un coup.</p>
+
+                <div class="sec-hdr">Sur mobile</div>
+                <p>Une barre de navigation apparaît en bas de l'écran avec les sections principales. Faites glisser vers le bas pour ouvrir le menu complet.</p>
+
+                <div style="margin-top:20px;padding:12px 14px;background:#1e1e1e;border:1px solid #2a2a2a;border-radius:8px;display:flex;align-items:center;gap:12px;">
+                  <span style="font-size:18px;">💬</span>
+                  <div>
+                    <div style="font-size:13px;color:#c0c0c0;font-weight:500;">Une mission en tête ?</div>
+                    <div style="font-size:12px;color:#555;margin-top:3px;">Rendez-vous directement dans <span style="color:#e06432;cursor:pointer;" onclick="openSection('contact')">Discuter →</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="banner"><span>Guide · Navigation</span><a class="banner-link" onclick="openSection('home')" style="cursor:pointer">Accueil →</a></div>
+      <div class="inp-wrap"><div class="inp-box"><div class="inp-row"><textarea class="inp-field" placeholder="Rechercher une section… (ex : projets, contact)" rows="1"></textarea><button class="inp-send"><i class="fa-solid fa-arrow-turn-down"></i></button></div><div class="inp-ctrl"><div class="inp-ctrl-l"><button class="inp-btn" onclick="openSection('contact')">Me contacter</button><button class="inp-icon-btn" onclick="openPalette()"><i class="fa-solid fa-plus"></i></button><button class="inp-icon-btn"><i class="fa-solid fa-microphone"></i></button></div><div class="inp-ctrl-r"><a class="model-name" href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Portfolio 2026</a><span class="model-level">Ingénieur <div class="model-dot" onclick="openSection('contact')" title="Disponible pour missions freelance" style="background:#e06432;border-color:#e06432;cursor:pointer"></div></span></div></div></div></div>
+    </div>
+
   </main>
 </div>
 
@@ -838,7 +904,7 @@
 var cur = 'home';
 var TAB_MAP = {
   'home':'portfolio','about':'portfolio','competences':'portfolio',
-  'parcours':'portfolio','readme':'portfolio',
+  'parcours':'portfolio','readme':'portfolio','guide':'portfolio',
   'projets':'collaborer',
   'contact':'discuter'
 };
@@ -872,7 +938,8 @@ var SHARED_MAP={
   'skill':'competences','compet':'competences','stack':'competences','service':'competences','technolog':'competences','langage':'competences',
   'parcours':'parcours','experience':'parcours','travail':'parcours','emploi':'parcours',
   'contact':'contact','email':'contact','mission':'contact','discuter':'contact','message':'contact',
-  'readme':'readme','cv':'readme','tout':'readme'
+  'readme':'readme','cv':'readme','tout':'readme',
+  'guide':'guide','aide':'guide','help':'guide','navigat':'guide','comment':'guide'
 };
 function homeKey(e){
   if(e.key!=='Enter') return;
@@ -923,7 +990,8 @@ var PAL=[
   {id:'parcours',   label:'Parcours professionnel',  icon:'fa-briefcase'},
   {id:'contact',    label:'Me contacter',            icon:'fa-envelope'},
   {id:'readme',     label:'README.md',               icon:'fa-file-lines'},
-  {id:'cv',         label:'Credo_Ahiafor_CV.pdf',   icon:'fa-file-pdf', href:'/assets/Credo_Ahiafor_CV.pdf'}
+  {id:'cv',         label:'Credo_Ahiafor_CV.pdf',   icon:'fa-file-pdf', href:'/assets/Credo_Ahiafor_CV.pdf'},
+  {id:'guide',      label:'Guide de navigation',     icon:'fa-map'}
 ];
 var pi=-1;
 function openPalette(){
