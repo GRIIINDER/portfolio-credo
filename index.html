@@ -50,9 +50,14 @@
     .nf-profile-avatar{ width:120px; height:120px; border-radius:6px; border:3px solid transparent; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#333; transition:border-color .15s, transform .15s; margin-bottom:10px; }
     .nf-profile-avatar img{ width:100%; height:100%; object-fit:cover; }
     .nf-profile-avatar i{ font-size:40px; color:rgba(255,255,255,.9); }
-    .nf-profile-tile:hover .nf-profile-avatar{ border-color:#fff; }
     .nf-profile-name{ font-size:15px; color:var(--gray-lt); transition:color .15s; }
-    .nf-profile-tile:hover .nf-profile-name{ color:#fff; }
+    /* Hover-only visuals gated to real pointers: on touch devices (notably iOS Safari), a
+       :hover rule on the same element as the tap target eats the first tap and needs a
+       second one to register the click — this keeps every tile a reliable single tap. */
+    @media (hover:hover){
+      .nf-profile-tile:hover .nf-profile-avatar{ border-color:#fff; }
+      .nf-profile-tile:hover .nf-profile-name{ color:#fff; }
+    }
     .nf-profile-add .nf-profile-avatar{ background:#141414; }
     .nf-profile-add i{ font-size:44px; color:var(--gray-lt); }
     .nf-profiles-manage{ font-size:15px; color:var(--gray-lt); background:transparent; border:1.5px solid var(--gray-dim); padding:9px 22px; letter-spacing:.03em; transition:color .15s, border-color .15s; }
@@ -374,15 +379,15 @@
         <div class="nf-profile-avatar"><img src="/assets/images/credoahiafor.webp" alt="Crédo"></div>
         <div class="nf-profile-name" data-i18n="gate_credo">Crédo</div>
       </div>
-      <div class="nf-profile-tile" data-profile="recruteur">
+      <div class="nf-profile-tile" data-profile="professionnel">
         <div class="nf-profile-pencil"><i class="fa-solid fa-pencil"></i></div>
         <div class="nf-profile-avatar" style="background:linear-gradient(135deg,#2563eb,#0f172a)"><i class="fa-solid fa-briefcase"></i></div>
-        <div class="nf-profile-name" data-i18n="gate_recruiter">Recruteur</div>
+        <div class="nf-profile-name" data-i18n="gate_professional">Professionnel</div>
       </div>
-      <div class="nf-profile-tile" data-profile="developpeur">
+      <div class="nf-profile-tile" data-profile="etudiant">
         <div class="nf-profile-pencil"><i class="fa-solid fa-pencil"></i></div>
-        <div class="nf-profile-avatar" style="background:linear-gradient(135deg,#0d9488,#052e2b)"><i class="fa-solid fa-code"></i></div>
-        <div class="nf-profile-name" data-i18n="gate_dev">Développeur</div>
+        <div class="nf-profile-avatar" style="background:linear-gradient(135deg,#0d9488,#052e2b)"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div class="nf-profile-name" data-i18n="gate_student">Étudiant</div>
       </div>
       <div class="nf-profile-tile nf-profile-add" data-profile="add">
         <div class="nf-profile-avatar"><i class="fa-solid fa-plus"></i></div>
@@ -707,8 +712,8 @@ const UI = {
   footer_copy:{fr:`Ce portfolio a été conçu et développé par Credo Ahiafor. Non autorisé à copier ou reproduire sans permission écrite préalable.<br>© 2026 Credo Ahiafor · Tous droits réservés · Made with ❤ from Lomé, Togo`,en:`This portfolio was designed and built by Credo Ahiafor. Not authorized to copy or reproduce without prior written permission.<br>© 2026 Credo Ahiafor · All rights reserved · Made with ❤ from Lomé, Togo`},
   gate_title:{fr:'Qui regarde ?',en:"Who's watching?"},
   gate_credo:{fr:'Crédo',en:'Credo'},
-  gate_recruiter:{fr:'Recruteur',en:'Recruiter'},
-  gate_dev:{fr:'Développeur',en:'Developer'},
+  gate_professional:{fr:'Professionnel',en:'Professional'},
+  gate_student:{fr:'Étudiant',en:'Student'},
   gate_add:{fr:'Ajouter un profil',en:'Add Profile'},
   gate_manage:{fr:'Gérer les profils',en:'Manage Profiles'},
   gate_done:{fr:'Terminé',en:'Done'},
