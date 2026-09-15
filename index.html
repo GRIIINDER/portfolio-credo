@@ -84,6 +84,8 @@
     .nf-icon-btn{ font-size:17px; color:var(--white); position:relative; width:22px; height:22px; display:flex; align-items:center; justify-content:center; }
     .nf-bell-dot{ position:absolute; top:-2px; right:-3px; width:7px; height:7px; border-radius:50%; background:var(--brand); border:1.5px solid var(--bg); animation:nfPulse 2.2s ease-in-out infinite; }
     @keyframes nfPulse{ 0%{ box-shadow:0 0 0 0 rgba(224,100,50,.55); } 70%{ box-shadow:0 0 0 7px rgba(224,100,50,0); } 100%{ box-shadow:0 0 0 0 rgba(224,100,50,0); } }
+    .nf-lang-btn{ font-size:12.5px; font-weight:700; color:var(--white); border:1px solid var(--gray-dim); border-radius:4px; padding:4px 8px; letter-spacing:.02em; transition:border-color .15s, color .15s; }
+    .nf-lang-btn:hover{ border-color:#fff; }
     .nf-search{ display:flex; align-items:center; }
     .nf-search-inp{ width:0; opacity:0; background:rgba(0,0,0,.75); border:1px solid transparent; color:#fff; font-size:13px; padding:0; transition:width .25s ease, opacity .2s ease, padding .25s ease; }
     .nf-search.open .nf-search-inp{ width:200px; opacity:1; padding:6px 10px; border-color:#555; margin-left:8px; }
@@ -365,29 +367,29 @@
 <!-- "Qui regarde ?" profile gate -->
 <div id="nf-profiles">
   <div class="nf-profiles-inner">
-    <div class="nf-profiles-title">Qui regarde ?</div>
+    <div class="nf-profiles-title" data-i18n="gate_title">Qui regarde ?</div>
     <div class="nf-profiles-row" id="nf-profiles-row">
       <div class="nf-profile-tile" data-profile="credo">
         <div class="nf-profile-pencil"><i class="fa-solid fa-pencil"></i></div>
         <div class="nf-profile-avatar"><img src="/assets/images/credoahiafor.webp" alt="Crédo"></div>
-        <div class="nf-profile-name">Crédo</div>
+        <div class="nf-profile-name" data-i18n="gate_credo">Crédo</div>
       </div>
       <div class="nf-profile-tile" data-profile="recruteur">
         <div class="nf-profile-pencil"><i class="fa-solid fa-pencil"></i></div>
         <div class="nf-profile-avatar" style="background:linear-gradient(135deg,#2563eb,#0f172a)"><i class="fa-solid fa-briefcase"></i></div>
-        <div class="nf-profile-name">Recruteur</div>
+        <div class="nf-profile-name" data-i18n="gate_recruiter">Recruteur</div>
       </div>
       <div class="nf-profile-tile" data-profile="developpeur">
         <div class="nf-profile-pencil"><i class="fa-solid fa-pencil"></i></div>
         <div class="nf-profile-avatar" style="background:linear-gradient(135deg,#0d9488,#052e2b)"><i class="fa-solid fa-code"></i></div>
-        <div class="nf-profile-name">Développeur</div>
+        <div class="nf-profile-name" data-i18n="gate_dev">Développeur</div>
       </div>
       <div class="nf-profile-tile nf-profile-add" data-profile="add">
         <div class="nf-profile-avatar"><i class="fa-solid fa-plus"></i></div>
-        <div class="nf-profile-name">Ajouter un profil</div>
+        <div class="nf-profile-name" data-i18n="gate_add">Ajouter un profil</div>
       </div>
     </div>
-    <button class="nf-profiles-manage" id="nf-profiles-manage">Gérer les profils</button>
+    <button class="nf-profiles-manage" id="nf-profiles-manage" data-i18n="gate_manage">Gérer les profils</button>
   </div>
 </div>
 
@@ -396,37 +398,38 @@
   <div class="nf-header-l">
     <div class="nf-logo" data-sec="home">CREDO</div>
     <nav class="nf-nav" id="nf-nav">
-      <a class="nf-nav-link on" data-sec="home">Accueil</a>
-      <a class="nf-nav-link" data-sec="about">À propos</a>
-      <a class="nf-nav-link" data-sec="projets">Projets</a>
-      <a class="nf-nav-link" data-sec="competences">Compétences</a>
-      <a class="nf-nav-link" data-sec="parcours">Parcours</a>
-      <a class="nf-nav-link" data-sec="contact">Contact</a>
+      <a class="nf-nav-link on" data-sec="home" data-i18n="nav_home">Accueil</a>
+      <a class="nf-nav-link" data-sec="about" data-i18n="nav_about">À propos</a>
+      <a class="nf-nav-link" data-sec="projets" data-i18n="nav_projects">Projets</a>
+      <a class="nf-nav-link" data-sec="competences" data-i18n="nav_skills">Compétences</a>
+      <a class="nf-nav-link" data-sec="parcours" data-i18n="nav_career">Parcours</a>
+      <a class="nf-nav-link" data-sec="contact" data-i18n="nav_contact">Contact</a>
       <span class="nf-nav-indicator" id="nf-nav-indicator"></span>
     </nav>
   </div>
   <div class="nf-header-r">
     <div class="nf-search" id="nf-search-wrap">
-      <button class="nf-icon-btn" id="nf-search-btn" aria-label="Rechercher"><i class="fa-solid fa-magnifying-glass"></i></button>
-      <input id="nf-search-inp" class="nf-search-inp" type="text" placeholder="Projets, compétences…" autocomplete="off">
+      <button class="nf-icon-btn" id="nf-search-btn" data-i18n-aria="search_aria" aria-label="Rechercher"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <input id="nf-search-inp" class="nf-search-inp" type="text" data-i18n-ph="search_ph" placeholder="Projets, compétences…" autocomplete="off">
     </div>
+    <button class="nf-lang-btn" id="nf-lang-btn" title="Langue / Language">EN</button>
     <div style="position:relative">
-      <button class="nf-icon-btn" id="nf-bell-btn" title="Disponibilité"><i class="fa-regular fa-bell"></i><span class="nf-bell-dot"></span></button>
+      <button class="nf-icon-btn" id="nf-bell-btn" data-i18n-title="bell_title" title="Disponibilité"><i class="fa-regular fa-bell"></i><span class="nf-bell-dot"></span></button>
       <div class="nf-notif-panel" id="nf-notif-panel">
-        <div><span class="dot"></span><strong style="font-size:13px">Nouvelle disponibilité</strong></div>
-        <p>Credo est disponible pour des missions freelance &amp; collaborations depuis Lomé, Togo 🇹🇬.</p>
-        <button data-sec="contact">Me contacter</button>
+        <div><span class="dot"></span><strong style="font-size:13px" data-i18n="notif_title">Nouvelle disponibilité</strong></div>
+        <p data-i18n="notif_body">Credo est disponible pour des missions freelance &amp; collaborations depuis Lomé, Togo 🇹🇬.</p>
+        <button data-sec="contact" data-i18n="notif_cta">Me contacter</button>
       </div>
     </div>
     <div class="nf-profile" id="nf-profile">
       <img src="/assets/images/credoahiafor.webp" alt="Crédo">
       <i class="fa-solid fa-caret-down"></i>
       <div class="nf-profile-menu">
-        <a href="/assets/Credo_Ahiafor_CV.pdf" download><i class="fa-solid fa-file-pdf"></i> Télécharger le CV</a>
+        <a href="/assets/Credo_Ahiafor_CV.pdf" download><i class="fa-solid fa-file-pdf"></i> <span data-i18n="menu_cv">Télécharger le CV</span></a>
         <a href="https://www.linkedin.com/in/credoahiafor" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
         <a href="https://github.com/GRIIINDER" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
         <div class="nf-profile-sep"></div>
-        <a data-sec="contact"><i class="fa-solid fa-paper-plane"></i> Me contacter</a>
+        <a data-sec="contact"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="menu_contact">Me contacter</span></a>
       </div>
     </div>
   </div>
@@ -438,23 +441,23 @@
   <div class="nf-hero-grid"></div>
   <div class="nf-hero-vignette"></div>
   <div class="nf-hero-content">
-    <div class="nf-hero-tag"><i class="fa-solid fa-bolt"></i> SÉRIE ORIGINALE · PORTFOLIO 2026</div>
+    <div class="nf-hero-tag"><i class="fa-solid fa-bolt"></i> <span data-i18n="hero_tag">SÉRIE ORIGINALE · PORTFOLIO 2026</span></div>
     <h1 class="nf-hero-title">CREDO<br>AHIAFOR</h1>
     <div class="nf-hero-meta">
-      <span class="nf-match">98% de correspondance</span>
+      <span class="nf-match" data-i18n="hero_match">98% de correspondance</span>
       <span>2026</span>
-      <span class="nf-badge-outline">FREELANCE</span>
-      <span>5 ans d'expérience</span>
+      <span class="nf-badge-outline" data-i18n="hero_freelance">FREELANCE</span>
+      <span data-i18n="hero_exp">5 ans d'expérience</span>
       <span class="nf-badge-hd">HD</span>
-      <span class="nf-badge-avail">🇹🇬 Disponible pour missions freelance</span>
+      <span class="nf-badge-avail" data-i18n="hero_avail">🇹🇬 Disponible pour missions freelance</span>
     </div>
-    <p class="nf-hero-desc">Développeur web freelance spécialisé en réseaux &amp; sécurité, basé à Lomé, Togo. Du câble au code : sites vitrines, e-commerce, applications métier et infrastructures réseau sécurisées.</p>
+    <p class="nf-hero-desc" data-i18n="hero_desc">Développeur web freelance spécialisé en réseaux &amp; sécurité, basé à Lomé, Togo. Du câble au code : sites vitrines, e-commerce, applications métier et infrastructures réseau sécurisées.</p>
     <div class="nf-hero-btns">
-      <button class="nf-btn nf-btn-primary" data-sec="projets"><i class="fa-solid fa-play"></i> Voir mes projets</button>
-      <button class="nf-btn nf-btn-secondary" data-sec="about"><i class="fa-solid fa-circle-info"></i> Plus d'infos</button>
+      <button class="nf-btn nf-btn-primary" data-sec="projets"><i class="fa-solid fa-play"></i> <span data-i18n="hero_btn_play">Voir mes projets</span></button>
+      <button class="nf-btn nf-btn-secondary" data-sec="about"><i class="fa-solid fa-circle-info"></i> <span data-i18n="hero_btn_info">Plus d'infos</span></button>
     </div>
   </div>
-  <button class="nf-hero-mute" id="nf-hero-mute" title="Son" aria-label="Activer/couper le son"><i class="fa-solid fa-volume-xmark"></i></button>
+  <button class="nf-hero-mute" id="nf-hero-mute" data-i18n-title="hero_mute_title" title="Son" data-i18n-aria="hero_mute_aria" aria-label="Activer/couper le son"><i class="fa-solid fa-volume-xmark"></i></button>
 </section>
 
 <!-- About / Detail -->
@@ -465,38 +468,38 @@
         <img class="nf-avatar" src="/assets/images/credoahiafor.webp" alt="Credo Ahiafor">
         <div>
           <div class="nf-detail-name">Credo Ahiafor</div>
-          <div class="nf-detail-role">Développeur Web · Réseaux &amp; Sécurité · Freelance</div>
+          <div class="nf-detail-role" data-i18n="about_role">Développeur Web · Réseaux &amp; Sécurité · Freelance</div>
           <div class="nf-detail-loc"><i class="fa-solid fa-location-dot"></i>Lomé, Togo</div>
         </div>
       </div>
-      <p>Bonjour ! Je suis <strong>Credo Ahiafor</strong>, <strong>développeur web freelance</strong> spécialisé en <strong>réseaux &amp; sécurité</strong>, basé à <strong>Lomé, Togo</strong>. Je construis des systèmes web robustes et des infrastructures réseau sécurisées — du câble au code.</p>
-      <p>Actuellement en <strong>Master 2 Systèmes, Réseaux &amp; Sécurité</strong> à l'ESGIS Togo, je combine expertise technique et sens pratique pour livrer des solutions qui marchent vraiment.</p>
-      <div class="nf-focus-lbl">Focus actuel</div>
+      <p data-i18n-html="about_p1">Bonjour ! Je suis <strong>Credo Ahiafor</strong>, <strong>développeur web freelance</strong> spécialisé en <strong>réseaux &amp; sécurité</strong>, basé à <strong>Lomé, Togo</strong>. Je construis des systèmes web robustes et des infrastructures réseau sécurisées — du câble au code.</p>
+      <p data-i18n-html="about_p2">Actuellement en <strong>Master 2 Systèmes, Réseaux &amp; Sécurité</strong> à l'ESGIS Togo, je combine expertise technique et sens pratique pour livrer des solutions qui marchent vraiment.</p>
+      <div class="nf-focus-lbl" data-i18n="focus_label">Focus actuel</div>
       <div class="nf-focus-grid">
-        <div class="nf-focus-item">🌐 Développement web freelance — Cabinet BEGO, Afinah Closet</div>
-        <div class="nf-focus-item">🔒 Cybersécurité &amp; infrastructure réseau Cisco</div>
-        <div class="nf-focus-item">⚛️ Applications React full-stack &amp; WordPress RGPD</div>
-        <div class="nf-focus-item">☁️ Cloud Azure &amp; virtualisation serveurs</div>
-        <div class="nf-focus-item">🛒 E-commerce Shopify &amp; WooCommerce</div>
-        <div class="nf-focus-item">📚 Toujours apprenant, toujours en construction</div>
+        <div class="nf-focus-item" data-i18n="focus_1">🌐 Développement web freelance — Cabinet BEGO, Afinah Closet</div>
+        <div class="nf-focus-item" data-i18n="focus_2">🔒 Cybersécurité &amp; infrastructure réseau Cisco</div>
+        <div class="nf-focus-item" data-i18n="focus_3">⚛️ Applications React full-stack &amp; WordPress RGPD</div>
+        <div class="nf-focus-item" data-i18n="focus_4">☁️ Cloud Azure &amp; virtualisation serveurs</div>
+        <div class="nf-focus-item" data-i18n="focus_5">🛒 E-commerce Shopify &amp; WooCommerce</div>
+        <div class="nf-focus-item" data-i18n="focus_6">📚 Toujours apprenant, toujours en construction</div>
       </div>
     </div>
     <aside class="nf-detail-side">
       <div class="nf-side-block">
-        <div class="nf-side-lbl">Statistiques</div>
-        <div class="nf-stat-row"><span>Projets</span><b>5+</b></div>
-        <div class="nf-stat-row"><span>Clients</span><b>3</b></div>
-        <div class="nf-stat-row"><span>Technologies</span><b>30+</b></div>
-        <div class="nf-stat-row"><span>Années d'expérience</span><b>5+</b></div>
-        <div class="nf-stat-row"><span>Commits GitHub</span><b>200+</b></div>
-        <div class="nf-stat-row"><span>Stack favori</span><b>React</b></div>
+        <div class="nf-side-lbl" data-i18n="stats_label">Statistiques</div>
+        <div class="nf-stat-row"><span data-i18n="stat_projects">Projets</span><b>5+</b></div>
+        <div class="nf-stat-row"><span data-i18n="stat_clients">Clients</span><b>3</b></div>
+        <div class="nf-stat-row"><span data-i18n="stat_tech">Technologies</span><b>30+</b></div>
+        <div class="nf-stat-row"><span data-i18n="stat_years">Années d'expérience</span><b>5+</b></div>
+        <div class="nf-stat-row"><span data-i18n="stat_commits">Commits GitHub</span><b>200+</b></div>
+        <div class="nf-stat-row"><span data-i18n="stat_stack">Stack favori</span><b>React</b></div>
       </div>
       <div class="nf-side-block">
-        <div class="nf-side-lbl">Genres</div>
-        <div class="nf-genre-tags"><span>Développement Web</span><span>Cybersécurité</span><span>Réseaux</span><span>Cloud</span></div>
+        <div class="nf-side-lbl" data-i18n="genres_label">Genres</div>
+        <div class="nf-genre-tags"><span data-i18n="genre_web">Développement Web</span><span data-i18n="genre_cyber">Cybersécurité</span><span data-i18n="genre_network">Réseaux</span><span>Cloud</span></div>
       </div>
       <div class="nf-side-block">
-        <div class="nf-side-lbl">Ce portfolio</div>
+        <div class="nf-side-lbl" data-i18n="portfolio_label">Ce portfolio</div>
         <div class="nf-genre-tags"><span>HTML/CSS/JS</span><span>Vercel</span></div>
       </div>
     </aside>
@@ -506,7 +509,7 @@
 <!-- Rows -->
 <main class="nf-rows">
   <section class="nf-row nf-reveal" id="projets">
-    <h2 class="nf-row-title">Projets Web</h2>
+    <h2 class="nf-row-title" data-i18n="row_projects">Projets Web</h2>
     <div class="nf-row-wrap">
       <button class="nf-row-arrow l" data-scroll="projets" data-dir="-1"><i class="fa-solid fa-chevron-left"></i></button>
       <div class="nf-row-track" id="track-projets"></div>
@@ -515,7 +518,7 @@
   </section>
 
   <section class="nf-row nf-reveal" id="competences">
-    <h2 class="nf-row-title">Compétences &amp; Stack</h2>
+    <h2 class="nf-row-title" data-i18n="row_skills">Compétences &amp; Stack</h2>
     <div class="nf-row-wrap">
       <button class="nf-row-arrow l" data-scroll="competences" data-dir="-1"><i class="fa-solid fa-chevron-left"></i></button>
       <div class="nf-row-track" id="track-competences"></div>
@@ -524,7 +527,7 @@
   </section>
 
   <section class="nf-row nf-reveal" id="parcours">
-    <h2 class="nf-row-title">Parcours Professionnel</h2>
+    <h2 class="nf-row-title" data-i18n="row_career">Parcours Professionnel</h2>
     <div class="nf-row-wrap">
       <button class="nf-row-arrow l" data-scroll="parcours" data-dir="-1"><i class="fa-solid fa-chevron-left"></i></button>
       <div class="nf-row-track" id="track-parcours"></div>
@@ -533,7 +536,7 @@
   </section>
 
   <section class="nf-row nf-reveal" id="maliste">
-    <h2 class="nf-row-title">Ma Liste</h2>
+    <h2 class="nf-row-title" data-i18n="row_mylist">Ma Liste</h2>
     <div class="nf-row-wrap">
       <button class="nf-row-arrow l" data-scroll="maliste" data-dir="-1"><i class="fa-solid fa-chevron-left"></i></button>
       <div class="nf-row-track" id="track-maliste"></div>
@@ -545,22 +548,22 @@
 <!-- Contact CTA -->
 <section class="nf-cta nf-reveal" id="contact">
   <div class="nf-cta-inner">
-    <h2>Une mission en tête ?</h2>
-    <p>Disponible pour des missions freelance &amp; collaborations depuis Lomé, Togo 🇹🇬</p>
+    <h2 data-i18n="cta_title">Une mission en tête ?</h2>
+    <p data-i18n="cta_sub">Disponible pour des missions freelance &amp; collaborations depuis Lomé, Togo 🇹🇬</p>
     <div class="nf-contact-grid">
       <div>
-        <a href="mailto:ahiafor.credo@gmail.com" class="ct-link"><div class="ct-icon" style="background:rgba(52,211,153,.1);color:#34d399"><i class="fa-solid fa-envelope"></i></div><div class="ct-info"><div class="ct-plat" style="color:#34d399">EMAIL</div><div class="ct-val">ahiafor.credo@gmail.com</div></div><span class="ct-arr">↗</span></a>
-        <a href="tel:+22892236379" class="ct-link"><div class="ct-icon" style="background:rgba(147,51,234,.1);color:#a855f7"><i class="fa-solid fa-phone"></i></div><div class="ct-info"><div class="ct-plat" style="color:#a855f7">TÉLÉPHONE</div><div class="ct-val">+228 92 23 63 79</div></div><span class="ct-arr">↗</span></a>
+        <a href="mailto:ahiafor.credo@gmail.com" class="ct-link"><div class="ct-icon" style="background:rgba(52,211,153,.1);color:#34d399"><i class="fa-solid fa-envelope"></i></div><div class="ct-info"><div class="ct-plat" style="color:#34d399" data-i18n="ct_email">EMAIL</div><div class="ct-val">ahiafor.credo@gmail.com</div></div><span class="ct-arr">↗</span></a>
+        <a href="tel:+22892236379" class="ct-link"><div class="ct-icon" style="background:rgba(147,51,234,.1);color:#a855f7"><i class="fa-solid fa-phone"></i></div><div class="ct-info"><div class="ct-plat" style="color:#a855f7" data-i18n="ct_phone">TÉLÉPHONE</div><div class="ct-val">+228 92 23 63 79</div></div><span class="ct-arr">↗</span></a>
         <a href="https://www.linkedin.com/in/credoahiafor" target="_blank" rel="noopener" class="ct-link"><div class="ct-icon" style="background:rgba(10,102,194,.12);color:#2ea1ff"><i class="fa-brands fa-linkedin"></i></div><div class="ct-info"><div class="ct-plat" style="color:#2ea1ff">LINKEDIN</div><div class="ct-val">linkedin.com/in/credoahiafor</div></div><span class="ct-arr">↗</span></a>
         <a href="https://github.com/GRIIINDER" target="_blank" rel="noopener" class="ct-link"><div class="ct-icon" style="background:rgba(255,255,255,.08);color:#e2e2e2"><i class="fa-brands fa-github"></i></div><div class="ct-info"><div class="ct-plat" style="color:#e2e2e2">GITHUB</div><div class="ct-val">github.com/GRIIINDER</div></div><span class="ct-arr">↗</span></a>
-        <div class="ct-link" style="pointer-events:none"><div class="ct-icon" style="background:rgba(224,100,50,.1);color:var(--brand)"><i class="fa-solid fa-location-dot"></i></div><div class="ct-info"><div class="ct-plat" style="color:var(--brand)">LOCALISATION</div><div class="ct-val">Segbé-Zanvi · Lomé, Togo</div></div></div>
+        <div class="ct-link" style="pointer-events:none"><div class="ct-icon" style="background:rgba(224,100,50,.1);color:var(--brand)"><i class="fa-solid fa-location-dot"></i></div><div class="ct-info"><div class="ct-plat" style="color:var(--brand)" data-i18n="ct_location">LOCALISATION</div><div class="ct-val">Segbé-Zanvi · Lomé, Togo</div></div></div>
       </div>
       <form class="nf-form" id="contact-form" action="https://formspree.io/f/mljdrjvv" method="POST">
-        <div><label class="cf-lbl" for="cf-name">Votre nom *</label><input type="text" id="cf-name" name="name" required class="cf-in" placeholder="John Doe"></div>
-        <div><label class="cf-lbl" for="cf-email">Votre email *</label><input type="email" id="cf-email" name="email" required class="cf-in" placeholder="john@example.com"></div>
-        <div><label class="cf-lbl" for="cf-sub">Sujet</label><input type="text" id="cf-sub" name="subject" class="cf-in" placeholder="Collaboration freelance…"></div>
-        <div><label class="cf-lbl" for="cf-msg">Message *</label><textarea id="cf-msg" name="message" required class="cf-ta" placeholder="Votre message…"></textarea></div>
-        <div><button type="submit" class="cf-sub cf-btn"><i class="fa-solid fa-paper-plane"></i> Envoyer le message</button><div class="cf-ok" id="cf-ok">Message envoyé avec succès ✓</div></div>
+        <div><label class="cf-lbl" for="cf-name" data-i18n="form_name">Votre nom *</label><input type="text" id="cf-name" name="name" required class="cf-in" data-i18n-ph="form_name_ph" placeholder="John Doe"></div>
+        <div><label class="cf-lbl" for="cf-email" data-i18n="form_email">Votre email *</label><input type="email" id="cf-email" name="email" required class="cf-in" placeholder="john@example.com"></div>
+        <div><label class="cf-lbl" for="cf-sub" data-i18n="form_subject">Sujet</label><input type="text" id="cf-sub" name="subject" class="cf-in" data-i18n-ph="form_subject_ph" placeholder="Collaboration freelance…"></div>
+        <div><label class="cf-lbl" for="cf-msg" data-i18n="form_message">Message *</label><textarea id="cf-msg" name="message" required class="cf-ta" data-i18n-ph="form_message_ph" placeholder="Votre message…"></textarea></div>
+        <div><button type="submit" class="cf-sub cf-btn"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="form_submit">Envoyer le message</span></button><div class="cf-ok" id="cf-ok" data-i18n="form_success">Message envoyé avec succès ✓</div></div>
       </form>
     </div>
   </div>
@@ -576,28 +579,28 @@
       <a href="tel:+22892236379" aria-label="Téléphone"><i class="fa-solid fa-phone"></i></a>
     </div>
     <div class="nf-footer-links">
-      <a data-sec="about">À propos</a>
-      <a data-sec="projets">Projets</a>
-      <a data-sec="competences">Compétences</a>
-      <a data-sec="parcours">Parcours</a>
-      <a href="/assets/Credo_Ahiafor_CV.pdf" download>CV (PDF)</a>
-      <a href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener">Code source</a>
-      <a href="mailto:ahiafor.credo@gmail.com">Email</a>
-      <a data-sec="contact">Contact</a>
+      <a data-sec="about" data-i18n="footer_about">À propos</a>
+      <a data-sec="projets" data-i18n="nav_projects">Projets</a>
+      <a data-sec="competences" data-i18n="nav_skills">Compétences</a>
+      <a data-sec="parcours" data-i18n="nav_career">Parcours</a>
+      <a href="/assets/Credo_Ahiafor_CV.pdf" download data-i18n="footer_cv">CV (PDF)</a>
+      <a href="https://github.com/GRIIINDER/portfolio-credo" target="_blank" rel="noopener" data-i18n="footer_source">Code source</a>
+      <a href="mailto:ahiafor.credo@gmail.com" data-i18n="footer_email">Email</a>
+      <a data-sec="contact" data-i18n="nav_contact">Contact</a>
     </div>
     <div class="nf-footer-meta"><i class="fa-solid fa-earth-africa"></i> Lomé, Togo 🇹🇬</div>
-    <div class="nf-footer-copy">Ce portfolio a été conçu et développé par Credo Ahiafor. Non autorisé à copier ou reproduire sans permission écrite préalable.<br>© 2026 Credo Ahiafor · Tous droits réservés · Made with ❤ from Lomé, Togo</div>
+    <div class="nf-footer-copy" data-i18n-html="footer_copy">Ce portfolio a été conçu et développé par Credo Ahiafor. Non autorisé à copier ou reproduire sans permission écrite préalable.<br>© 2026 Credo Ahiafor · Tous droits réservés · Made with ❤ from Lomé, Togo</div>
   </div>
 </footer>
 
 <!-- Mobile nav -->
 <nav id="nf-mob">
   <div class="nf-mob-row">
-    <button class="nf-mob-i on" data-sec="home"><i class="fa-solid fa-house"></i><span>Accueil</span></button>
-    <button class="nf-mob-i" data-sec="about"><i class="fa-solid fa-user"></i><span>Profil</span></button>
-    <button class="nf-mob-i" data-sec="projets"><i class="fa-solid fa-clapperboard"></i><span>Projets</span></button>
+    <button class="nf-mob-i on" data-sec="home"><i class="fa-solid fa-house"></i><span data-i18n="nav_home">Accueil</span></button>
+    <button class="nf-mob-i" data-sec="about"><i class="fa-solid fa-user"></i><span data-i18n="mob_profile">Profil</span></button>
+    <button class="nf-mob-i" data-sec="projets"><i class="fa-solid fa-clapperboard"></i><span data-i18n="nav_projects">Projets</span></button>
     <button class="nf-mob-i" data-sec="competences"><i class="fa-solid fa-code"></i><span>Skills</span></button>
-    <button class="nf-mob-i" data-sec="contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></button>
+    <button class="nf-mob-i" data-sec="contact"><i class="fa-solid fa-envelope"></i><span data-i18n="nav_contact">Contact</span></button>
   </div>
 </nav>
 
@@ -611,7 +614,7 @@
 
 <!-- Search overlay -->
 <div class="nf-search-overlay" id="nf-search-overlay">
-  <div class="nf-search-title">Résultats pour « <span id="nf-search-term"></span> »</div>
+  <div class="nf-search-title" id="nf-search-title"></div>
   <div class="nf-search-grid" id="nf-search-grid"></div>
 </div>
 
@@ -619,59 +622,185 @@
 <div class="nf-toast" id="nf-toast"></div>
 
 <script>
+/* ── i18n ── */
+let LANG = localStorage.getItem('nf_lang') === 'en' ? 'en' : 'fr';
+function L(field){
+  if(field && typeof field === 'object' && !Array.isArray(field)) return field[LANG] || field.fr || field.en || '';
+  return field;
+}
+function Lt(arr){
+  return (arr||[]).map(function(t){ return L(t); });
+}
+const UI = {
+  search_aria:{fr:'Rechercher',en:'Search'},
+  search_ph:{fr:'Projets, compétences…',en:'Projects, skills…'},
+  bell_title:{fr:'Disponibilité',en:'Availability'},
+  notif_title:{fr:'Nouvelle disponibilité',en:'New availability'},
+  notif_body:{fr:'Credo est disponible pour des missions freelance & collaborations depuis Lomé, Togo 🇹🇬.',en:'Credo is available for freelance work & collaborations from Lomé, Togo 🇹🇬.'},
+  notif_cta:{fr:'Me contacter',en:'Contact me'},
+  menu_cv:{fr:'Télécharger le CV',en:'Download CV'},
+  menu_contact:{fr:'Me contacter',en:'Contact me'},
+  nav_home:{fr:'Accueil',en:'Home'},
+  nav_about:{fr:'À propos',en:'About'},
+  nav_projects:{fr:'Projets',en:'Projects'},
+  nav_skills:{fr:'Compétences',en:'Skills'},
+  nav_career:{fr:'Parcours',en:'Career'},
+  nav_contact:{fr:'Contact',en:'Contact'},
+  mob_profile:{fr:'Profil',en:'Profile'},
+  hero_tag:{fr:'SÉRIE ORIGINALE · PORTFOLIO 2026',en:'ORIGINAL SERIES · PORTFOLIO 2026'},
+  hero_match:{fr:'98% de correspondance',en:'98% Match'},
+  hero_freelance:{fr:'FREELANCE',en:'FREELANCE'},
+  hero_exp:{fr:"5 ans d'expérience",en:'5 years of experience'},
+  hero_avail:{fr:'🇹🇬 Disponible pour missions freelance',en:'🇹🇬 Available for freelance work'},
+  hero_desc:{fr:"Développeur web freelance spécialisé en réseaux & sécurité, basé à Lomé, Togo. Du câble au code : sites vitrines, e-commerce, applications métier et infrastructures réseau sécurisées.",en:"Freelance web developer specializing in networks & security, based in Lomé, Togo. From cable to code: showcase sites, e-commerce, business applications and secure network infrastructure."},
+  hero_btn_play:{fr:'Voir mes projets',en:'View my projects'},
+  hero_btn_info:{fr:"Plus d'infos",en:'More info'},
+  hero_mute_title:{fr:'Son',en:'Sound'},
+  hero_mute_aria:{fr:'Activer/couper le son',en:'Turn sound on/off'},
+  about_role:{fr:'Développeur Web · Réseaux & Sécurité · Freelance',en:'Web Developer · Networks & Security · Freelance'},
+  about_p1:{fr:`Bonjour ! Je suis <strong>Credo Ahiafor</strong>, <strong>développeur web freelance</strong> spécialisé en <strong>réseaux &amp; sécurité</strong>, basé à <strong>Lomé, Togo</strong>. Je construis des systèmes web robustes et des infrastructures réseau sécurisées — du câble au code.`,en:`Hi! I'm <strong>Credo Ahiafor</strong>, a <strong>freelance web developer</strong> specializing in <strong>networks &amp; security</strong>, based in <strong>Lomé, Togo</strong>. I build robust web systems and secure network infrastructure — from cable to code.`},
+  about_p2:{fr:`Actuellement en <strong>Master 2 Systèmes, Réseaux &amp; Sécurité</strong> à l'ESGIS Togo, je combine expertise technique et sens pratique pour livrer des solutions qui marchent vraiment.`,en:`Currently completing a <strong>Master's in Systems, Networks &amp; Security</strong> at ESGIS Togo, I combine technical expertise with practical sense to deliver solutions that actually work.`},
+  focus_label:{fr:'Focus actuel',en:'Current focus'},
+  focus_1:{fr:'🌐 Développement web freelance — Cabinet BEGO, Afinah Closet',en:'🌐 Freelance web development — Cabinet BEGO, Afinah Closet'},
+  focus_2:{fr:'🔒 Cybersécurité & infrastructure réseau Cisco',en:'🔒 Cybersecurity & Cisco network infrastructure'},
+  focus_3:{fr:'⚛️ Applications React full-stack & WordPress RGPD',en:'⚛️ Full-stack React apps & GDPR-compliant WordPress'},
+  focus_4:{fr:'☁️ Cloud Azure & virtualisation serveurs',en:'☁️ Azure cloud & server virtualization'},
+  focus_5:{fr:'🛒 E-commerce Shopify & WooCommerce',en:'🛒 Shopify & WooCommerce e-commerce'},
+  focus_6:{fr:'📚 Toujours apprenant, toujours en construction',en:'📚 Always learning, always under construction'},
+  stats_label:{fr:'Statistiques',en:'Stats'},
+  stat_projects:{fr:'Projets',en:'Projects'},
+  stat_clients:{fr:'Clients',en:'Clients'},
+  stat_tech:{fr:'Technologies',en:'Technologies'},
+  stat_years:{fr:"Années d'expérience",en:'Years of experience'},
+  stat_commits:{fr:'Commits GitHub',en:'GitHub commits'},
+  stat_stack:{fr:'Stack favori',en:'Favorite stack'},
+  genres_label:{fr:'Genres',en:'Genres'},
+  genre_web:{fr:'Développement Web',en:'Web Development'},
+  genre_cyber:{fr:'Cybersécurité',en:'Cybersecurity'},
+  genre_network:{fr:'Réseaux',en:'Networks'},
+  portfolio_label:{fr:'Ce portfolio',en:'This portfolio'},
+  row_projects:{fr:'Projets Web',en:'Web Projects'},
+  row_skills:{fr:'Compétences & Stack',en:'Skills & Stack'},
+  row_career:{fr:'Parcours Professionnel',en:'Professional Career'},
+  row_mylist:{fr:'Ma Liste',en:'My List'},
+  cta_title:{fr:'Une mission en tête ?',en:'Got a project in mind?'},
+  cta_sub:{fr:'Disponible pour des missions freelance & collaborations depuis Lomé, Togo 🇹🇬',en:'Available for freelance work & collaborations from Lomé, Togo 🇹🇬'},
+  ct_email:{fr:'EMAIL',en:'EMAIL'},
+  ct_phone:{fr:'TÉLÉPHONE',en:'PHONE'},
+  ct_location:{fr:'LOCALISATION',en:'LOCATION'},
+  form_name:{fr:'Votre nom *',en:'Your name *'},
+  form_email:{fr:'Votre email *',en:'Your email *'},
+  form_subject:{fr:'Sujet',en:'Subject'},
+  form_message:{fr:'Message *',en:'Message *'},
+  form_name_ph:{fr:'John Doe',en:'John Doe'},
+  form_subject_ph:{fr:'Collaboration freelance…',en:'Freelance collaboration…'},
+  form_message_ph:{fr:'Votre message…',en:'Your message…'},
+  form_submit:{fr:'Envoyer le message',en:'Send message'},
+  form_sending:{fr:'Envoi…',en:'Sending…'},
+  form_sent:{fr:'Envoyé',en:'Sent'},
+  form_success:{fr:'Message envoyé avec succès ✓',en:'Message sent successfully ✓'},
+  form_error:{fr:'Erreur. Contactez-moi directement par email.',en:'Error. Please contact me directly by email.'},
+  footer_about:{fr:'À propos',en:'About'},
+  footer_cv:{fr:'CV (PDF)',en:'Resume (PDF)'},
+  footer_source:{fr:'Code source',en:'Source code'},
+  footer_email:{fr:'Email',en:'Email'},
+  footer_copy:{fr:`Ce portfolio a été conçu et développé par Credo Ahiafor. Non autorisé à copier ou reproduire sans permission écrite préalable.<br>© 2026 Credo Ahiafor · Tous droits réservés · Made with ❤ from Lomé, Togo`,en:`This portfolio was designed and built by Credo Ahiafor. Not authorized to copy or reproduce without prior written permission.<br>© 2026 Credo Ahiafor · All rights reserved · Made with ❤ from Lomé, Togo`},
+  gate_title:{fr:'Qui regarde ?',en:"Who's watching?"},
+  gate_credo:{fr:'Crédo',en:'Credo'},
+  gate_recruiter:{fr:'Recruteur',en:'Recruiter'},
+  gate_dev:{fr:'Développeur',en:'Developer'},
+  gate_add:{fr:'Ajouter un profil',en:'Add Profile'},
+  gate_manage:{fr:'Gérer les profils',en:'Manage Profiles'},
+  gate_done:{fr:'Terminé',en:'Done'},
+  card_mylist:{fr:'Ma Liste',en:'My List'},
+  card_remove:{fr:'Retirer',en:'Remove'},
+  card_like:{fr:"J'aime",en:'Like'},
+  card_moreinfo:{fr:"Plus d'infos",en:'More info'},
+  card_visit:{fr:'Voir le site',en:'Visit site'},
+  card_open:{fr:'Ouvrir',en:'Open'},
+  card_preview:{fr:'Aperçu',en:'Preview'},
+  card_match:{fr:'correspondance',en:'match'},
+  card_ongoing:{fr:'EN COURS',en:'ONGOING'},
+  modal_download:{fr:'Télécharger',en:'Download'},
+  modal_visit:{fr:'Voir le site',en:'Visit site'},
+  modal_private:{fr:'Accès privé',en:'Private access'},
+  search_results_for:{fr:'Résultats pour',en:'Results for'},
+  search_empty_prefix:{fr:'Aucun résultat pour',en:'No results for'},
+  search_empty_suffix:{fr:'Essayez « projets », « React », « Cisco »…',en:'Try "projects", "React", "Cisco"…'},
+  search_q_open:{fr:'«',en:'"'},
+  search_q_close:{fr:'»',en:'"'},
+  toast_added:{fr:'ajouté à Ma Liste',en:'added to My List'},
+  toast_removed:{fr:'retiré de Ma Liste',en:'removed from My List'}
+};
+function t(key){ return UI[key] ? UI[key][LANG] : key; }
+
+function applyI18n(){
+  document.documentElement.lang = LANG;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){ el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){ el.innerHTML = t(el.dataset.i18nHtml); });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){ el.placeholder = t(el.dataset.i18nPh); });
+  document.querySelectorAll('[data-i18n-title]').forEach(function(el){ el.title = t(el.dataset.i18nTitle); });
+  document.querySelectorAll('[data-i18n-aria]').forEach(function(el){ el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
+  const langBtn = document.getElementById('nf-lang-btn');
+  if(langBtn) langBtn.textContent = LANG === 'fr' ? 'EN' : 'FR';
+  const manageBtn = document.getElementById('nf-profiles-manage');
+  const profilesRow = document.getElementById('nf-profiles-row');
+  if(manageBtn) manageBtn.textContent = (profilesRow && profilesRow.classList.contains('editing')) ? t('gate_done') : t('gate_manage');
+}
+
 /* ── Data ── */
 const ITEMS = {
-  'proj-bego': { type:'project', title:'Cabinet BEGO', sub:'WordPress · Vitrine · Professionnel', match:97, year:'2025', img:'/assets/images/afinahcloset.webp', icon:'fa-briefcase', grad:['#7c3aed','#1e1b4b'],
-    desc:`Site vitrine pour un cabinet d'études et de gestion des organisations. Design soigné, SEO optimisé, formulaire de contact, hébergement sécurisé conforme RGPD.`,
-    tags:['WordPress','WooCommerce','SEO','RGPD'], href:'https://cabinetbego.com' },
-  'proj-afinah': { type:'project', title:'Afinah Closet', sub:'Shopify · E-commerce · Mode Africaine', match:95, year:'2025', img:'/assets/images/cabinetbego.webp', icon:'fa-bag-shopping', grad:['#db2777','#3b0764'],
-    desc:`Boutique e-commerce de mode africaine modeste. Catalogue produits, gestion des commandes, paiement sécurisé et livraison internationale.`,
+  'proj-bego': { type:'project', title:'Cabinet BEGO', sub:{fr:'WordPress · Vitrine · Professionnel',en:'WordPress · Showcase · Professional'}, match:97, year:'2025', img:'/assets/images/afinahcloset.webp', icon:'fa-briefcase', grad:['#7c3aed','#1e1b4b'],
+    desc:{fr:`Site vitrine pour un cabinet d'études et de gestion des organisations. Design soigné, SEO optimisé, formulaire de contact, hébergement sécurisé conforme RGPD.`,en:`Showcase site for a business consulting and organizational management firm. Polished design, optimized SEO, contact form, secure GDPR-compliant hosting.`},
+    tags:['WordPress','WooCommerce','SEO',{fr:'RGPD',en:'GDPR'}], href:'https://cabinetbego.com' },
+  'proj-afinah': { type:'project', title:'Afinah Closet', sub:{fr:'Shopify · E-commerce · Mode Africaine',en:'Shopify · E-commerce · African Fashion'}, match:95, year:'2025', img:'/assets/images/cabinetbego.webp', icon:'fa-bag-shopping', grad:['#db2777','#3b0764'],
+    desc:{fr:`Boutique e-commerce de mode africaine modeste. Catalogue produits, gestion des commandes, paiement sécurisé et livraison internationale.`,en:`E-commerce store for modest African fashion. Product catalog, order management, secure payment and international shipping.`},
     tags:['Shopify','Liquid','CSS','E-commerce'], href:'https://afinahcloset.com' },
-  'proj-mogu': { type:'project', title:'MOGU Stock', sub:'React · Application métier · Gestion de stock', match:94, year:'2025', img:'/assets/images/mogustock.svg', icon:'fa-boxes-stacked', grad:['#0891b2','#0c4a6e'],
-    desc:`Application de gestion de stock sur mesure pour un franchisé MOGU : inventaire physique, mouvements de stock, ventes comptoir, réparations (ordres de travail), fournisseurs, bons de commande et fiches clients. Accès réservé — capture d'écran de l'interface de connexion.`,
+  'proj-mogu': { type:'project', title:'MOGU Stock', sub:{fr:'React · Application métier · Gestion de stock',en:'React · Business App · Inventory Management'}, match:94, year:'2025', img:'/assets/images/mogustock.svg', icon:'fa-boxes-stacked', grad:['#0891b2','#0c4a6e'],
+    desc:{fr:`Application de gestion de stock sur mesure pour un franchisé MOGU : inventaire physique, mouvements de stock, ventes comptoir, réparations (ordres de travail), fournisseurs, bons de commande et fiches clients. Accès réservé — capture d'écran de l'interface de connexion.`,en:`Custom inventory management application for a MOGU franchisee: physical inventory, stock movements, counter sales, repairs (work orders), suppliers, purchase orders and customer records. Private access — screenshot of the login interface.`},
     tags:['React','Express','PostgreSQL','Vercel'], locked:true },
-  'proj-oura': { type:'project', title:'OuraGrove', sub:'Évaluation · Concours · Bien-être', match:92, year:'2024', img:'/assets/images/ouragrove.webp', icon:'fa-scale-balanced', grad:['#65a30d','#14532d'],
-    desc:`Projet évalué en tant que membre du jury. Analyse de la conception, de l'expérience utilisateur et de la pertinence technique.`,
-    tags:['Jury','UX Review','Évaluation'], locked:true },
+  'proj-oura': { type:'project', title:'OuraGrove', sub:{fr:'Évaluation · Concours · Bien-être',en:'Judging · Competition · Wellness'}, match:92, year:'2024', img:'/assets/images/ouragrove.webp', icon:'fa-scale-balanced', grad:['#65a30d','#14532d'],
+    desc:{fr:`Projet évalué en tant que membre du jury. Analyse de la conception, de l'expérience utilisateur et de la pertinence technique.`,en:`Project evaluated as a jury member. Analysis of the design, user experience and technical relevance.`},
+    tags:[{fr:'Jury',en:'Judging'},'UX Review',{fr:'Évaluation',en:'Evaluation'}], locked:true },
 
-  'skill-dev': { type:'skill', title:'Développement Logiciel', sub:'11 compétences', icon:'fa-laptop-code', grad:['#6d28d9','#1e1b4b'],
-    desc:`Bases solides en génie logiciel — de l'algorithmique à la conception orientée objet, en passant par la modélisation et les méthodes agiles.`,
-    tags:['Python','Java','C / C++','C#','VB.NET','HTML5 / CSS3','POO','Design Patterns','UML','MERISE','Agile / Scrum','ITIL'] },
-  'skill-web': { type:'skill', title:'Web & CMS', sub:'11 compétences', icon:'fa-globe', grad:['#ea580c','#7c2d12'],
-    desc:`Développement web moderne, du CMS à l'application full-stack, avec une attention particulière à l'hébergement et à la sécurité.`,
-    tags:['WordPress','Shopify','WooCommerce','React','Next.js','Hébergement','DNS','SSL / TLS','Oracle','MySQL','PostgreSQL'] },
-  'skill-sys': { type:'skill', title:'Systèmes & Réseaux', sub:'10 compétences', icon:'fa-network-wired', grad:['#0e7490','#164e63'],
-    desc:`Administration systèmes et infrastructures réseau — datacenter, virtualisation et téléphonie, sur environnements Linux comme Windows.`,
-    tags:['Linux','Windows Server','PowerShell','Cisco','VLAN','Datacenter','Virtualisation','Clusters','Microsoft Exchange','Téléphonie / fibre'] },
-  'skill-sec': { type:'skill', title:'Cybersécurité & Cloud', sub:'11 compétences', icon:'fa-shield-halved', grad:['#b91c1c','#450a0a'],
-    desc:`Sécurité offensive et défensive, cryptographie et cloud — pour protéger les infrastructures et accompagner leur transformation numérique.`,
-    tags:['CEH','CCNP Security','Pare-feu','Cryptographie','Sécurité WLAN','Veritas','Droit du numérique','Azure','IoT','BI','IA / ML'] },
+  'skill-dev': { type:'skill', title:{fr:'Développement Logiciel',en:'Software Development'}, sub:{fr:'11 compétences',en:'11 skills'}, icon:'fa-laptop-code', grad:['#6d28d9','#1e1b4b'],
+    desc:{fr:`Bases solides en génie logiciel — de l'algorithmique à la conception orientée objet, en passant par la modélisation et les méthodes agiles.`,en:`Solid foundations in software engineering — from algorithms to object-oriented design, through modeling and agile methods.`},
+    tags:['Python','Java','C / C++','C#','VB.NET','HTML5 / CSS3',{fr:'POO',en:'OOP'},'Design Patterns','UML','MERISE','Agile / Scrum','ITIL'] },
+  'skill-web': { type:'skill', title:'Web & CMS', sub:{fr:'11 compétences',en:'11 skills'}, icon:'fa-globe', grad:['#ea580c','#7c2d12'],
+    desc:{fr:`Développement web moderne, du CMS à l'application full-stack, avec une attention particulière à l'hébergement et à la sécurité.`,en:`Modern web development, from CMS to full-stack applications, with particular attention to hosting and security.`},
+    tags:['WordPress','Shopify','WooCommerce','React','Next.js',{fr:'Hébergement',en:'Hosting'},'DNS','SSL / TLS','Oracle','MySQL','PostgreSQL'] },
+  'skill-sys': { type:'skill', title:{fr:'Systèmes & Réseaux',en:'Systems & Networks'}, sub:{fr:'10 compétences',en:'10 skills'}, icon:'fa-network-wired', grad:['#0e7490','#164e63'],
+    desc:{fr:`Administration systèmes et infrastructures réseau — datacenter, virtualisation et téléphonie, sur environnements Linux comme Windows.`,en:`Systems administration and network infrastructure — datacenter, virtualization and telephony, on both Linux and Windows environments.`},
+    tags:['Linux','Windows Server','PowerShell','Cisco','VLAN','Datacenter',{fr:'Virtualisation',en:'Virtualization'},'Clusters','Microsoft Exchange',{fr:'Téléphonie / fibre',en:'Telephony / Fiber'}] },
+  'skill-sec': { type:'skill', title:{fr:'Cybersécurité & Cloud',en:'Cybersecurity & Cloud'}, sub:{fr:'11 compétences',en:'11 skills'}, icon:'fa-shield-halved', grad:['#b91c1c','#450a0a'],
+    desc:{fr:`Sécurité offensive et défensive, cryptographie et cloud — pour protéger les infrastructures et accompagner leur transformation numérique.`,en:`Offensive and defensive security, cryptography and cloud — protecting infrastructure and supporting digital transformation.`},
+    tags:['CEH','CCNP Security',{fr:'Pare-feu',en:'Firewall'},{fr:'Cryptographie',en:'Cryptography'},{fr:'Sécurité WLAN',en:'WLAN Security'},'Veritas',{fr:'Droit du numérique',en:'Digital Law'},'Azure','IoT','BI',{fr:'IA / ML',en:'AI / ML'}] },
 
-  'exp-freelance': { type:'exp', title:'Développeur Web Freelance', sub:'Indépendant · Lomé, Togo', date:"Sept. 2025 — Présent", now:true, icon:'fa-briefcase', grad:['#334155','#0f172a'],
-    desc:`Création et maintenance de sites web professionnels. Projets WordPress RGPD, Shopify e-commerce.`,
-    tags:['WordPress','Shopify','React','Next.js','RGPD'] },
-  'exp-cfao': { type:'exp', title:'Stagiaire Technicien Réseau', sub:'CFAO Infrastructure · Lomé, Togo', date:'Fév. — Juin 2022', icon:'fa-server', grad:['#334155','#0f172a'],
-    desc:`Configuration et mise en service d'équipements réseau. Maintenance préventive, résolution d'incidents, installation d'imprimantes réseau.`,
+  'exp-freelance': { type:'exp', title:{fr:'Développeur Web Freelance',en:'Freelance Web Developer'}, sub:{fr:'Indépendant · Lomé, Togo',en:'Independent · Lomé, Togo'}, date:{fr:"Sept. 2025 — Présent",en:'Sept 2025 — Present'}, now:true, icon:'fa-briefcase', grad:['#334155','#0f172a'],
+    desc:{fr:`Création et maintenance de sites web professionnels. Projets WordPress RGPD, Shopify e-commerce.`,en:`Building and maintaining professional websites. GDPR-compliant WordPress projects, Shopify e-commerce.`},
+    tags:['WordPress','Shopify','React','Next.js',{fr:'RGPD',en:'GDPR'}] },
+  'exp-cfao': { type:'exp', title:{fr:'Stagiaire Technicien Réseau',en:'Network Technician Intern'}, sub:'CFAO Infrastructure · Lomé, Togo', date:{fr:'Fév. — Juin 2022',en:'Feb – Jun 2022'}, icon:'fa-server', grad:['#334155','#0f172a'],
+    desc:{fr:`Configuration et mise en service d'équipements réseau. Maintenance préventive, résolution d'incidents, installation d'imprimantes réseau.`,en:`Configuration and deployment of network equipment. Preventive maintenance, incident resolution, network printer installation.`},
     tags:['Cisco','Windows Server','VLAN','Maintenance'] },
-  'edu-m2': { type:'exp', title:'Master 2 — Systèmes, Réseaux & Sécurité', sub:'ESGIS Togo · Lomé', date:'En cours · 2026', now:true, icon:'fa-graduation-cap', grad:['#7c2d12','#1c1917'],
-    desc:`Formation avancée en cybersécurité, architectures réseaux enterprise, virtualisation et cloud.`,
-    tags:['Cybersécurité','Réseaux','Cloud','Virtualisation'] },
-  'edu-dev': { type:'exp', title:"Licence — Développement d'Applications", sub:'UCAO-ISTIN · Lomé', date:'2017 — 2020', icon:'fa-graduation-cap', grad:['#7c2d12','#1c1917'],
-    desc:`Génie logiciel, algorithmique, bases de données, développement orienté objet et conception UML.`,
-    tags:['POO','Java','UML','SQL'] },
-  'edu-res': { type:'exp', title:'Licence — Réseaux & Télécommunications', sub:'UCAO · Lomé', date:'2020 — 2023', icon:'fa-graduation-cap', grad:['#7c2d12','#1c1917'],
-    desc:`Architecture réseaux, protocoles de communication, télécommunications et sécurité des systèmes d'information.`,
-    tags:['Réseaux','Protocoles','Télécom'] },
-  'edu-bac': { type:'exp', title:'Baccalauréat — Série D', sub:'Collège Protestant · Kpalimé, Togo', date:'2017', icon:'fa-graduation-cap', grad:['#7c2d12','#1c1917'],
-    desc:`Baccalauréat scientifique, série D.`,
-    tags:['Mathématiques','SVT','Sciences'] },
+  'edu-m2': { type:'exp', title:{fr:'Master 2 — Systèmes, Réseaux & Sécurité',en:"Master's Degree — Systems, Networks & Security"}, sub:'ESGIS Togo · Lomé', date:{fr:'En cours · 2026',en:'Ongoing · 2026'}, now:true, icon:'fa-graduation-cap', grad:['#7c2d12','#1c1917'],
+    desc:{fr:`Formation avancée en cybersécurité, architectures réseaux enterprise, virtualisation et cloud.`,en:`Advanced training in cybersecurity, enterprise network architecture, virtualization and cloud.`},
+    tags:[{fr:'Cybersécurité',en:'Cybersecurity'},{fr:'Réseaux',en:'Networks'},'Cloud',{fr:'Virtualisation',en:'Virtualization'}] },
+  'edu-dev': { type:'exp', title:{fr:"Licence — Développement d'Applications",en:"Bachelor's Degree — Application Development"}, sub:'UCAO-ISTIN · Lomé', date:'2017 — 2020', icon:'fa-graduation-cap', grad:['#7c2d12','#1c1917'],
+    desc:{fr:`Génie logiciel, algorithmique, bases de données, développement orienté objet et conception UML.`,en:`Software engineering, algorithms, databases, object-oriented development and UML design.`},
+    tags:[{fr:'POO',en:'OOP'},'Java','UML','SQL'] },
+  'edu-res': { type:'exp', title:{fr:'Licence — Réseaux & Télécommunications',en:"Bachelor's Degree — Networks & Telecommunications"}, sub:'UCAO · Lomé', date:'2020 — 2023', icon:'fa-graduation-cap', grad:['#7c2d12','#1c1917'],
+    desc:{fr:`Architecture réseaux, protocoles de communication, télécommunications et sécurité des systèmes d'information.`,en:`Network architecture, communication protocols, telecommunications and information systems security.`},
+    tags:[{fr:'Réseaux',en:'Networks'},{fr:'Protocoles',en:'Protocols'},{fr:'Télécom',en:'Telecom'}] },
+  'edu-bac': { type:'exp', title:{fr:'Baccalauréat — Série D',en:'High School Diploma — Science Track'}, sub:'Collège Protestant · Kpalimé, Togo', date:'2017', icon:'fa-graduation-cap', grad:['#7c2d12','#1c1917'],
+    desc:{fr:`Baccalauréat scientifique, série D.`,en:`Science-track high school diploma (Série D).`},
+    tags:[{fr:'Mathématiques',en:'Mathematics'},{fr:'SVT',en:'Life & Earth Sciences'},{fr:'Sciences',en:'Science'}] },
 
-  'list-cv': { type:'list', title:'CV — Credo Ahiafor', sub:'PDF · Téléchargement', icon:'fa-file-pdf', grad:['#e06432','#7a2e0e'], fixed:true,
-    desc:`Le curriculum vitae complet de Credo Ahiafor, au format PDF.`, tags:[], href:'/assets/Credo_Ahiafor_CV.pdf', download:true },
+  'list-cv': { type:'list', title:{fr:'CV — Credo Ahiafor',en:'Resume — Credo Ahiafor'}, sub:{fr:'PDF · Téléchargement',en:'PDF · Download'}, icon:'fa-file-pdf', grad:['#e06432','#7a2e0e'], fixed:true,
+    desc:{fr:`Le curriculum vitae complet de Credo Ahiafor, au format PDF.`,en:`Credo Ahiafor's full resume, in PDF format.`}, tags:[], href:'/assets/Credo_Ahiafor_CV.pdf', download:true },
   'list-linkedin': { type:'list', title:'LinkedIn', sub:'linkedin.com/in/credoahiafor', icon:'fa-linkedin', brand:true, grad:['#0a66c2','#062c50'], fixed:true,
-    desc:`Profil professionnel de Credo Ahiafor sur LinkedIn.`, tags:[], href:'https://www.linkedin.com/in/credoahiafor' },
+    desc:{fr:`Profil professionnel de Credo Ahiafor sur LinkedIn.`,en:`Credo Ahiafor's professional profile on LinkedIn.`}, tags:[], href:'https://www.linkedin.com/in/credoahiafor' },
   'list-github': { type:'list', title:'GitHub', sub:'github.com/GRIIINDER', icon:'fa-github', brand:true, grad:['#24292e','#0d1117'], fixed:true,
-    desc:`Dépôts et code source de Credo Ahiafor, dont celui de ce portfolio.`, tags:[], href:'https://github.com/GRIIINDER' }
+    desc:{fr:`Dépôts et code source de Credo Ahiafor, dont celui de ce portfolio.`,en:`Credo Ahiafor's repositories and source code, including this portfolio.`}, tags:[], href:'https://github.com/GRIIINDER' }
 };
 const ROWS = {
   projets: ['proj-bego','proj-afinah','proj-mogu','proj-oura'],
@@ -689,7 +818,7 @@ function setLikes(arr){ try{ localStorage.setItem('nf_likes', JSON.stringify(arr
 function mediaHTML(id, small){
   const it = ITEMS[id];
   if(it.img){
-    return `<div class="nf-card-media"><img src="${it.img}" alt="${it.title}" loading="lazy">${it.locked?'<div class="nf-card-lockbadge"><i class="fa-solid fa-lock"></i></div>':''}</div>`;
+    return `<div class="nf-card-media"><img src="${it.img}" alt="${L(it.title)}" loading="lazy">${it.locked?'<div class="nf-card-lockbadge"><i class="fa-solid fa-lock"></i></div>':''}</div>`;
   }
   const g = it.grad || ['#333','#111'];
   const ic = it.brand ? `fa-brands ${it.icon}` : `fa-solid ${it.icon||'fa-star'}`;
@@ -705,16 +834,16 @@ function cardHTML(id, i){
       <div class="nf-card-inner" style="animation-delay:${delay}">
         <div class="nf-card-media" style="background:linear-gradient(135deg,${it.grad[0]},${it.grad[1]})">
           <i class="fa-solid ${it.icon} nf-genre-icon"></i>
-          <div class="nf-genre-title">${it.title}</div>
-          <div class="nf-genre-sub">${it.sub}</div>
+          <div class="nf-genre-title">${L(it.title)}</div>
+          <div class="nf-genre-sub">${L(it.sub)}</div>
         </div>
         <div class="nf-card-panel">
           <div class="nf-card-actions">
-            <button class="nf-round-btn ${inList?'added':''}" data-add="${id}" title="Ma Liste"><i class="fa-solid ${inList?'fa-check':'fa-plus'}"></i></button>
-            <button class="nf-round-btn ${liked?'liked':''}" data-like="${id}" title="J'aime"><i class="fa-${liked?'solid':'regular'} fa-thumbs-up"></i></button>
-            <button class="nf-round-btn more" data-info="${id}" title="Plus d'infos"><i class="fa-solid fa-chevron-down"></i></button>
+            <button class="nf-round-btn ${inList?'added':''}" data-add="${id}" title="${t('card_mylist')}"><i class="fa-solid ${inList?'fa-check':'fa-plus'}"></i></button>
+            <button class="nf-round-btn ${liked?'liked':''}" data-like="${id}" title="${t('card_like')}"><i class="fa-${liked?'solid':'regular'} fa-thumbs-up"></i></button>
+            <button class="nf-round-btn more" data-info="${id}" title="${t('card_moreinfo')}"><i class="fa-solid fa-chevron-down"></i></button>
           </div>
-          <div class="nf-card-sub">${it.tags.slice(0,3).join(' · ')}…</div>
+          <div class="nf-card-sub">${Lt(it.tags).slice(0,3).join(' · ')}…</div>
         </div>
       </div>
     </div>`;
@@ -723,21 +852,21 @@ function cardHTML(id, i){
     return `<div class="nf-card nf-card-ep" data-id="${id}" data-info="${id}">
       <div class="nf-card-inner" style="animation-delay:${delay}">
         <div class="nf-card-media" style="background:linear-gradient(135deg,${it.grad[0]},${it.grad[1]})">
-          ${it.now?`<div class="nf-ep-now">EN COURS</div>`:''}
+          ${it.now?`<div class="nf-ep-now">${t('card_ongoing')}</div>`:''}
           <i class="fa-solid ${it.icon}" style="font-size:34px;color:rgba(255,255,255,.85)"></i>
         </div>
         <div class="nf-ep-body">
-          <div class="nf-ep-date">${it.date}</div>
-          <div class="nf-ep-title">${it.title}</div>
-          <div class="nf-ep-org">${it.sub}</div>
+          <div class="nf-ep-date">${L(it.date)}</div>
+          <div class="nf-ep-title">${L(it.title)}</div>
+          <div class="nf-ep-org">${L(it.sub)}</div>
         </div>
         <div class="nf-card-panel">
           <div class="nf-card-actions">
-            <button class="nf-round-btn ${inList?'added':''}" data-add="${id}" title="Ma Liste"><i class="fa-solid ${inList?'fa-check':'fa-plus'}"></i></button>
-            <button class="nf-round-btn ${liked?'liked':''}" data-like="${id}" title="J'aime"><i class="fa-${liked?'solid':'regular'} fa-thumbs-up"></i></button>
-            <button class="nf-round-btn more" data-info="${id}" title="Plus d'infos"><i class="fa-solid fa-chevron-down"></i></button>
+            <button class="nf-round-btn ${inList?'added':''}" data-add="${id}" title="${t('card_mylist')}"><i class="fa-solid ${inList?'fa-check':'fa-plus'}"></i></button>
+            <button class="nf-round-btn ${liked?'liked':''}" data-like="${id}" title="${t('card_like')}"><i class="fa-${liked?'solid':'regular'} fa-thumbs-up"></i></button>
+            <button class="nf-round-btn more" data-info="${id}" title="${t('card_moreinfo')}"><i class="fa-solid fa-chevron-down"></i></button>
           </div>
-          <div class="nf-card-sub">${it.tags.join(' · ')}</div>
+          <div class="nf-card-sub">${Lt(it.tags).join(' · ')}</div>
         </div>
       </div>
     </div>`;
@@ -748,12 +877,12 @@ function cardHTML(id, i){
         ${mediaHTML(id)}
         <div class="nf-card-panel">
           <div class="nf-card-actions">
-            <button class="nf-round-btn primary" data-open="${id}" title="Ouvrir"><i class="fa-solid ${it.download?'fa-download':'fa-arrow-up-right-from-square'}"></i></button>
-            ${it.fixed?'':`<button class="nf-round-btn" data-add="${id}" title="Retirer"><i class="fa-solid fa-check"></i></button>`}
-            <button class="nf-round-btn more" data-info="${id}" title="Plus d'infos"><i class="fa-solid fa-chevron-down"></i></button>
+            <button class="nf-round-btn primary" data-open="${id}" title="${t('card_open')}"><i class="fa-solid ${it.download?'fa-download':'fa-arrow-up-right-from-square'}"></i></button>
+            ${it.fixed?'':`<button class="nf-round-btn" data-add="${id}" title="${t('card_remove')}"><i class="fa-solid fa-check"></i></button>`}
+            <button class="nf-round-btn more" data-info="${id}" title="${t('card_moreinfo')}"><i class="fa-solid fa-chevron-down"></i></button>
           </div>
-          <div class="nf-card-title">${it.title}</div>
-          <div class="nf-card-sub">${it.sub}</div>
+          <div class="nf-card-title">${L(it.title)}</div>
+          <div class="nf-card-sub">${L(it.sub)}</div>
         </div>
       </div>
     </div>`;
@@ -764,14 +893,14 @@ function cardHTML(id, i){
       ${mediaHTML(id)}
       <div class="nf-card-panel">
         <div class="nf-card-actions">
-          ${it.locked ? `<button class="nf-round-btn primary" data-info="${id}" title="Aperçu"><i class="fa-solid fa-eye"></i></button>` : `<button class="nf-round-btn primary" data-open="${id}" title="Voir le site"><i class="fa-solid fa-play"></i></button>`}
-          <button class="nf-round-btn ${inList?'added':''}" data-add="${id}" title="Ma Liste"><i class="fa-solid ${inList?'fa-check':'fa-plus'}"></i></button>
-          <button class="nf-round-btn ${liked?'liked':''}" data-like="${id}" title="J'aime"><i class="fa-${liked?'solid':'regular'} fa-thumbs-up"></i></button>
-          <button class="nf-round-btn more" data-info="${id}" title="Plus d'infos"><i class="fa-solid fa-chevron-down"></i></button>
+          ${it.locked ? `<button class="nf-round-btn primary" data-info="${id}" title="${t('card_preview')}"><i class="fa-solid fa-eye"></i></button>` : `<button class="nf-round-btn primary" data-open="${id}" title="${t('card_visit')}"><i class="fa-solid fa-play"></i></button>`}
+          <button class="nf-round-btn ${inList?'added':''}" data-add="${id}" title="${t('card_mylist')}"><i class="fa-solid ${inList?'fa-check':'fa-plus'}"></i></button>
+          <button class="nf-round-btn ${liked?'liked':''}" data-like="${id}" title="${t('card_like')}"><i class="fa-${liked?'solid':'regular'} fa-thumbs-up"></i></button>
+          <button class="nf-round-btn more" data-info="${id}" title="${t('card_moreinfo')}"><i class="fa-solid fa-chevron-down"></i></button>
         </div>
-        <div class="nf-card-title">${it.title}</div>
-        <div class="nf-card-meta"><span class="nf-match">${it.match}% correspondance</span><span class="nf-badge-outline" style="font-size:10px;padding:0 4px">HD</span><span>${it.year}</span></div>
-        <div class="nf-card-sub">${it.sub}</div>
+        <div class="nf-card-title">${L(it.title)}</div>
+        <div class="nf-card-meta"><span class="nf-match">${it.match}% ${t('card_match')}</span><span class="nf-badge-outline" style="font-size:10px;padding:0 4px">HD</span><span>${it.year}</span></div>
+        <div class="nf-card-sub">${L(it.sub)}</div>
       </div>
     </div>
   </div>`;
@@ -842,8 +971,8 @@ function bindCardEvents(){
       setMyList(list);
       syncAddButtons(id, !wasIn);
       renderMaListeRow();
-      const title = ITEMS[id] ? ITEMS[id].title : '';
-      showToast(wasIn ? `<i class="fa-solid fa-xmark"></i> « ${title} » retiré de Ma Liste` : `<i class="fa-solid fa-check"></i> « ${title} » ajouté à Ma Liste`);
+      const title = ITEMS[id] ? L(ITEMS[id].title) : '';
+      showToast(wasIn ? `<i class="fa-solid fa-xmark"></i> ${t('search_q_open')} ${title} ${t('search_q_close')} ${t('toast_removed')}` : `<i class="fa-solid fa-check"></i> ${t('search_q_open')} ${title} ${t('search_q_close')} ${t('toast_added')}`);
     };
   });
   document.querySelectorAll('[data-like]').forEach(function(btn){
@@ -875,34 +1004,34 @@ function openModal(id){
 
   let mediaHtml;
   if(it.img){
-    mediaHtml = `<div class="nf-modal-media"><img src="${it.img}" alt="${it.title}">
-      <div class="nf-modal-media-fade"></div><div class="nf-modal-media-title">${it.title}</div></div>`;
+    mediaHtml = `<div class="nf-modal-media"><img src="${it.img}" alt="${L(it.title)}">
+      <div class="nf-modal-media-fade"></div><div class="nf-modal-media-title">${L(it.title)}</div></div>`;
   } else {
     const g = it.grad || ['#333','#111'];
     const ic = it.brand ? `fa-brands ${it.icon}` : `fa-solid ${it.icon||'fa-star'}`;
     mediaHtml = `<div class="nf-modal-media icon" style="background:linear-gradient(135deg,${g[0]},${g[1]})"><i class="${ic}"></i>
-      <div class="nf-modal-media-fade"></div><div class="nf-modal-media-title">${it.title}</div></div>`;
+      <div class="nf-modal-media-fade"></div><div class="nf-modal-media-title">${L(it.title)}</div></div>`;
   }
 
   let metaHtml = '<div class="nf-modal-meta">';
-  if(it.match) metaHtml += `<span class="nf-match">${it.match}% correspondance</span>`;
+  if(it.match) metaHtml += `<span class="nf-match">${it.match}% ${t('card_match')}</span>`;
   if(it.year) metaHtml += `<span>${it.year}</span>`;
-  if(it.date) metaHtml += `<span>${it.date}</span>`;
-  if(it.now) metaHtml += `<span class="nf-badge-outline" style="color:var(--red);border-color:var(--red)">EN COURS</span>`;
-  if(it.sub) metaHtml += `<span>${it.sub}</span>`;
+  if(it.date) metaHtml += `<span>${L(it.date)}</span>`;
+  if(it.now) metaHtml += `<span class="nf-badge-outline" style="color:var(--red);border-color:var(--red)">${t('card_ongoing')}</span>`;
+  if(it.sub) metaHtml += `<span>${L(it.sub)}</span>`;
   metaHtml += '</div>';
 
   let actionsHtml = '<div class="nf-modal-actions">';
   if(it.href && !it.locked){
-    actionsHtml += `<button class="nf-btn nf-btn-primary" data-open="${id}"><i class="fa-solid ${it.download?'fa-download':'fa-play'}"></i> ${it.download?'Télécharger':'Voir le site'}</button>`;
+    actionsHtml += `<button class="nf-btn nf-btn-primary" data-open="${id}"><i class="fa-solid ${it.download?'fa-download':'fa-play'}"></i> ${it.download?t('modal_download'):t('modal_visit')}</button>`;
   } else if(it.locked){
-    actionsHtml += `<button class="nf-btn nf-btn-secondary" disabled style="opacity:.7;cursor:default"><i class="fa-solid fa-lock"></i> Accès privé</button>`;
+    actionsHtml += `<button class="nf-btn nf-btn-secondary" disabled style="opacity:.7;cursor:default"><i class="fa-solid fa-lock"></i> ${t('modal_private')}</button>`;
   }
-  actionsHtml += `<button class="nf-round-btn ${inList?'added':''}" data-add="${id}" title="Ma Liste"><i class="fa-solid ${inList?'fa-check':'fa-plus'}"></i></button>`;
+  actionsHtml += `<button class="nf-round-btn ${inList?'added':''}" data-add="${id}" title="${t('card_mylist')}"><i class="fa-solid ${inList?'fa-check':'fa-plus'}"></i></button>`;
   actionsHtml += '</div>';
 
-  content.innerHTML = mediaHtml + `<div class="nf-modal-body">${actionsHtml}${metaHtml}<p class="nf-modal-desc">${it.desc||''}</p>
-    <div class="nf-modal-tags">${(it.tags||[]).map(function(t){ return '<span>'+t+'</span>'; }).join('')}</div></div>`;
+  content.innerHTML = mediaHtml + `<div class="nf-modal-body">${actionsHtml}${metaHtml}<p class="nf-modal-desc">${L(it.desc)||''}</p>
+    <div class="nf-modal-tags">${Lt(it.tags).map(function(tag){ return '<span>'+tag+'</span>'; }).join('')}</div></div>`;
 
   bindCardEvents();
   overlay.classList.add('open');
@@ -1025,19 +1154,19 @@ function closeSearch(){
 function searchQuery(q){
   q = q.trim().toLowerCase();
   if(!q){ searchOverlay.classList.remove('open'); return; }
-  document.getElementById('nf-search-term').textContent = q;
+  document.getElementById('nf-search-title').innerHTML = `${t('search_results_for')} ${t('search_q_open')} <span>${q}</span> ${t('search_q_close')}`;
   const matches = Object.keys(ITEMS).filter(function(id){
     const it = ITEMS[id];
-    const hay = (it.title+' '+(it.sub||'')+' '+(it.tags||[]).join(' ')).toLowerCase();
+    const hay = (L(it.title)+' '+L(it.sub)+' '+Lt(it.tags).join(' ')).toLowerCase();
     return hay.includes(q);
   });
   const grid = document.getElementById('nf-search-grid');
   if(!matches.length){
-    grid.innerHTML = '<div class="nf-search-empty">Aucun résultat pour « '+q+' ». Essayez « projets », « React », « Cisco »…</div>';
+    grid.innerHTML = `<div class="nf-search-empty">${t('search_empty_prefix')} ${t('search_q_open')} ${q} ${t('search_q_close')}. ${t('search_empty_suffix')}</div>`;
   } else {
     grid.innerHTML = matches.map(function(id){
       const it = ITEMS[id];
-      return `<div class="nf-sr-card" data-info="${id}">${mediaHTML(id)}<div class="nf-card-title">${it.title}</div><div class="nf-card-sub">${it.sub||''}</div></div>`;
+      return `<div class="nf-sr-card" data-info="${id}">${mediaHTML(id)}<div class="nf-card-title">${L(it.title)}</div><div class="nf-card-sub">${L(it.sub)||''}</div></div>`;
     }).join('');
     grid.querySelectorAll('.nf-sr-card').forEach(function(el){
       el.addEventListener('click', function(){ closeSearch(); openModal(el.dataset.info); });
@@ -1062,14 +1191,14 @@ document.addEventListener('keydown', function(e){
   form.addEventListener('submit', async function(e){
     e.preventDefault();
     const btn = form.querySelector('.cf-btn'), ok = document.getElementById('cf-ok');
-    btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Envoi…';
+    btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ' + t('form_sending');
     try{
       const res = await fetch(form.action, { method:'POST', body:new FormData(form), headers:{ Accept:'application/json' } });
-      if(res.ok){ form.reset(); ok.style.display='block'; btn.innerHTML='<i class="fa-solid fa-check"></i> Envoyé'; }
+      if(res.ok){ form.reset(); ok.style.display='block'; btn.innerHTML='<i class="fa-solid fa-check"></i> ' + t('form_sent'); }
       else throw new Error();
     }catch(err){
-      btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Envoyer le message';
-      alert('Erreur. Contactez-moi directement par email.');
+      btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ' + t('form_submit');
+      alert(t('form_error'));
     }
   });
 })();
@@ -1110,7 +1239,7 @@ document.addEventListener('keydown', function(e){
   manageBtn.addEventListener('click', function(){
     editing = !editing;
     row.classList.toggle('editing', editing);
-    manageBtn.textContent = editing ? 'Terminé' : 'Gérer les profils';
+    manageBtn.textContent = editing ? t('gate_done') : t('gate_manage');
   });
 
   row.querySelectorAll('.nf-profile-tile').forEach(function(tile){
@@ -1121,7 +1250,21 @@ document.addEventListener('keydown', function(e){
   });
 })();
 
+/* ── Language toggle ── */
+const langBtn = document.getElementById('nf-lang-btn');
+if(langBtn){
+  langBtn.addEventListener('click', function(){
+    LANG = LANG === 'fr' ? 'en' : 'fr';
+    try{ localStorage.setItem('nf_lang', LANG); }catch(e){}
+    applyI18n();
+    renderRows();
+    closeModal();
+    closeSearch();
+  });
+}
+
 /* ── Init ── */
+applyI18n();
 renderRows();
 </script>
 
