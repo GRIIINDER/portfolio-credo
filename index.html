@@ -74,10 +74,12 @@
     #nf-header.on{ background:var(--bg); box-shadow:0 2px 14px rgba(0,0,0,.5); }
     .nf-header-l{ display:flex; align-items:center; gap:34px; min-width:0; }
     .nf-logo{ font-family:var(--f-display); color:var(--red); font-size:30px; letter-spacing:.03em; flex-shrink:0; cursor:pointer; }
-    .nf-nav{ display:flex; gap:20px; }
+    .nf-nav{ position:relative; display:flex; gap:20px; }
     .nf-nav-link{ font-size:14px; color:var(--gray-lt); white-space:nowrap; cursor:pointer; transition:color .15s; padding:4px 0; }
     .nf-nav-link:hover{ color:var(--white); }
     .nf-nav-link.on{ color:var(--white); font-weight:700; }
+    .nf-nav-indicator{ position:absolute; bottom:-8px; height:2px; background:var(--red); border-radius:2px; left:0; width:0; opacity:0; transition:left .35s cubic-bezier(.3,.8,.3,1), width .35s cubic-bezier(.3,.8,.3,1), opacity .2s ease; }
+    .nf-nav-indicator.on{ opacity:1; }
     .nf-header-r{ display:flex; align-items:center; gap:18px; flex-shrink:0; }
     .nf-icon-btn{ font-size:17px; color:var(--white); position:relative; width:22px; height:22px; display:flex; align-items:center; justify-content:center; }
     .nf-bell-dot{ position:absolute; top:-2px; right:-3px; width:7px; height:7px; border-radius:50%; background:var(--brand); border:1.5px solid var(--bg); animation:nfPulse 2.2s ease-in-out infinite; }
@@ -151,6 +153,8 @@
     /* Scroll-reveal utility, applied to sections below the hero */
     .nf-reveal{ opacity:0; transform:translateY(34px); transition:opacity .7s ease, transform .7s ease; }
     .nf-reveal.in{ opacity:1; transform:translateY(0); }
+    /* Rows animate card-by-card instead of as one block — cancel the block fade above */
+    .nf-row.nf-reveal{ opacity:1; transform:none; transition:none; }
 
     .nf-detail{ position:relative; z-index:3; background:var(--bg); padding:54px 4vw 20px; margin-top:-6vh; }
     .nf-detail-grid{ display:grid; grid-template-columns:1fr 300px; gap:52px; max-width:1300px; margin:0 auto; }
@@ -178,7 +182,8 @@
     /* ── Rows ── */
     .nf-rows{ position:relative; z-index:3; background:var(--bg); padding:8px 0 30px; }
     .nf-row{ margin-bottom:6px; position:relative; }
-    .nf-row-title{ font-size:1.35rem; font-weight:700; padding:0 4vw; margin-bottom:2px; }
+    .nf-row-title{ font-size:1.35rem; font-weight:700; padding:0 4vw; margin-bottom:2px; opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease; }
+    .nf-row.in .nf-row-title{ opacity:1; transform:translateY(0); }
     .nf-row-wrap{ position:relative; }
     .nf-row-track{ display:flex; flex-wrap:nowrap; gap:7px; overflow-x:auto; overflow-y:visible; padding:26px 4vw 40px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
     .nf-row-track::-webkit-scrollbar{ display:none; }
@@ -188,8 +193,10 @@
 
     .nf-card{ position:relative; flex:0 0 auto; width:250px; transform-origin:center 30%; transition:transform .22s ease, z-index 0s; z-index:1; cursor:pointer; }
     .nf-card:hover{ transform:scale(1.32); z-index:30; transition:transform .22s ease .35s, z-index 0s .35s; }
-    .nf-card-inner{ border-radius:4px; overflow:hidden; background:var(--card); box-shadow:0 2px 8px rgba(0,0,0,.5); transition:box-shadow .2s; }
+    .nf-card-inner{ border-radius:4px; overflow:hidden; background:var(--card); box-shadow:0 2px 8px rgba(0,0,0,.5); transition:box-shadow .2s; opacity:0; transform:translateY(24px); }
     .nf-card:hover .nf-card-inner{ box-shadow:0 18px 44px rgba(0,0,0,.8); }
+    @keyframes nfCardIn{ to{ opacity:1; transform:translateY(0); } }
+    .nf-row.in .nf-card-inner{ animation:nfCardIn .5s ease forwards; }
     .nf-card-media{ width:100%; aspect-ratio:16/9; position:relative; background:#232323; overflow:hidden; }
     .nf-card-media img{ width:100%; height:100%; object-fit:cover; }
     .nf-card-media.icon{ display:flex; align-items:center; justify-content:center; }
@@ -265,6 +272,11 @@
     .nf-sr-card .nf-card-title{ font-size:13px; font-weight:600; }
     .nf-sr-card .nf-card-sub{ font-size:11.5px; }
 
+    /* ── Toast ── */
+    .nf-toast{ position:fixed; left:50%; bottom:28px; z-index:3000; display:flex; align-items:center; gap:9px; background:#fff; color:#000; font-size:14px; font-weight:600; padding:12px 20px; border-radius:6px; box-shadow:0 14px 34px rgba(0,0,0,.5); opacity:0; visibility:hidden; transform:translate(-50%,16px); transition:opacity .3s ease, transform .3s ease, visibility 0s linear .3s; pointer-events:none; }
+    .nf-toast.show{ opacity:1; visibility:visible; transform:translate(-50%,0); transition:opacity .3s ease, transform .3s ease; }
+    .nf-toast i{ color:var(--red); font-size:13px; }
+
     /* ── Contact CTA ── */
     .nf-cta{ position:relative; background:#000; padding:80px 4vw 70px; text-align:center; border-top:8px solid #1a1a1a; overflow:hidden; }
     .nf-cta::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 60% at 50% 0%, rgba(229,9,20,.16), transparent 70%); }
@@ -328,6 +340,21 @@
       .nf-hero-mute{ display:none; }
     }
     @media(min-width:769px){ #nf-mob{ display:none; } }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce){
+      *, *::before, *::after{
+        animation-duration:.001ms !important;
+        animation-delay:0s !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.001ms !important;
+        transition-delay:0s !important;
+        scroll-behavior:auto !important;
+      }
+      .nf-hero-tag,.nf-hero-title,.nf-hero-meta,.nf-hero-desc,.nf-hero-btns,
+      .nf-reveal,.nf-row-title,.nf-card-inner{ opacity:1 !important; transform:none !important; }
+      #nf-profiles.hide{ transform:none !important; filter:none !important; }
+    }
   </style>
 </head>
 <body>
@@ -375,6 +402,7 @@
       <a class="nf-nav-link" data-sec="competences">Compétences</a>
       <a class="nf-nav-link" data-sec="parcours">Parcours</a>
       <a class="nf-nav-link" data-sec="contact">Contact</a>
+      <span class="nf-nav-indicator" id="nf-nav-indicator"></span>
     </nav>
   </div>
   <div class="nf-header-r">
@@ -587,6 +615,9 @@
   <div class="nf-search-grid" id="nf-search-grid"></div>
 </div>
 
+<!-- Toast -->
+<div class="nf-toast" id="nf-toast"></div>
+
 <script>
 /* ── Data ── */
 const ITEMS = {
@@ -664,13 +695,14 @@ function mediaHTML(id, small){
   const ic = it.brand ? `fa-brands ${it.icon}` : `fa-solid ${it.icon||'fa-star'}`;
   return `<div class="nf-card-media icon" style="background:linear-gradient(135deg,${g[0]},${g[1]})"><i class="${ic}"></i></div>`;
 }
-function cardHTML(id){
+function cardHTML(id, i){
   const it = ITEMS[id];
   const inList = getMyList().includes(id);
   const liked = getLikes().includes(id);
+  const delay = Math.min((i||0)*70, 420) + 'ms';
   if(it.type === 'skill'){
     return `<div class="nf-card nf-card-genre" data-id="${id}" data-info="${id}">
-      <div class="nf-card-inner">
+      <div class="nf-card-inner" style="animation-delay:${delay}">
         <div class="nf-card-media" style="background:linear-gradient(135deg,${it.grad[0]},${it.grad[1]})">
           <i class="fa-solid ${it.icon} nf-genre-icon"></i>
           <div class="nf-genre-title">${it.title}</div>
@@ -689,7 +721,7 @@ function cardHTML(id){
   }
   if(it.type === 'exp'){
     return `<div class="nf-card nf-card-ep" data-id="${id}" data-info="${id}">
-      <div class="nf-card-inner">
+      <div class="nf-card-inner" style="animation-delay:${delay}">
         <div class="nf-card-media" style="background:linear-gradient(135deg,${it.grad[0]},${it.grad[1]})">
           ${it.now?`<div class="nf-ep-now">EN COURS</div>`:''}
           <i class="fa-solid ${it.icon}" style="font-size:34px;color:rgba(255,255,255,.85)"></i>
@@ -712,7 +744,7 @@ function cardHTML(id){
   }
   if(it.type === 'list'){
     return `<div class="nf-card nf-card-list" data-id="${id}" data-info="${id}">
-      <div class="nf-card-inner">
+      <div class="nf-card-inner" style="animation-delay:${delay}">
         ${mediaHTML(id)}
         <div class="nf-card-panel">
           <div class="nf-card-actions">
@@ -728,7 +760,7 @@ function cardHTML(id){
   }
   /* project */
   return `<div class="nf-card" data-id="${id}" data-info="${id}">
-    <div class="nf-card-inner">
+    <div class="nf-card-inner" style="animation-delay:${delay}">
       ${mediaHTML(id)}
       <div class="nf-card-panel">
         <div class="nf-card-actions">
@@ -753,9 +785,45 @@ function renderRows(){
     if(row === 'maliste'){
       getMyList().forEach(function(id){ if(!ids.includes(id)) ids.push(id); });
     }
-    track.innerHTML = ids.map(cardHTML).join('');
+    track.innerHTML = ids.map(function(id, i){ return cardHTML(id, i); }).join('');
   });
   bindCardEvents();
+}
+
+/* Rebuilds only the "Ma Liste" row — the one row whose card list actually
+   changes on add/remove — so other rows don't replay their entrance animation. */
+function renderMaListeRow(){
+  const track = document.getElementById('track-maliste');
+  if(!track) return;
+  let ids = ROWS.maliste.slice();
+  getMyList().forEach(function(id){ if(!ids.includes(id)) ids.push(id); });
+  track.innerHTML = ids.map(function(id, i){ return cardHTML(id, i); }).join('');
+  bindCardEvents();
+}
+
+function syncAddButtons(id, inList){
+  document.querySelectorAll('[data-add="'+id+'"]').forEach(function(btn){
+    btn.classList.toggle('added', inList);
+    const icon = btn.querySelector('i');
+    if(icon) icon.className = 'fa-solid ' + (inList ? 'fa-check' : 'fa-plus');
+  });
+}
+function syncLikeButtons(id, liked){
+  document.querySelectorAll('[data-like="'+id+'"]').forEach(function(btn){
+    btn.classList.toggle('liked', liked);
+    const icon = btn.querySelector('i');
+    if(icon) icon.className = (liked ? 'fa-solid' : 'fa-regular') + ' fa-thumbs-up';
+  });
+}
+
+let toastTimer = null;
+function showToast(html){
+  const toast = document.getElementById('nf-toast');
+  if(!toast) return;
+  toast.innerHTML = html;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2600);
 }
 
 function bindCardEvents(){
@@ -768,20 +836,25 @@ function bindCardEvents(){
     btn.onclick = function(e){ e.stopPropagation();
       const id = btn.dataset.add;
       let list = getMyList();
-      if(list.includes(id)) list = list.filter(function(x){ return x!==id; });
+      const wasIn = list.includes(id);
+      if(wasIn) list = list.filter(function(x){ return x!==id; });
       else list.push(id);
       setMyList(list);
-      renderRows();
+      syncAddButtons(id, !wasIn);
+      renderMaListeRow();
+      const title = ITEMS[id] ? ITEMS[id].title : '';
+      showToast(wasIn ? `<i class="fa-solid fa-xmark"></i> « ${title} » retiré de Ma Liste` : `<i class="fa-solid fa-check"></i> « ${title} » ajouté à Ma Liste`);
     };
   });
   document.querySelectorAll('[data-like]').forEach(function(btn){
     btn.onclick = function(e){ e.stopPropagation();
       const id = btn.dataset.like;
       let likes = getLikes();
-      if(likes.includes(id)) likes = likes.filter(function(x){ return x!==id; });
+      const wasLiked = likes.includes(id);
+      if(wasLiked) likes = likes.filter(function(x){ return x!==id; });
       else likes.push(id);
       setLikes(likes);
-      renderRows();
+      syncLikeButtons(id, !wasLiked);
     };
   });
   document.querySelectorAll('[data-info]').forEach(function(el){
@@ -856,9 +929,24 @@ const io = new IntersectionObserver(function(entries){
     const id = entry.target.id;
     document.querySelectorAll('.nf-nav-link').forEach(function(a){ a.classList.toggle('on', a.dataset.sec===id); });
     document.querySelectorAll('.nf-mob-i').forEach(function(a){ a.classList.toggle('on', a.dataset.sec===id); });
+    updateNavIndicator();
   });
 }, { rootMargin:'-45% 0px -50% 0px' });
 SECTIONS.forEach(function(id){ const el=document.getElementById(id); if(el) io.observe(el); });
+
+/* Sliding nav underline */
+const navIndicator = document.getElementById('nf-nav-indicator');
+function updateNavIndicator(){
+  if(!navIndicator) return;
+  const nav = document.getElementById('nf-nav');
+  const active = nav.querySelector('.nf-nav-link.on');
+  if(!active || nav.offsetWidth === 0){ navIndicator.classList.remove('on'); return; }
+  navIndicator.style.left = active.offsetLeft + 'px';
+  navIndicator.style.width = active.offsetWidth + 'px';
+  navIndicator.classList.add('on');
+}
+updateNavIndicator();
+window.addEventListener('resize', updateNavIndicator);
 
 /* Scroll-reveal for sections below the hero */
 const revealIo = new IntersectionObserver(function(entries){
