@@ -10,10 +10,10 @@
   <meta property="og:description" content="Développeur Web · Réseaux &amp; Sécurité · Freelance · Lomé, Togo">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://portfolio-credo.vercel.app">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g transform='translate(50,50)'><path d='M0,-42 C7,-22 7,22 0,42 C-7,22 -7,-22 0,-42Z' fill='%23e06432'/><path d='M0,-42 C7,-22 7,22 0,42 C-7,22 -7,-22 0,-42Z' fill='%23e06432' transform='rotate(45)'/><path d='M0,-42 C7,-22 7,22 0,42 C-7,22 -7,-22 0,-42Z' fill='%23e06432' transform='rotate(90)'/><path d='M0,-42 C7,-22 7,22 0,42 C-7,22 -7,-22 0,-42Z' fill='%23e06432' transform='rotate(135)'/></g></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000'/><rect x='8' y='8' width='84' height='84' rx='14' fill='%23e50914'/><text x='50' y='73' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='62' fill='white' text-anchor='middle'>C</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root{
@@ -23,7 +23,7 @@
       --green:#46d369; --brand:#e06432;
       --border:#2e2e2e;
       --f-display:'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
-      --f-body:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;
+      --f-body:'Helvetica Neue',Helvetica,Arial,sans-serif;
     }
     *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
     html{ scroll-behavior:smooth; }
@@ -96,6 +96,7 @@
     .nf-hero-meta .nf-match{ color:var(--green); font-weight:700; }
     .nf-badge-outline{ border:1px solid var(--gray-dim); padding:1px 6px; border-radius:3px; font-size:12px; }
     .nf-badge-hd{ border:1px solid var(--gray-dim); padding:1px 6px; border-radius:3px; font-size:11px; }
+    .nf-hero-meta .nf-badge-avail{ font-size:12.5px; color:#fff; background:rgba(70,211,105,.12); border:1px solid rgba(70,211,105,.35); border-radius:20px; padding:3px 12px; }
     .nf-hero-desc{ font-size:16.5px; line-height:1.55; color:#e4e4e4; margin-bottom:26px; max-width:560px; text-shadow:0 2px 10px rgba(0,0,0,.5); }
     .nf-hero-btns{ display:flex; flex-wrap:wrap; gap:12px; }
     .nf-btn{ display:inline-flex; align-items:center; gap:9px; padding:11px 24px; border-radius:4px; font-size:15.5px; font-weight:700; transition:background .12s, opacity .12s; }
@@ -103,7 +104,8 @@
     .nf-btn-primary:hover{ background:rgba(255,255,255,.78); }
     .nf-btn-secondary{ background:rgba(109,109,110,.55); color:#fff; }
     .nf-btn-secondary:hover{ background:rgba(109,109,110,.35); }
-    .nf-hero-corner{ position:absolute; z-index:2; right:4vw; bottom:6vh; font-size:12.5px; color:var(--gray-lt); background:rgba(0,0,0,.4); border:1px solid #333; padding:7px 12px; border-radius:20px; }
+    .nf-hero-mute{ position:absolute; z-index:2; right:4vw; bottom:9vh; width:42px; height:42px; border-radius:50%; border:1.5px solid rgba(255,255,255,.5); background:rgba(42,42,42,.4); display:flex; align-items:center; justify-content:center; color:#fff; font-size:15px; transition:border-color .15s, background .15s; }
+    .nf-hero-mute:hover{ border-color:#fff; background:rgba(42,42,42,.7); }
 
     /* ── Detail (About) ── */
     .nf-detail{ position:relative; z-index:3; background:var(--bg); padding:54px 4vw 20px; margin-top:-6vh; }
@@ -277,7 +279,7 @@
       .nf-footer-links{ grid-template-columns:1fr 1fr; }
       .nf-search.open .nf-search-inp{ width:130px; }
       section{ scroll-margin-top:56px; padding-bottom:0; }
-      .nf-hero-corner{ display:none; }
+      .nf-hero-mute{ display:none; }
     }
     @media(min-width:769px){ #nf-mob{ display:none; } }
   </style>
@@ -341,6 +343,7 @@
       <span class="nf-badge-outline">FREELANCE</span>
       <span>5 ans d'expérience</span>
       <span class="nf-badge-hd">HD</span>
+      <span class="nf-badge-avail">🇹🇬 Disponible pour missions freelance</span>
     </div>
     <p class="nf-hero-desc">Développeur web freelance spécialisé en réseaux &amp; sécurité, basé à Lomé, Togo. Du câble au code : sites vitrines, e-commerce, applications métier et infrastructures réseau sécurisées.</p>
     <div class="nf-hero-btns">
@@ -348,7 +351,7 @@
       <button class="nf-btn nf-btn-secondary" data-sec="about"><i class="fa-solid fa-circle-info"></i> Plus d'infos</button>
     </div>
   </div>
-  <div class="nf-hero-corner">Disponible pour missions freelance 🇹🇬</div>
+  <button class="nf-hero-mute" id="nf-hero-mute" title="Son" aria-label="Activer/couper le son"><i class="fa-solid fa-volume-xmark"></i></button>
 </section>
 
 <!-- About / Detail -->
@@ -787,6 +790,17 @@ const header = document.getElementById('nf-header');
 window.addEventListener('scroll', function(){
   header.classList.toggle('on', window.scrollY > 40);
 }, { passive:true });
+
+/* Hero mute toggle (decorative) */
+(function(){
+  const btn = document.getElementById('nf-hero-mute');
+  if(!btn) return;
+  let muted = true;
+  btn.addEventListener('click', function(){
+    muted = !muted;
+    btn.innerHTML = muted ? '<i class="fa-solid fa-volume-xmark"></i>' : '<i class="fa-solid fa-volume-high"></i>';
+  });
+})();
 
 /* Row arrow scroll */
 document.querySelectorAll('.nf-row-arrow').forEach(function(btn){
