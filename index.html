@@ -814,7 +814,20 @@ const ITEMS = {
   'list-linkedin': { type:'list', title:'LinkedIn', sub:'linkedin.com/in/credoahiafor', icon:'fa-linkedin', brand:true, grad:['#0a66c2','#062c50'], fixed:true,
     desc:{fr:`Profil professionnel de Credo Ahiafor sur LinkedIn.`,en:`Credo Ahiafor's professional profile on LinkedIn.`}, tags:[], href:'https://www.linkedin.com/in/credoahiafor' },
   'list-github': { type:'list', title:'GitHub', sub:'github.com/GRIIINDER', icon:'fa-github', brand:true, grad:['#24292e','#0d1117'], fixed:true,
-    desc:{fr:`Dépôts et code source de Credo Ahiafor, dont celui de ce portfolio.`,en:`Credo Ahiafor's repositories and source code, including this portfolio.`}, tags:[], href:'https://github.com/GRIIINDER' }
+    desc:{fr:`Dépôts et code source de Credo Ahiafor, dont celui de ce portfolio.`,en:`Credo Ahiafor's repositories and source code, including this portfolio.`}, tags:[], href:'https://github.com/GRIIINDER' },
+
+  /* Section entries exist only to make every part of the page reachable from search — they never
+     appear in a row, and clicking one scrolls to the section instead of opening a modal. */
+  'sec-about': { type:'section', sec:'about', title:{fr:'À propos',en:'About'}, sub:{fr:'Profil de Credo Ahiafor',en:'Credo Ahiafor profile'}, icon:'fa-user', grad:['#e06432','#7a2e0e'],
+    desc:{fr:`Développeur web freelance spécialisé en réseaux et sécurité, basé à Lomé, Togo. Bio, focus actuel et statistiques.`,en:`Freelance web developer specializing in networks and security, based in Lomé, Togo. Bio, current focus and stats.`}, tags:[] },
+  'sec-projets': { type:'section', sec:'projets', title:{fr:'Projets Web',en:'Web Projects'}, sub:{fr:'Section Projets',en:'Projects section'}, icon:'fa-clapperboard', grad:['#7c3aed','#1e1b4b'],
+    desc:{fr:`Cabinet BEGO, Afinah Closet, MOGU Stock, OuraGrove.`,en:`Cabinet BEGO, Afinah Closet, MOGU Stock, OuraGrove.`}, tags:[] },
+  'sec-competences': { type:'section', sec:'competences', title:{fr:'Compétences & Stack',en:'Skills & Stack'}, sub:{fr:'Section Compétences',en:'Skills section'}, icon:'fa-code', grad:['#0e7490','#164e63'],
+    desc:{fr:`Développement logiciel, Web & CMS, Systèmes & Réseaux, Cybersécurité & Cloud.`,en:`Software development, Web & CMS, Systems & Networks, Cybersecurity & Cloud.`}, tags:[] },
+  'sec-parcours': { type:'section', sec:'parcours', title:{fr:'Parcours Professionnel',en:'Professional Career'}, sub:{fr:'Section Parcours',en:'Career section'}, icon:'fa-timeline', grad:['#334155','#0f172a'],
+    desc:{fr:`Expérience professionnelle et formation de Credo Ahiafor.`,en:`Credo Ahiafor's work experience and education.`}, tags:[] },
+  'sec-contact': { type:'section', sec:'contact', title:{fr:'Contact',en:'Contact'}, sub:'ahiafor.credo@gmail.com · +228 92 23 63 79', icon:'fa-envelope', grad:['#b91c1c','#450a0a'],
+    desc:{fr:`Email, téléphone, LinkedIn, GitHub, localisation (Segbé-Zanvi, Lomé, Togo) et formulaire de contact.`,en:`Email, phone, LinkedIn, GitHub, location (Segbé-Zanvi, Lomé, Togo) and contact form.`}, tags:[] }
 };
 const ROWS = {
   projets: ['proj-bego','proj-afinah','proj-mogu','proj-oura'],
@@ -1171,7 +1184,7 @@ function searchQuery(q){
   document.getElementById('nf-search-title').innerHTML = `${t('search_results_for')} ${t('search_q_open')} <span>${q}</span> ${t('search_q_close')}`;
   const matches = Object.keys(ITEMS).filter(function(id){
     const it = ITEMS[id];
-    const hay = (L(it.title)+' '+L(it.sub)+' '+Lt(it.tags).join(' ')).toLowerCase();
+    const hay = (L(it.title)+' '+L(it.sub)+' '+L(it.desc)+' '+Lt(it.tags).join(' ')).toLowerCase();
     return hay.includes(q);
   });
   const grid = document.getElementById('nf-search-grid');
@@ -1183,7 +1196,12 @@ function searchQuery(q){
       return `<div class="nf-sr-card" data-info="${id}">${mediaHTML(id)}<div class="nf-card-title">${L(it.title)}</div><div class="nf-card-sub">${L(it.sub)||''}</div></div>`;
     }).join('');
     grid.querySelectorAll('.nf-sr-card').forEach(function(el){
-      el.addEventListener('click', function(){ closeSearch(); openModal(el.dataset.info); });
+      el.addEventListener('click', function(){
+        const id = el.dataset.info;
+        const it = ITEMS[id];
+        closeSearch();
+        if(it && it.type === 'section') go(it.sec); else openModal(id);
+      });
     });
   }
   searchOverlay.classList.add('open');
