@@ -39,6 +39,36 @@
     #nf-intro span{ font-family:var(--f-display); color:var(--red); font-size:clamp(40px,10vw,90px); letter-spacing:.02em; animation:nfIntroPulse 1.1s ease forwards; }
     @keyframes nfIntroPulse{ 0%{ transform:scale(.4); opacity:0; filter:brightness(2.4); } 55%{ transform:scale(1.06); opacity:1; filter:brightness(1); } 100%{ transform:scale(1); opacity:1; } }
 
+    /* ── "Qui regarde ?" profile gate ── */
+    #nf-profiles{ position:fixed; inset:0; z-index:99998; background:#000; display:none; align-items:center; justify-content:center; opacity:0; transition:opacity .4s ease; }
+    #nf-profiles.show{ display:flex; opacity:1; }
+    #nf-profiles.hide{ opacity:0; pointer-events:none; }
+    .nf-profiles-inner{ text-align:center; padding:24px; }
+    .nf-profiles-title{ font-size:clamp(26px,4.5vw,48px); font-weight:500; color:#fff; margin-bottom:36px; }
+    .nf-profiles-row{ display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:center; gap:22px; margin-bottom:44px; }
+    .nf-profile-tile{ width:120px; cursor:pointer; }
+    .nf-profile-avatar{ width:120px; height:120px; border-radius:6px; border:3px solid transparent; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#333; transition:border-color .15s, transform .15s; margin-bottom:10px; }
+    .nf-profile-avatar img{ width:100%; height:100%; object-fit:cover; }
+    .nf-profile-avatar i{ font-size:40px; color:rgba(255,255,255,.9); }
+    .nf-profile-tile:hover .nf-profile-avatar{ border-color:#fff; }
+    .nf-profile-name{ font-size:15px; color:var(--gray-lt); transition:color .15s; }
+    .nf-profile-tile:hover .nf-profile-name{ color:#fff; }
+    .nf-profile-add .nf-profile-avatar{ background:#141414; }
+    .nf-profile-add i{ font-size:44px; color:var(--gray-lt); }
+    .nf-profiles-manage{ font-size:15px; color:var(--gray-lt); background:transparent; border:1.5px solid var(--gray-dim); padding:9px 22px; letter-spacing:.03em; transition:color .15s, border-color .15s; }
+    .nf-profiles-manage:hover{ color:#fff; border-color:#fff; }
+    .nf-profile-pencil{ display:none; width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,.6); border:1.5px solid #fff; align-items:center; justify-content:center; font-size:12px; color:#fff; margin:0 auto -18px; position:relative; z-index:2; top:44px; }
+    .nf-profiles-row.editing .nf-profile-pencil{ display:flex; }
+    .nf-profiles-row.editing .nf-profile-avatar{ opacity:.55; }
+    .nf-profiles-row.editing .nf-profile-add{ display:none; }
+    @media(max-width:480px){
+      .nf-profile-tile{ width:84px; }
+      .nf-profile-avatar{ width:84px; height:84px; }
+      .nf-profile-avatar i{ font-size:28px; }
+      .nf-profile-name{ font-size:12.5px; }
+      .nf-profiles-row{ gap:14px; }
+    }
+
     /* ── Header ── */
     #nf-header{ position:fixed; top:0; left:0; right:0; z-index:500; display:flex; align-items:center; justify-content:space-between; padding:16px 4vw; transition:background .3s ease, box-shadow .3s ease; background:linear-gradient(to bottom, rgba(0,0,0,.75) 0%, transparent 100%); }
     #nf-header.on{ background:var(--bg); box-shadow:0 2px 14px rgba(0,0,0,.5); }
@@ -288,6 +318,35 @@
 
 <!-- Intro splash -->
 <div id="nf-intro"><span>CREDO</span></div>
+
+<!-- "Qui regarde ?" profile gate -->
+<div id="nf-profiles">
+  <div class="nf-profiles-inner">
+    <div class="nf-profiles-title">Qui regarde ?</div>
+    <div class="nf-profiles-row" id="nf-profiles-row">
+      <div class="nf-profile-tile" data-profile="credo">
+        <div class="nf-profile-pencil"><i class="fa-solid fa-pencil"></i></div>
+        <div class="nf-profile-avatar"><img src="/assets/images/credoahiafor.webp" alt="Crédo"></div>
+        <div class="nf-profile-name">Crédo</div>
+      </div>
+      <div class="nf-profile-tile" data-profile="recruteur">
+        <div class="nf-profile-pencil"><i class="fa-solid fa-pencil"></i></div>
+        <div class="nf-profile-avatar" style="background:linear-gradient(135deg,#2563eb,#0f172a)"><i class="fa-solid fa-briefcase"></i></div>
+        <div class="nf-profile-name">Recruteur</div>
+      </div>
+      <div class="nf-profile-tile" data-profile="developpeur">
+        <div class="nf-profile-pencil"><i class="fa-solid fa-pencil"></i></div>
+        <div class="nf-profile-avatar" style="background:linear-gradient(135deg,#0d9488,#052e2b)"><i class="fa-solid fa-code"></i></div>
+        <div class="nf-profile-name">Développeur</div>
+      </div>
+      <div class="nf-profile-tile nf-profile-add" data-profile="add">
+        <div class="nf-profile-avatar"><i class="fa-solid fa-plus"></i></div>
+        <div class="nf-profile-name">Ajouter un profil</div>
+      </div>
+    </div>
+    <button class="nf-profiles-manage" id="nf-profiles-manage">Gérer les profils</button>
+  </div>
+</div>
 
 <!-- Header -->
 <header id="nf-header">
@@ -901,13 +960,49 @@ document.addEventListener('keydown', function(e){
   });
 })();
 
-/* ── Intro splash ── */
+/* ── Intro splash + "Qui regarde ?" profile gate ── */
 (function(){
   const intro = document.getElementById('nf-intro');
-  if(sessionStorage.getItem('nf_intro_seen')){ intro.remove(); return; }
-  function dismiss(){ intro.classList.add('hide'); setTimeout(function(){ intro.remove(); }, 550); sessionStorage.setItem('nf_intro_seen','1'); }
-  setTimeout(dismiss, 1300);
-  intro.addEventListener('click', dismiss);
+  const gate = document.getElementById('nf-profiles');
+  const row = document.getElementById('nf-profiles-row');
+  const manageBtn = document.getElementById('nf-profiles-manage');
+
+  if(sessionStorage.getItem('nf_profile_seen')){
+    intro.remove();
+    gate.remove();
+    return;
+  }
+
+  document.body.style.overflow = 'hidden';
+
+  function showGate(){
+    intro.classList.add('hide');
+    setTimeout(function(){ intro.remove(); }, 550);
+    gate.classList.add('show');
+  }
+  setTimeout(showGate, 1300);
+  intro.addEventListener('click', showGate);
+
+  function enterSite(){
+    sessionStorage.setItem('nf_profile_seen', '1');
+    gate.classList.add('hide');
+    document.body.style.overflow = '';
+    setTimeout(function(){ gate.remove(); }, 450);
+  }
+
+  let editing = false;
+  manageBtn.addEventListener('click', function(){
+    editing = !editing;
+    row.classList.toggle('editing', editing);
+    manageBtn.textContent = editing ? 'Terminé' : 'Gérer les profils';
+  });
+
+  row.querySelectorAll('.nf-profile-tile').forEach(function(tile){
+    tile.addEventListener('click', function(){
+      if(editing) return;
+      enterSite();
+    });
+  });
 })();
 
 /* ── Init ── */
