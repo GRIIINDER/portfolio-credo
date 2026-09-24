@@ -245,6 +245,7 @@
     /* Genre (skills) tiles */
     .nf-card-genre .nf-card-media{ display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:10px; gap:6px; }
     .nf-card-genre .nf-genre-icon{ font-size:26px; }
+    .nf-card-genre .nf-genre-logo{ width:42px; height:42px; object-fit:contain; filter:drop-shadow(0 2px 6px rgba(0,0,0,.35)); }
     .nf-card-genre .nf-genre-title{ font-size:14px; font-weight:800; letter-spacing:.01em; }
     .nf-card-genre .nf-genre-sub{ font-size:11px; color:rgba(255,255,255,.75); }
 
@@ -801,7 +802,7 @@ const ITEMS = {
   'skill-dev': { type:'skill', title:{fr:'Développement Logiciel',en:'Software Development'}, sub:{fr:'11 compétences',en:'11 skills'}, icon:'fa-laptop-code', grad:['#6d28d9','#1e1b4b'],
     desc:{fr:`Bases solides en génie logiciel — de l'algorithmique à la conception orientée objet, en passant par la modélisation et les méthodes agiles.`,en:`Solid foundations in software engineering — from algorithms to object-oriented design, through modeling and agile methods.`},
     tags:['Python','Java','C / C++','C#','VB.NET','HTML5 / CSS3',{fr:'POO',en:'OOP'},'Design Patterns','UML','MERISE','Agile / Scrum','ITIL'] },
-  'skill-web': { type:'skill', title:'Web & CMS', sub:{fr:'11 compétences',en:'11 skills'}, icon:'fa-globe', grad:['#ea580c','#7c2d12'],
+  'skill-web': { type:'skill', title:'Web & CMS', sub:{fr:'11 compétences',en:'11 skills'}, icon:'fa-globe', grad:['#ea580c','#7c2d12'], logo:'/assets/images/logo-wordpress.webp',
     desc:{fr:`Développement web moderne, du CMS à l'application full-stack, avec une attention particulière à l'hébergement et à la sécurité.`,en:`Modern web development, from CMS to full-stack applications, with particular attention to hosting and security.`},
     tags:['WordPress','Shopify','WooCommerce','React','Next.js',{fr:'Hébergement',en:'Hosting'},'DNS','SSL / TLS','Oracle','MySQL','PostgreSQL'] },
   'skill-sys': { type:'skill', title:{fr:'Systèmes & Réseaux',en:'Systems & Networks'}, sub:{fr:'10 compétences',en:'10 skills'}, icon:'fa-network-wired', grad:['#0e7490','#164e63'],
@@ -893,7 +894,7 @@ function cardHTML(id, i){
     return `<div class="nf-card nf-card-genre" data-id="${id}" data-info="${id}">
       <div class="nf-card-inner" style="animation-delay:${delay}">
         <div class="nf-card-media" style="background:linear-gradient(135deg,${it.grad[0]},${it.grad[1]})">
-          <i class="fa-solid ${it.icon} nf-genre-icon"></i>
+          ${it.logo?`<img src="${it.logo}" class="nf-genre-logo" alt="">`:`<i class="fa-solid ${it.icon} nf-genre-icon"></i>`}
           <div class="nf-genre-title">${L(it.title)}</div>
           <div class="nf-genre-sub">${L(it.sub)}</div>
         </div>
