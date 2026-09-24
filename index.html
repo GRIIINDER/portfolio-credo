@@ -817,7 +817,7 @@ const ITEMS = {
   'exp-freelance': { type:'exp', title:{fr:'Développeur Fullstack Freelance',en:'Freelance Fullstack Developer'}, sub:{fr:'Indépendant · Lomé, Togo',en:'Independent · Lomé, Togo'}, date:{fr:"Sept. 2023 — Présent",en:'Sept 2023 — Present'}, now:true, icon:'fa-briefcase', grad:['#334155','#0f172a'],
     desc:{fr:`Création et maintenance de sites web professionnels (WordPress RGPD, Shopify e-commerce) et conception d'une plateforme communautaire recensant les parcours et ressources tech disponibles au Togo.`,en:`Building and maintaining professional websites (GDPR-compliant WordPress, Shopify e-commerce) and designing a community platform mapping tech career paths and resources available in Togo.`},
     tags:['WordPress','Shopify','React','Next.js',{fr:'Communauté Tech',en:'Tech Community'}] },
-  'exp-lss': { type:'exp', title:{fr:'Membre du Jury — Lomé Summer School on IA',en:'Jury Member — Lomé Summer School on AI'}, sub:{fr:'ACAN · Représentant OuraGrove · Lomé, Togo',en:'ACAN · Representing OuraGrove · Lomé, Togo'}, date:{fr:'14 — 18 Sept. 2026',en:'Sept 14 – 18, 2026'}, icon:'fa-gavel', grad:['#4338ca','#1e1b4b'],
+  'exp-lss': { type:'exp', title:{fr:'Membre du Jury — Lomé Summer School on IA',en:'Jury Member — Lomé Summer School on AI'}, sub:{fr:'ACAN · Représentant OuraGrove · Lomé, Togo',en:'ACAN · Representing OuraGrove · Lomé, Togo'}, date:{fr:'14 — 18 Sept. 2026',en:'Sept 14 – 18, 2026'}, icon:'fa-gavel', grad:['#4338ca','#1e1b4b'], img:'/assets/images/lss.webp',
     desc:{fr:`Membre du jury de la 2ème édition du Lomé Summer School on IA, en représentant d'OuraGrove, partenaire du programme. Une semaine de renforcement de capacités pour 150 jeunes de 5 universités de Lomé sur l'usage responsable et professionnel de l'IA, clôturée par un hackathon dont les 3 projets lauréats seront incubés par ACAN.`,en:`Jury member for the 2nd edition of the Lomé Summer School on AI, representing OuraGrove as a program partner. A week of capacity-building for 150 young people from 5 universities in Lomé on the responsible, professional use of AI, closing with a hackathon whose 3 winning projects will be incubated by ACAN.`},
     tags:[{fr:'IA',en:'AI'},{fr:'Jury',en:'Jury'},'ACAN',{fr:'Formation',en:'Training'}] },
   'exp-duolingo': { type:'exp', title:{fr:'Certification — Duolingo English Test',en:'Certification — Duolingo English Test'}, sub:{fr:'Score 95/160 · Niveau B1 (Intermédiaire)',en:'Score 95/160 · B1 Level (Intermediate)'}, date:{fr:'Octobre 2024',en:'October 2024'}, icon:'fa-language', grad:['#0369a1','#082f49'],
@@ -908,9 +908,9 @@ function cardHTML(id, i){
   if(it.type === 'exp'){
     return `<div class="nf-card nf-card-ep" data-id="${id}" data-info="${id}">
       <div class="nf-card-inner" style="animation-delay:${delay}">
-        <div class="nf-card-media" style="background:linear-gradient(135deg,${it.grad[0]},${it.grad[1]})">
+        <div class="nf-card-media" ${it.img?'':`style="background:linear-gradient(135deg,${it.grad[0]},${it.grad[1]})"`}>
           ${it.now?`<div class="nf-ep-now">${t('card_ongoing')}</div>`:''}
-          <i class="fa-solid ${it.icon}" style="font-size:34px;color:rgba(255,255,255,.85)"></i>
+          ${it.img?`<img src="${it.img}" alt="${L(it.title)}" loading="lazy">`:`<i class="fa-solid ${it.icon}" style="font-size:34px;color:rgba(255,255,255,.85)"></i>`}
         </div>
         <div class="nf-ep-body">
           <div class="nf-ep-date">${L(it.date)}</div>
