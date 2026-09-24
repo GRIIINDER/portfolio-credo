@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Credo Ahiafor — Portfolio</title>
-  <meta name="description" content="Développeur Web · Réseaux &amp; Sécurité · Lomé, Togo">
+  <meta name="description" content="CTO OuraGrove · Développeur Web · Réseaux &amp; Sécurité · Lomé, Togo">
   <meta name="theme-color" content="#141414">
+  <meta name="color-scheme" content="dark">
   <meta property="og:title" content="Credo Ahiafor — Portfolio">
-  <meta property="og:description" content="Développeur Web · Réseaux &amp; Sécurité · Freelance · Lomé, Togo">
+  <meta property="og:description" content="CTO OuraGrove · Développeur Web · Réseaux &amp; Sécurité · Freelance · Lomé, Togo">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://portfolio-credo.vercel.app">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000'/><rect x='8' y='8' width='84' height='84' rx='14' fill='%23e50914'/><text x='50' y='73' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='62' fill='white' text-anchor='middle'>C</text></svg>">
@@ -17,6 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root{
+      color-scheme: dark;
       --bg:#141414; --bg2:#181818; --bg3:#232323; --card:#2a2a2a;
       --red:#e50914; --red-dim:#b20710;
       --white:#fff; --gray:#808080; --gray-lt:#b3b3b3; --gray-dim:#565656;
@@ -474,12 +476,13 @@
     <div class="nf-hero-meta">
       <span class="nf-match" data-i18n="hero_match">98% de correspondance</span>
       <span>2026</span>
+      <span class="nf-badge-outline" data-i18n="hero_cto">CTO · OURAGROVE</span>
       <span class="nf-badge-outline" data-i18n="hero_freelance">FREELANCE</span>
       <span data-i18n="hero_exp">5 ans d'expérience</span>
       <span class="nf-badge-hd">HD</span>
       <span class="nf-badge-avail" data-i18n="hero_avail">🇹🇬 Disponible pour missions freelance</span>
     </div>
-    <p class="nf-hero-desc" data-i18n="hero_desc">Développeur web freelance spécialisé en réseaux &amp; sécurité, basé à Lomé, Togo. Du câble au code : sites vitrines, e-commerce, applications métier et infrastructures réseau sécurisées.</p>
+    <p class="nf-hero-desc" data-i18n="hero_desc">CTO chez OuraGrove — infrastructures numériques sécurisées pour l'éducation — et développeur web freelance basé à Lomé, Togo. Du câble au code : sites vitrines, e-commerce, applications métier et réseaux sécurisés.</p>
     <div class="nf-hero-btns">
       <button class="nf-btn nf-btn-primary" data-sec="projets"><i class="fa-solid fa-play"></i> <span data-i18n="hero_btn_play">Voir mes projets</span></button>
       <button class="nf-btn nf-btn-secondary" data-sec="about"><i class="fa-solid fa-circle-info"></i> <span data-i18n="hero_btn_info">Plus d'infos</span></button>
@@ -496,14 +499,15 @@
         <img class="nf-avatar" src="/assets/images/credoahiafor.webp" alt="Credo Ahiafor">
         <div>
           <div class="nf-detail-name">Credo Ahiafor</div>
-          <div class="nf-detail-role" data-i18n="about_role">Développeur Web · Réseaux &amp; Sécurité · Freelance</div>
+          <div class="nf-detail-role" data-i18n="about_role">Chief Technology Officer · OuraGrove · Développeur Web Freelance</div>
           <div class="nf-detail-loc"><i class="fa-solid fa-location-dot"></i>Lomé, Togo</div>
         </div>
       </div>
-      <p data-i18n-html="about_p1">Bonjour ! Je suis <strong>Credo Ahiafor</strong>, <strong>développeur web freelance</strong> spécialisé en <strong>réseaux &amp; sécurité</strong>, basé à <strong>Lomé, Togo</strong>. Je construis des systèmes web robustes et des infrastructures réseau sécurisées — du câble au code.</p>
+      <p data-i18n-html="about_p1">Bonjour ! Je suis <strong>Credo Ahiafor</strong>, <strong>CTO chez OuraGrove</strong> et <strong>développeur web freelance</strong> spécialisé en <strong>réseaux &amp; sécurité</strong>, basé à <strong>Lomé, Togo</strong>. Je construis des infrastructures numériques résilientes et des systèmes web robustes — du câble au code.</p>
       <p data-i18n-html="about_p2">Actuellement en <strong>Master 2 Systèmes, Réseaux &amp; Sécurité</strong> à l'ESGIS Togo, je combine expertise technique et sens pratique pour livrer des solutions qui marchent vraiment.</p>
       <div class="nf-focus-lbl" data-i18n="focus_label">Focus actuel</div>
       <div class="nf-focus-grid">
+        <div class="nf-focus-item" data-i18n="focus_0">🏫 CTO @ OuraGrove — infrastructure EdTech mesh &amp; zero-trust pour écoles K-12</div>
         <div class="nf-focus-item" data-i18n="focus_1">🌐 Développement web freelance — Cabinet BEGO, Afinah Closet</div>
         <div class="nf-focus-item" data-i18n="focus_2">🔒 Cybersécurité &amp; infrastructure réseau Cisco</div>
         <div class="nf-focus-item" data-i18n="focus_3">⚛️ Applications React full-stack &amp; WordPress RGPD</div>
@@ -678,18 +682,20 @@ const UI = {
   mob_profile:{fr:'Profil',en:'Profile'},
   hero_tag:{fr:'SÉRIE ORIGINALE · PORTFOLIO 2026',en:'ORIGINAL SERIES · PORTFOLIO 2026'},
   hero_match:{fr:'98% de correspondance',en:'98% Match'},
+  hero_cto:{fr:'CTO · OURAGROVE',en:'CTO · OURAGROVE'},
   hero_freelance:{fr:'FREELANCE',en:'FREELANCE'},
   hero_exp:{fr:"5 ans d'expérience",en:'5 years of experience'},
   hero_avail:{fr:'🇹🇬 Disponible pour missions freelance',en:'🇹🇬 Available for freelance work'},
-  hero_desc:{fr:"Développeur web freelance spécialisé en réseaux & sécurité, basé à Lomé, Togo. Du câble au code : sites vitrines, e-commerce, applications métier et infrastructures réseau sécurisées.",en:"Freelance web developer specializing in networks & security, based in Lomé, Togo. From cable to code: showcase sites, e-commerce, business applications and secure network infrastructure."},
+  hero_desc:{fr:"CTO chez OuraGrove — infrastructures numériques sécurisées pour l'éducation — et développeur web freelance basé à Lomé, Togo. Du câble au code : sites vitrines, e-commerce, applications métier et réseaux sécurisés.",en:"CTO at OuraGrove — secure digital infrastructure for education — and freelance web developer based in Lomé, Togo. From cable to code: showcase sites, e-commerce, business apps and secure networks."},
   hero_btn_play:{fr:'Voir mes projets',en:'View my projects'},
   hero_btn_info:{fr:"Plus d'infos",en:'More info'},
   hero_mute_title:{fr:'Son',en:'Sound'},
   hero_mute_aria:{fr:'Activer/couper le son',en:'Turn sound on/off'},
-  about_role:{fr:'Développeur Web · Réseaux & Sécurité · Freelance',en:'Web Developer · Networks & Security · Freelance'},
-  about_p1:{fr:`Bonjour ! Je suis <strong>Credo Ahiafor</strong>, <strong>développeur web freelance</strong> spécialisé en <strong>réseaux &amp; sécurité</strong>, basé à <strong>Lomé, Togo</strong>. Je construis des systèmes web robustes et des infrastructures réseau sécurisées — du câble au code.`,en:`Hi! I'm <strong>Credo Ahiafor</strong>, a <strong>freelance web developer</strong> specializing in <strong>networks &amp; security</strong>, based in <strong>Lomé, Togo</strong>. I build robust web systems and secure network infrastructure — from cable to code.`},
+  about_role:{fr:'Chief Technology Officer · OuraGrove · Développeur Web Freelance',en:'Chief Technology Officer · OuraGrove · Freelance Web Developer'},
+  about_p1:{fr:`Bonjour ! Je suis <strong>Credo Ahiafor</strong>, <strong>CTO chez OuraGrove</strong> et <strong>développeur web freelance</strong> spécialisé en <strong>réseaux &amp; sécurité</strong>, basé à <strong>Lomé, Togo</strong>. Je construis des infrastructures numériques résilientes et des systèmes web robustes — du câble au code.`,en:`Hi! I'm <strong>Credo Ahiafor</strong>, <strong>CTO at OuraGrove</strong> and <strong>freelance web developer</strong> specializing in <strong>networks &amp; security</strong>, based in <strong>Lomé, Togo</strong>. I build resilient digital infrastructure and robust web systems — from cable to code.`},
   about_p2:{fr:`Actuellement en <strong>Master 2 Systèmes, Réseaux &amp; Sécurité</strong> à l'ESGIS Togo, je combine expertise technique et sens pratique pour livrer des solutions qui marchent vraiment.`,en:`Currently completing a <strong>Master's in Systems, Networks &amp; Security</strong> at ESGIS Togo, I combine technical expertise with practical sense to deliver solutions that actually work.`},
   focus_label:{fr:'Focus actuel',en:'Current focus'},
+  focus_0:{fr:'🏫 CTO @ OuraGrove — infrastructure EdTech mesh & zero-trust pour écoles K-12',en:'🏫 CTO @ OuraGrove — mesh & zero-trust EdTech infrastructure for K-12 schools'},
   focus_1:{fr:'🌐 Développement web freelance — Cabinet BEGO, Afinah Closet',en:'🌐 Freelance web development — Cabinet BEGO, Afinah Closet'},
   focus_2:{fr:'🔒 Cybersécurité & infrastructure réseau Cisco',en:'🔒 Cybersecurity & Cisco network infrastructure'},
   focus_3:{fr:'⚛️ Applications React full-stack & WordPress RGPD',en:'⚛️ Full-stack React apps & GDPR-compliant WordPress'},
@@ -805,10 +811,13 @@ const ITEMS = {
     desc:{fr:`Sécurité offensive et défensive, cryptographie et cloud — pour protéger les infrastructures et accompagner leur transformation numérique.`,en:`Offensive and defensive security, cryptography and cloud — protecting infrastructure and supporting digital transformation.`},
     tags:['CEH','CCNP Security',{fr:'Pare-feu',en:'Firewall'},{fr:'Cryptographie',en:'Cryptography'},{fr:'Sécurité WLAN',en:'WLAN Security'},'Veritas',{fr:'Droit du numérique',en:'Digital Law'},'Azure','IoT','BI',{fr:'IA / ML',en:'AI / ML'}] },
 
-  'exp-freelance': { type:'exp', title:{fr:'Développeur Web Freelance',en:'Freelance Web Developer'}, sub:{fr:'Indépendant · Lomé, Togo',en:'Independent · Lomé, Togo'}, date:{fr:"Sept. 2025 — Présent",en:'Sept 2025 — Present'}, now:true, icon:'fa-briefcase', grad:['#334155','#0f172a'],
-    desc:{fr:`Création et maintenance de sites web professionnels. Projets WordPress RGPD, Shopify e-commerce.`,en:`Building and maintaining professional websites. GDPR-compliant WordPress projects, Shopify e-commerce.`},
-    tags:['WordPress','Shopify','React','Next.js',{fr:'RGPD',en:'GDPR'}] },
-  'exp-cfao': { type:'exp', title:{fr:'Stagiaire Technicien Réseau',en:'Network Technician Intern'}, sub:'CFAO Infrastructure · Lomé, Togo', date:{fr:'Fév. — Juin 2022',en:'Feb – Jun 2022'}, icon:'fa-server', grad:['#334155','#0f172a'],
+  'exp-cto': { type:'exp', title:{fr:'Chief Technology Officer',en:'Chief Technology Officer'}, sub:{fr:'OuraGrove · Lomé, Togo (Hybride)',en:'OuraGrove · Lomé, Togo (Hybrid)'}, date:{fr:'Août 2026 — Présent',en:'Aug 2026 — Present'}, now:true, icon:'fa-diagram-project', grad:['#b45309','#451a03'],
+    desc:{fr:`Conception et déploiement d'une infrastructure numérique résiliente et sécurisée pour écoles K-12 et communautés à faible connectivité : architecture mesh offline-first, sécurité zero-trust, direction de l'équipe technique.`,en:`Designing and deploying resilient, secure-by-design digital infrastructure for K-12 schools and low-connectivity communities: offline-first mesh architecture, zero-trust security, technical team leadership.`},
+    tags:[{fr:'Zero Trust',en:'Zero Trust'},{fr:'Mesh Networking',en:'Mesh Networking'},{fr:'Leadership',en:'Leadership'},'EdTech'] },
+  'exp-freelance': { type:'exp', title:{fr:'Développeur Fullstack Freelance',en:'Freelance Fullstack Developer'}, sub:{fr:'Indépendant · Lomé, Togo',en:'Independent · Lomé, Togo'}, date:{fr:"Sept. 2023 — Présent",en:'Sept 2023 — Present'}, now:true, icon:'fa-briefcase', grad:['#334155','#0f172a'],
+    desc:{fr:`Création et maintenance de sites web professionnels (WordPress RGPD, Shopify e-commerce) et conception d'une plateforme communautaire recensant les parcours et ressources tech disponibles au Togo.`,en:`Building and maintaining professional websites (GDPR-compliant WordPress, Shopify e-commerce) and designing a community platform mapping tech career paths and resources available in Togo.`},
+    tags:['WordPress','Shopify','React','Next.js',{fr:'Communauté Tech',en:'Tech Community'}] },
+  'exp-cfao': { type:'exp', title:{fr:'Stagiaire Technicien Environnement Utilisateur',en:'IT User Environment Technician Intern'}, sub:'CFAO Infrastructure · Lomé, Togo', date:{fr:'Fév. — Juin 2022',en:'Feb – Jun 2022'}, icon:'fa-server', grad:['#334155','#0f172a'],
     desc:{fr:`Configuration et mise en service d'équipements réseau. Maintenance préventive, résolution d'incidents, installation d'imprimantes réseau.`,en:`Configuration and deployment of network equipment. Preventive maintenance, incident resolution, network printer installation.`},
     tags:['Cisco','Windows Server','VLAN','Maintenance'] },
   'edu-m2': { type:'exp', title:{fr:'Master 2 — Systèmes, Réseaux & Sécurité',en:"Master's Degree — Systems, Networks & Security"}, sub:'ESGIS Togo · Lomé', date:{fr:'En cours · 2026',en:'Ongoing · 2026'}, now:true, icon:'fa-graduation-cap', grad:['#7c2d12','#1c1917'],
@@ -847,7 +856,7 @@ const ITEMS = {
 const ROWS = {
   projets: ['proj-bego','proj-afinah','proj-mogu','proj-oura'],
   competences: ['skill-dev','skill-web','skill-sys','skill-sec'],
-  parcours: ['exp-freelance','edu-m2','exp-cfao','edu-dev','edu-res','edu-bac'],
+  parcours: ['exp-cto','exp-freelance','edu-m2','exp-cfao','edu-dev','edu-res','edu-bac'],
   maliste: ['list-cv','list-linkedin','list-github']
 };
 const MYLIST_KEY = 'nf_mylist';
